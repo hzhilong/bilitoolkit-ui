@@ -1,0 +1,82 @@
+{
+  "name": "bilitoolkit-ui",
+  "version": "0.0.1",
+  "private": false,
+  "type": "module",
+  "productName": "bilitoolkit-ui",
+  "description": "bilitoolkit-ui",
+  "author": "hzhilong",
+  "keywords": [
+    "BiliToolkit",
+    "哔哩工具姬"
+  ],
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hzhilong/bilitoolkit-ui"
+  },
+  "bugs": {
+    "url": "https://github.com/hzhilong/bilitoolkit-ui/issues"
+  },
+  "homepage": "https://github.com/hzhilong/bilitoolkit-ui#readme",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
+  "main": "dist/bilitoolkit-ui.umd.cjs",
+  "module": "dist/bilitoolkit-ui.js",
+  "types": "dist/index.d.ts",
+  "style": "dist/bilitoolkit-ui.css",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/bilitoolkit-ui.js",
+      "require": "./dist/bilitoolkit-ui.umd.cjs"
+    },
+    "./style.css": "./dist/bilitoolkit-ui.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "类型检查": "tsc --noEmit",
+    "构建前记得补全桶": "构建前记得补全桶",
+    "build": "vite build --mode library",
+    "npm 登录": " npm login",
+    "npm 发布": " npm publish --access public",
+    "本地发布": "yalc publish",
+    "添加本地依赖包": "yalc add bilitoolkit-api-types @ybgnb/utils --peer",
+    "移除本地依赖包": "yalc remove --all"
+  },
+  "devDependencies": {
+    "@tsconfig/node22": "^22.0.2",
+    "@types/node": "^22.16.5",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "@vitejs/plugin-vue-jsx": "^5.0.1",
+    "@vue/eslint-config-prettier": "^10.2.0",
+    "@vue/eslint-config-typescript": "^14.6.0",
+    "@vue/language-core": "^3.0.7",
+    "@vue/tsconfig": "^0.7.0",
+    "eslint": "^9.31.0",
+    "eslint-plugin-vue": "~10.3.0",
+    "jiti": "^2.4.2",
+    "npm-run-all2": "^8.0.4",
+    "prettier": "3.6.2",
+    "sass": "^1.92.1",
+    "typescript": "~5.8.0",
+    "unplugin-auto-import": "^20.1.0",
+    "unplugin-vue-components": "^29.0.0",
+    "vite": "^7.0.6",
+    "vite-plugin-dts": "^4.5.4",
+    "vue-tsc": "^3.0.4"
+  },
+  "peerDependencies": {
+    "@vue/language-core": "^3.0.7",
+    "@ybgnb/utils": "file:.yalc/@ybgnb/utils",
+    "bilitoolkit-api-types": "file:.yalc/bilitoolkit-api-types",
+    "consola": "^3.4.2",
+    "dayjs": "^1.11.18",
+    "element-plus": "^2.11.2",
+    "remixicon": "^4.6.0",
+    "vue": "^3.5.18"
+  }
+}
