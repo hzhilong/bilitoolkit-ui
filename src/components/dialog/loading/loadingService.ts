@@ -38,8 +38,8 @@ export const AppLoadingDialog = {
       }
 
       exposed?.show({
-        loadingText: options?.loadingText,
-        canCancel: options?.canCancel,
+        canCancel: true,
+        ...options,
         onCancel: () => {
           resolve(false)
         },
