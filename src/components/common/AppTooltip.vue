@@ -17,21 +17,18 @@ withDefaults(defineProps<TooltipProps>(), {
 
 <template>
   <div class="tooltip">
-    <slot name="label">
+    <div name="label">
       <AppIcon v-if="iconClass" :icon="iconClass" />
-    </slot>
+    </div>
     <template v-if="content">
-      <el-tooltip effect="dark" :content="content" placement="top">
+      <el-tooltip effect="light" :content="content" placement="top">
         <slot name="default">
-          <div v-if="type === 'rtl'" class="tooltip__content txt-reverse-ellipsis" :class="contentClass">
+          <div v-if="type === 'rtl'"  v-bind="$attrs" class="tooltip__content txt-reverse-ellipsis" :class="contentClass">
             &lrm;{{ content }}&lrm;
           </div>
-          <div v-else class="tooltip__content txt-ellipsis" :class="contentClass">{{ content }}</div>
+          <div v-else  v-bind="$attrs" class="tooltip__content txt-ellipsis" :class="contentClass">{{ content }}</div>
         </slot>
       </el-tooltip>
-    </template>
-    <template v-else>
-      <slot name="default"></slot>
     </template>
   </div>
 </template>

@@ -9,7 +9,7 @@ import type {
 
 const visible = defineModel<boolean>({ required: true })
 const props = withDefaults(defineProps<LoadingDialogProps>(), {
-  canCancel: true,
+  canCancel: false,
 })
 
 const options: LoadingDialogProps = reactive(cloneDeep(props))

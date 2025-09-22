@@ -38,7 +38,7 @@ export const AppLoadingDialog = {
       }
 
       exposed?.show({
-        canCancel: true,
+        canCancel: false,
         ...options,
         onCancel: () => {
           resolve(false)
