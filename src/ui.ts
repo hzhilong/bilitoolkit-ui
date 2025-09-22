@@ -12,8 +12,6 @@ export const initBilitoolkitUi = async () => {
   await import('element-plus/theme-chalk/el-loading.css')
   await import('element-plus/theme-chalk/el-message.css')
   await import('element-plus/theme-chalk/el-message-box.css')
-  // 集成 remixicon
-  import('remixicon/fonts/remixicon.css')
   import('@/assets/scss/common/base.scss')
   await ThemeUtils.initAppTheme()
 

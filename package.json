@@ -74,10 +74,8 @@
     "@vue/language-core": "^3.0.7",
     "@ybgnb/utils": "file:.yalc/@ybgnb/utils",
     "bilitoolkit-api-types": "file:.yalc/bilitoolkit-api-types",
-    "consola": "^3.4.2",
-    "dayjs": "^1.11.18",
     "element-plus": "^2.11.2",
-    "remixicon": "^4.6.0",
+    "lodash": "^4.17.21",
     "vue": "^3.5.18"
   }
 }

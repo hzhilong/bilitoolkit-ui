@@ -1,25 +1,21 @@
-import { BaseUtils } from '@ybgnb/utils';
+import { BaseUtils } from '@ybgnb/utils'
 import { ElMessage, ElMessageBox, type ElMessageBoxOptions, type MessageParams } from 'element-plus'
-import { defaultsDeep } from 'lodash'
-import { logger } from '@/utils/renderer-logger.ts'
 
 /**
  * App工具，包含一些全局的方法
  */
 export class AppUtils {
-
   /**
    * 统一处理异常
    * @param error
    */
   static handleError(error: unknown): void {
     if (!error) {
-      logger.error('[app]:未知错误')
-    } else if (error instanceof Error) {
-      logger.error('[app]:出现错误', error)
+      AppUtils.message({
+        message: '未知错误',
+        type: 'error',
+      })
     } else {
-      logger.error('[app]:出现错误', error)
-      // 待完善
       AppUtils.message({
         message: BaseUtils.getErrorMessage(error),
         type: 'error',
@@ -79,12 +75,15 @@ export class AppUtils {
       ElMessageBox.confirm(
         message,
         title,
-        defaultsDeep(options, {
-          autofocus: false,
-          cancelButtonText: '取消',
-          confirmButtonText: '确定',
-          type: 'warning',
-        }),
+        Object.assign(
+          {
+            autofocus: false,
+            cancelButtonText: '取消',
+            confirmButtonText: '确定',
+            type: 'warning',
+          },
+          options,
+        ),
       )
         .then(() => {
           resolve()

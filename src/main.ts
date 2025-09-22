@@ -1,5 +1,4 @@
 import { createApp } from 'vue'
-import { AppUtils, logger } from 'bilitoolkit-ui'
 import HomeView from '@/views/HomeView.vue'
 import ElementPlus from 'element-plus'
 // 导入自定义的css变量
@@ -10,8 +9,7 @@ import 'element-plus/theme-chalk/dark/css-vars.css'
 import 'element-plus/theme-chalk/el-loading.css'
 import 'element-plus/theme-chalk/el-message.css'
 import 'element-plus/theme-chalk/el-message-box.css'
-// 集成 remixicon
-import 'remixicon/fonts/remixicon.css'
+import { AppUtils } from '@/utils/app-utils.ts'
 
 async function bootstrapApp() {
   const app = createApp(HomeView)
@@ -25,6 +23,6 @@ async function bootstrapApp() {
 
 bootstrapApp()
   .then(() => {
-    logger.info('ui 测试app 启动成功')
+    console.log('ui 测试app 启动成功')
   })
   .catch(AppUtils.handleError)
