@@ -37,3 +37,6 @@ yalc.lock
 files
 dbs
 logs
+
+# npm install -D rollup-plugin-visualizer
+stats.html

@@ -35,7 +35,8 @@
     "./style.css": "./dist/bilitoolkit-ui.css"
   },
   "files": [
-    "dist"
+    "dist",
+    "!dist/bundle-stats.*"
   ],
   "scripts": {
     "dev": "chcp 65001 && vite",
@@ -62,6 +63,7 @@
     "jiti": "^2.4.2",
     "npm-run-all2": "^8.0.4",
     "prettier": "3.6.2",
+    "rollup-plugin-bundle-stats": "^4.21.3",
     "sass": "^1.92.1",
     "typescript": "~5.8.0",
     "unplugin-auto-import": "^20.1.0",
@@ -75,8 +77,8 @@
     "@ybgnb/utils": "file:.yalc/@ybgnb/utils",
     "bilitoolkit-api-types": "file:.yalc/bilitoolkit-api-types",
     "element-plus": "^2.11.2",
-    "lodash": "^4.17.21",
-    "vue": "^3.5.18",
-    "pinia": "^3.0.3"
+    "lodash-es": "^4.17.21",
+    "pinia": "^3.0.3",
+    "vue": "^3.5.18"
   }
 }

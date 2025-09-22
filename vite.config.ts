@@ -6,6 +6,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { fileURLToPath, URL } from 'node:url'
+import { bundleStats } from 'rollup-plugin-bundle-stats'
 
 export default defineConfig(({ mode }: ConfigEnv) => {
   return {
@@ -25,6 +26,10 @@ export default defineConfig(({ mode }: ConfigEnv) => {
         // 输出目录
         outDir: 'dist',
         entryRoot: 'src',
+      }),
+      // bundle-stats 插件
+      bundleStats({
+        html: true,
       }),
     ],
     resolve: {
@@ -52,14 +57,14 @@ export default defineConfig(({ mode }: ConfigEnv) => {
           'vue',
           'pinia',
           'element-plus',
-          'lodash',
+          'lodash-es',
         ],
         output: {
           // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
           globals: {
             'vue': 'Vue',
             'pinia': 'pinia',
-            'lodash': 'lodash',
+            'lodash-es': 'lodash-es',
             'element-plus': 'ElementPlus',
           },
         },

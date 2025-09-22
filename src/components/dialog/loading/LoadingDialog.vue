@@ -1,6 +1,6 @@
 <!--加载框-->
 <script setup lang="ts">
-import { cloneDeep } from 'lodash'
+import cloneDeep from 'lodash-es/cloneDeep'
 import { reactive, ref, watch } from 'vue'
 import type {
   LoadingDialogExposed,
