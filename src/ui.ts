@@ -1,9 +1,10 @@
 import { type App } from 'vue'
 // 集成 ElementPlus
 import ElementPlus from 'element-plus'
-import { ThemeUtils } from '@/utils/theme-utils.ts'
+import type { Pinia } from 'pinia'
+import { useAppThemeStore } from '@/stores/app-theme.ts'
 
-export const initBilitoolkitUi = async () => {
+export const initBilitoolkitUi = async (pinia: Pinia) => {
   // 导入自定义的css变量
   await import('@/assets/scss/element/dark-var.css')
   await import('@/assets/scss/element/light-var.css')
@@ -12,12 +13,9 @@ export const initBilitoolkitUi = async () => {
   await import('element-plus/theme-chalk/el-loading.css')
   await import('element-plus/theme-chalk/el-message.css')
   await import('element-plus/theme-chalk/el-message-box.css')
-  import('@/assets/scss/common/base.scss')
-  await ThemeUtils.initAppTheme()
+  await import('@/assets/scss/common/base.scss')
 
-  window.toolkitApi.event.onUpdateAppTheme((newState) => {
-    ThemeUtils.updateAppTheme(newState)
-  })
+  await useAppThemeStore(pinia).init()
 
   return {
     install(app: App) {

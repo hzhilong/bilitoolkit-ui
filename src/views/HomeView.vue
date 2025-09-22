@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 const test = async () => {}
 </script>
 
@@ -7,4 +6,5 @@ const test = async () => {}
   <el-button @click="test()">测试1</el-button>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+</style>

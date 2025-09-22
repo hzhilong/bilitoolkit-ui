@@ -76,6 +76,7 @@
     "bilitoolkit-api-types": "file:.yalc/bilitoolkit-api-types",
     "element-plus": "^2.11.2",
     "lodash": "^4.17.21",
-    "vue": "^3.5.18"
+    "vue": "^3.5.18",
+    "pinia": "^3.0.3"
   }
 }
