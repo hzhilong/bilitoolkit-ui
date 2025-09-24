@@ -11,10 +11,10 @@ interface IconButtonProps {
 withDefaults(defineProps<IconButtonProps>(), {
   iconSize: '18px',
 })
-const emit = defineEmits(['onClick'])
+const emit = defineEmits(['click'])
 
 const handleClick = () => {
-  emit('onClick')
+  emit('click')
 }
 </script>
 

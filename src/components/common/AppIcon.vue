@@ -9,7 +9,7 @@ import { computed } from 'vue'
 const props = withDefaults(
   defineProps<{
     icon: string
-    iconSize: string
+    iconSize?: string
   }>(),
   {
     iconSize: '18px',

@@ -1,9 +1,8 @@
 <script setup lang="ts">
-const test = async () => {}
 </script>
 
 <template>
-  <el-button @click="test()">测试1</el-button>
+  <icon-button confirm="???" icon="aaa"></icon-button>
 </template>
 
 <style scoped lang="scss">

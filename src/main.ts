@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import HomeView from '@/views/HomeView.vue'
 import ElementPlus from 'element-plus'
 // 导入自定义的css变量
@@ -18,6 +19,7 @@ async function bootstrapApp() {
   app.config.globalProperties.$toolkitApi = window.toolkitApi
 
   app.use(ElementPlus, { size: 'small', zIndex: 3000 })
+  app.use(createPinia())
   app.mount('#app')
 }
 
