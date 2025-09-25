@@ -57,7 +57,7 @@ defineExpose<LoadingDialogExposed>({ show, hide })
 }
 </style>
 
-<style scoped lang="scss">
+<style lang="scss">
 @use '@/assets/scss/common/base' as *;
 @use '@/assets/scss/global' as *;
 

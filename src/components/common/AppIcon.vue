@@ -9,11 +9,8 @@ import { computed } from 'vue'
 const props = withDefaults(
   defineProps<{
     icon: string
-    iconSize?: string
   }>(),
-  {
-    iconSize: '18px',
-  },
+  {},
 )
 
 const theme = useAppThemeStore()
@@ -24,18 +21,10 @@ const iconClass = computed(() => {
     return `ri-${props.icon}-line`
   }
 })
-const getStyles = computed(() => {
-  return {
-    width: props.iconSize,
-    height: props.iconSize,
-    fontSize: props.iconSize,
-    lineHeight: props.iconSize,
-  }
-})
 </script>
 
 <template>
-  <i :class="iconClass" :style="getStyles"></i>
+  <i :class="iconClass" class="icon-font"></i>
 </template>
 
-<style scoped lang="scss"></style>
+<style lang="scss"></style>

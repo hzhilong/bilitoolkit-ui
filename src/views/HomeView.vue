@@ -2,8 +2,8 @@
 </script>
 
 <template>
-  <icon-button confirm="???" icon="aaa"></icon-button>
+  <ExternalLink url="https://www.baidu.com/?tn=22073068_oem_dg">跳转</ExternalLink>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 </style>

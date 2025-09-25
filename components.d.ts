@@ -15,6 +15,7 @@ declare module 'vue' {
     ElDialog: typeof import('element-plus/es')['ElDialog']
     ElPopconfirm: typeof import('element-plus/es')['ElPopconfirm']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
+    ExternalLink: typeof import('./src/components/common/ExternalLink.vue')['default']
     IconButton: typeof import('./src/components/common/IconButton.vue')['default']
     IconLabel: typeof import('./src/components/common/IconLabel.vue')['default']
     LoadingDialog: typeof import('./src/components/dialog/loading/LoadingDialog.vue')['default']

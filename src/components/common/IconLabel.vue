@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import AppIcon from '@/components/common/AppIcon.vue'
 
-defineProps<{
-  icon: string
-}>()
+const props = withDefaults(
+  defineProps<{
+    icon: string
+  }>(),
+  {},
+)
 </script>
 
 <template>
@@ -13,7 +16,7 @@ defineProps<{
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .icon-label {
   display: flex;
   align-items: center;
