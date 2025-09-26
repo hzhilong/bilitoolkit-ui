@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import defaultFace from '@/assets/images/noface.jpg'
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import type { BiliAccountCardProps } from '@/components/bili/types.ts'
 
 /**
@@ -15,13 +15,11 @@ const face = computed(() => {
 const levelImg = computed(() => {
   return new URL(`../../assets/images/user_level/level_${props.account.level}.svg`, import.meta.url).href
 })
-
-const logoutBtnVisible = ref(false)
 </script>
 
 <template>
-  <div class="bili-account-card" @mouseover="logoutBtnVisible = true" @mouseleave="logoutBtnVisible = false">
-    <div class="options-close-btn" v-show="showLogoutBtn && logoutBtnVisible"></div>
+  <div class="bili-account-card">
+    <slot></slot>
     <img class="bili-account-card__face" alt="face" :src="face" />
     <div class="bili-account-card__info">
       <div>
@@ -48,7 +46,6 @@ const logoutBtnVisible = ref(false)
 </template>
 
 <style lang="scss">
-
 .bili-account-card {
   border-radius: 8px;
   border: 1px solid var(--app-color-primary-transparent-35);
@@ -107,7 +104,7 @@ const logoutBtnVisible = ref(false)
       color: var(--el-text-color-secondary);
 
       .value {
-        color: var(--el-text-color-primary);
+        color: var(--el-text-color-regular);
       }
     }
   }

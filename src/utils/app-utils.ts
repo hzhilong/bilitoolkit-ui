@@ -1,4 +1,4 @@
-import { BaseUtils } from '@ybgnb/utils'
+import { AbortedError, BaseUtils } from '@ybgnb/utils'
 import { ElMessage, ElMessageBox, type ElMessageBoxOptions, type MessageParams } from 'element-plus'
 import { toolkitApi } from '@/api/toolkit-api.ts'
 
@@ -11,6 +11,13 @@ export class AppUtils {
    * @param error
    */
   static handleError(error: unknown): void {
+    if (error && error instanceof AbortedError) {
+      AppUtils.message({
+        message: error.message,
+        type: 'warning',
+      })
+      return
+    }
     console.error(error)
     toolkitApi.system.saveLog({
       level: 'error',
@@ -95,7 +102,7 @@ export class AppUtils {
           resolve()
         })
         .catch(() => {
-          reject()
+          reject(new AbortedError())
         })
     })
   }

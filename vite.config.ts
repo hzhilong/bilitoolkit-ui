@@ -8,7 +8,6 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { fileURLToPath, URL } from 'node:url'
 import { bundleStats } from 'rollup-plugin-bundle-stats'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
-import path from 'node:path'
 
 export default defineConfig(({ mode }: ConfigEnv) => {
   return {
@@ -37,10 +36,10 @@ export default defineConfig(({ mode }: ConfigEnv) => {
         targets: [
           {
             src: 'src/assets/scss/abstracts/*',
-            dest: 'styles/'
-          }
+            dest: 'styles/',
+          },
         ],
-      })
+      }),
     ],
     resolve: {
       // 路径别名
@@ -63,21 +62,14 @@ export default defineConfig(({ mode }: ConfigEnv) => {
       sourcemap: false,
       rollupOptions: {
         // 确保外部化处理那些你不想打包进库的依赖
-        external: [
-          'vue',
-          '@ybgnb/utils',
-          'bilitoolkit-api-types',
-          'pinia',
-          'element-plus',
-          'lodash-es',
-        ],
+        external: ['vue', '@ybgnb/utils', 'bilitoolkit-api-types', 'pinia', 'element-plus', 'lodash-es'],
         output: {
           // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
           globals: {
-            'vue': 'Vue',
+            vue: 'Vue',
             '@ybgnb/utils': '@ybgnb/utils',
             'bilitoolkit-api-types': 'bilitoolkit-api-types',
-            'pinia': 'pinia',
+            pinia: 'pinia',
             'lodash-es': 'lodash-es',
             'element-plus': 'ElementPlus',
           },

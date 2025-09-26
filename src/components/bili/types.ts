@@ -5,6 +5,4 @@ import type { BiliAccountInfo } from 'bilitoolkit-api-types'
  */
 export interface BiliAccountCardProps {
   account: BiliAccountInfo
-  // 显示注销按钮
-  showLogoutBtn?: boolean
 }
