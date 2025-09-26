@@ -47,7 +47,9 @@
     "npm 发布": " npm publish --access public",
     "本地构建并发布": "vite build --mode library && yalc publish",
     "添加本地依赖包": "yalc add bilitoolkit-api-types @ybgnb/utils --peer",
-    "移除本地依赖包": "yalc remove --all"
+    "移除本地依赖包": "yalc remove --all",
+    "type-check": "vue-tsc --build",
+    "lint": "eslint . --fix"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.2",
@@ -80,5 +82,9 @@
     "lodash-es": "^4.17.21",
     "pinia": "^3.0.3",
     "vue": "^3.5.18"
+  },
+  "dependencies": {
+    "@ybgnb/utils": "file:.yalc/@ybgnb/utils",
+    "bilitoolkit-api-types": "file:.yalc/bilitoolkit-api-types"
   }
 }

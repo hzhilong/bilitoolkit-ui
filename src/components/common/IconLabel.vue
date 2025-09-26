@@ -1,12 +1,9 @@
 <script setup lang="ts">
 import AppIcon from '@/components/common/AppIcon.vue'
 
-const props = withDefaults(
-  defineProps<{
-    icon: string
-  }>(),
-  {},
-)
+defineProps<{
+  icon: string
+}>()
 </script>
 
 <template>

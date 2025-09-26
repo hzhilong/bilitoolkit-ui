@@ -10,6 +10,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppIcon: typeof import('./src/components/common/AppIcon.vue')['default']
     AppTooltip: typeof import('./src/components/common/AppTooltip.vue')['default']
+    BiliAccountCard: typeof import('./src/components/bili/BiliAccountCard.vue')['default']
     CountdownDialog: typeof import('./src/components/dialog/countdown/CountdownDialog.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElDialog: typeof import('element-plus/es')['ElDialog']

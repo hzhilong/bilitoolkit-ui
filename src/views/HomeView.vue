@@ -1,9 +1,8 @@
 <script setup lang="ts">
+import BiliAccountCard from '@/components/bili/BiliAccountCard.vue'
 </script>
 
 <template>
-  <ExternalLink url="https://www.baidu.com/?tn=22073068_oem_dg">跳转</ExternalLink>
 </template>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>
