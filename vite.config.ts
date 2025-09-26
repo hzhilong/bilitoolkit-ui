@@ -7,8 +7,10 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { fileURLToPath, URL } from 'node:url'
 import { bundleStats } from 'rollup-plugin-bundle-stats'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
+import path from 'node:path'
 
-export default defineConfig(({  }: ConfigEnv) => {
+export default defineConfig(({ mode }: ConfigEnv) => {
   return {
     base: './',
     plugins: [
@@ -29,8 +31,16 @@ export default defineConfig(({  }: ConfigEnv) => {
       }),
       // bundle-stats 插件
       bundleStats({
-        html: true,
+        html: mode !== 'production',
       }),
+      viteStaticCopy({
+        targets: [
+          {
+            src: 'src/assets/scss/abstracts/*',
+            dest: 'styles/'
+          }
+        ],
+      })
     ],
     resolve: {
       // 路径别名

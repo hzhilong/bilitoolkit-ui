@@ -1,3 +1,6 @@
+@use "variables" as *;
+@use "functions" as *;
+
 /**
   省略左边内容
   注意，内容前后需要加上【&lrm;】（左至右符号）
@@ -12,14 +15,6 @@
   white-space: nowrap;
   direction: rtl; //定义方向
   text-align: left; // 防止父元素宽度足够的时候文字靠右右边
-}
-
-/**
-  省略左边内容
-  注意，内容前后需要加上【&lrm;】（左至右符号）
- */
-.txt-reverse-ellipsis {
-  @include txt-reverse-ellipsis;
 }
 
 /* 省略右边内容 */
@@ -151,11 +146,6 @@
   &:hover {
     animation: rotate 3s linear infinite;
   }
-}
-
-/* RGB透明度 */
-@function rgba-opacity($color, $opacity) {
-  @return rgba(red($color), green($color), blue($color), $opacity);
 }
 
 /*app logo*/

@@ -1,5 +1,7 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
 @use '../common/scrollbar' as *;
-@use '../global' as *;
 
 body {
   width: 100vw;
@@ -43,6 +45,14 @@ body {
 /* 省略右边内容*/
 .txt-ellipsis {
   @include txt-ellipsis;
+}
+
+/**
+  省略左边内容
+  注意，内容前后需要加上【&lrm;】（左至右符号）
+ */
+.txt-reverse-ellipsis {
+  @include txt-reverse-ellipsis;
 }
 
 /* 图标按钮 */
@@ -89,3 +99,5 @@ body {
   // 解决文本没有垂直居中的问题
   line-height: normal !important;
 }
+
+

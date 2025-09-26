@@ -58,8 +58,6 @@ defineExpose<LoadingDialogExposed>({ show, hide })
 </style>
 
 <style lang="scss">
-@use '@/assets/scss/common/base' as *;
-@use '@/assets/scss/global' as *;
 
 .loading-mask {
   position: fixed;
@@ -85,9 +83,6 @@ defineExpose<LoadingDialogExposed>({ show, hide })
     border-radius: 10px;
     overflow: hidden;
     position: relative;
-
-    .options-close-btn {
-    }
 
     .loading-spinner {
       width: var(--el-loading-spinner-size);

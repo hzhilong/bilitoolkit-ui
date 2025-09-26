@@ -1,0 +1,4 @@
+/* RGB透明度 */
+@function rgba-opacity($color, $opacity) {
+  @return rgba(red($color), green($color), blue($color), $opacity);
+}

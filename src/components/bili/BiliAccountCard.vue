@@ -48,7 +48,6 @@ const logoutBtnVisible = ref(false)
 </template>
 
 <style lang="scss">
-@use '@/assets/scss/global' as *;
 
 .bili-account-card {
   border-radius: 8px;
