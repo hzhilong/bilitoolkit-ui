@@ -1,6 +1,7 @@
 import { AbortedError, BaseUtils } from '@ybgnb/utils'
 import { ElMessage, ElMessageBox, type ElMessageBoxOptions, type MessageParams } from 'element-plus'
 import { toolkitApi } from '@/api/toolkit-api.ts'
+import { useTestDataStore } from '@/stores/test-data.ts'
 
 /**
  * App工具，包含一些全局的方法
@@ -19,10 +20,12 @@ export class AppUtils {
       return
     }
     console.error(error)
-    toolkitApi.system.saveLog({
-      level: 'error',
-      message: error,
-    })
+    if(!useTestDataStore().state.isTest){
+      toolkitApi.system.saveLog({
+        level: 'error',
+        message: error,
+      })
+    }
     if (!error) {
       AppUtils.message({
         message: '未知错误',

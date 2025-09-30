@@ -29,6 +29,7 @@ declare module 'vue' {
     LoadingDialog: typeof import('./src/components/dialog/loading/LoadingDialog.vue')['default']
     PluginMenuItem: typeof import('./src/components/plugin/PluginMenuItem.vue')['default']
     PluginMenus: typeof import('./src/components/plugin/PluginMenus.vue')['default']
+    PluginPageContent: typeof import('./src/components/plugin/PluginPageContent.vue')['default']
     PluginPageHeader: typeof import('./src/components/plugin/PluginPageHeader.vue')['default']
   }
   export interface GlobalDirectives {

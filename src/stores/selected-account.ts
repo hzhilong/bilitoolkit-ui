@@ -2,9 +2,10 @@ import type { BiliAccountInfo } from 'bilitoolkit-api-types'
 import { defineStore } from 'pinia'
 import { reactive, watch } from 'vue'
 import cloneDeep from 'lodash-es/cloneDeep'
+import { useTestDataStore } from '@/stores/test-data.ts'
 
 /**
- * 应用主题状态 Store
+ * 选择的账号状态 Store
  */
 export const useSelectedAccountStore = defineStore('BiliToolkit-ui-SelectedAccountStore', () => {
   const state = reactive<{
@@ -13,9 +14,15 @@ export const useSelectedAccountStore = defineStore('BiliToolkit-ui-SelectedAccou
     selectedAccount: undefined,
   })
 
+  const { state: testDataState } = useTestDataStore()
+
   // 初始化
   const init = async () => {
     try {
+      if (testDataState.isTest) {
+        state.selectedAccount = testDataState.account
+        return
+      }
       const newState = await window.toolkitApi.db.read<BiliAccountInfo>('ui-selected-account')
       if (newState) {
         state.selectedAccount = newState
@@ -27,7 +34,7 @@ export const useSelectedAccountStore = defineStore('BiliToolkit-ui-SelectedAccou
   watch(
     state,
     async (newState) => {
-      if (newState.selectedAccount) {
+      if (newState.selectedAccount && !testDataState.isTest) {
         await window.toolkitApi.db.write('ui-selected-account', cloneDeep(newState.selectedAccount!))
       }
     },

@@ -1,5 +1,7 @@
 import type { AppThemeMode, AppThemeState } from 'bilitoolkit-api-types'
 import { toolkitApi } from '@/api/toolkit-api.ts'
+import { useTestDataStore } from '@/stores/test-data.ts'
+import { defaultAppThemeState } from '@/common/ui-constants.ts'
 
 const whiteColor = '#ffffff'
 const blackColor = '#000000'
@@ -138,9 +140,14 @@ export class ThemeUtils {
    * 更新css变量
    */
   static async updateAppTheme(initState?: AppThemeState) {
-    const state = initState ?? (await toolkitApi.system.getAppThemeState())
-    const dark = await ThemeUtils.isDark(state.themeMode)
-    baseUpdateThemeColor(state.primaryColor, state.themeMode, dark)
+    if (!useTestDataStore().state.isTest) {
+      const state = initState ?? (await toolkitApi.system.getAppThemeState())
+      const dark = await ThemeUtils.isDark(state.themeMode)
+      baseUpdateThemeColor(state.primaryColor, state.themeMode, dark)
+    } else {
+      const state = initState ?? defaultAppThemeState
+      baseUpdateThemeColor(state.primaryColor, state.themeMode, false)
+    }
   }
 
   static async initAppTheme() {

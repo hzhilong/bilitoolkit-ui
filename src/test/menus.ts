@@ -13,4 +13,4 @@ export const testMenus: PluginMenuInfo[] = [
     title: '插件设置',
     path: '/manage',
   },
-]
+] as const
