@@ -6,7 +6,7 @@ export interface PluginMenuInfo {
 
 export interface PluginMenusProps {
   menus: Array<PluginMenuInfo>
-  activeIndex?: string
+  activeIndex: string
 }
 
 export interface PluginMenuItemProps {

@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import defaultFace from '@/assets/images/noface.jpg'
-import type { PluginMenuInfo } from '@/components/plugin/types.ts'
+import type { PluginMenuInfo, PluginMenusProps } from '@/components/plugin/types.ts'
 import { useSelectedAccountStore } from '@/stores/selected-account.ts'
 import { toolkitApi } from '@/api/toolkit-api.ts'
 
-defineProps<{
-  menus: PluginMenuInfo[]
-}>()
+defineProps<PluginMenusProps>()
 
 const { state, deleteAccount, setAccount } = useSelectedAccountStore()
 const account = computed(() => state.selectedAccount)
@@ -27,11 +25,24 @@ const chooseAccount = async () => {
 const cancelChoose = () => {
   deleteAccount()
 }
+const emit = defineEmits<{
+  handleMenuSelect: [menu: PluginMenuInfo]
+}>()
+const handleMenuSelect = (menu: PluginMenuInfo): void => {
+  if (menu) {
+    emit('handleMenuSelect', menu)
+  }
+}
 </script>
 
 <template>
   <div class="plugin-page-header">
-    <plugin-menus class="plugin-page-header__menus" :menus="menus"></plugin-menus>
+    <plugin-menus
+      class="plugin-page-header__menus"
+      :active-index="activeIndex"
+      :menus="menus"
+      @handle-select="handleMenuSelect"
+    ></plugin-menus>
     <div class="plugin-page-header__account-container">
       <template v-if="account">
         <el-popover placement="bottom-end" :width="260" trigger="hover" :teleported="false">

@@ -4,9 +4,6 @@ import PluginMenuItem from '@/components/plugin/PluginMenuItem.vue'
 import { computed, type Slots, useSlots } from 'vue'
 
 const props = defineProps<PluginMenusProps>()
-const finalActiveIndex = computed(() => {
-  return props.activeIndex || (props.menus[0]?.path ?? '')
-})
 const buildIndexMap = (
   menus: PluginMenuInfo[],
   map = new Map<string, PluginMenuInfo>(),
@@ -45,7 +42,7 @@ const hasRightItemSlot = computed(() => {
 
 <template>
   <el-menu
-    :default-active="finalActiveIndex"
+    :default-active="activeIndex"
     class="plugin-menus"
     mode="horizontal"
     :ellipsis="false"
