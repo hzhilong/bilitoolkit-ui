@@ -27,6 +27,7 @@ declare module 'vue' {
     IconButton: typeof import('./src/components/common/IconButton.vue')['default']
     IconLabel: typeof import('./src/components/common/IconLabel.vue')['default']
     LoadingDialog: typeof import('./src/components/dialog/loading/LoadingDialog.vue')['default']
+    LogPrint: typeof import('./src/components/common/LogPrint.vue')['default']
     PluginMenuItem: typeof import('./src/components/plugin/PluginMenuItem.vue')['default']
     PluginMenus: typeof import('./src/components/plugin/PluginMenus.vue')['default']
     PluginPageContent: typeof import('./src/components/plugin/PluginPageContent.vue')['default']

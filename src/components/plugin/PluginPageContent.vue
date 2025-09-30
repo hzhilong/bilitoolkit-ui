@@ -14,6 +14,7 @@
   display: flex;
   flex-direction: column;
   justify-items: start;
+  gap: 10px;
   padding: 10px 0;
   box-sizing: border-box;
   color: var(--el-text-color-regular);

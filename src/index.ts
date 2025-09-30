@@ -22,6 +22,7 @@ export { default as AppTooltip } from './components/common/AppTooltip.vue'
 export { default as IconButton } from './components/common/IconButton.vue'
 export { default as IconLabel } from './components/common/IconLabel.vue'
 export { default as ExternalLink } from './components/common/ExternalLink.vue'
+export { default as LogPrint } from './components/common/LogPrint.vue'
 
 export * from './components/bili/types.ts'
 export { default as BiliAccountCard } from './components/bili/BiliAccountCard.vue'
