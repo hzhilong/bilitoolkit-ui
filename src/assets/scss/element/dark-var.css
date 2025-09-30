@@ -67,4 +67,6 @@ html.dark {
   --app-color-logo: var(--el-text-color-primary);
 
   --el-mask-color: rgba(0, 0, 0, .5);
+
+  --el-menu-horizontal-height: 40px;
 }

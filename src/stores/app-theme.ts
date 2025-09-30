@@ -7,7 +7,7 @@ import { ThemeUtils } from '@/utils/theme-utils.ts'
 /**
  * 应用主题状态 Store
  */
-export const useAppThemeStore = defineStore('BiliToolkit-AppThemeStore-ui', () => {
+export const useAppThemeStore = defineStore('BiliToolkit-ui-AppThemeStore', () => {
   const state = reactive<AppThemeState>(defaultAppThemeState)
 
   // 初始化

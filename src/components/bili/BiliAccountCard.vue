@@ -23,14 +23,12 @@ const levelImg = computed(() => {
     <img class="bili-account-card__face" alt="face" :src="face" />
     <div class="bili-account-card__info">
       <div>
-        <span class="bili-account-card__name">{{ account.name }}</span>
+        <el-tooltip effect="light" :content="account.name" placement="top">
+          <span class="txt-ellipsis bili-account-card__name">{{ account.name }}</span>
+        </el-tooltip>
         <img class="bili-account-card__level" :src="levelImg" alt="level" />
       </div>
-      <div>
-        <span
-          >UID：<span class="bili-account-card__mid">{{ account.mid }}</span></span
-        >
-      </div>
+      <div class="bili-account-card__mid">UID: {{ account.mid }}</div>
       <div class="bili-account-card__stat">
         <span class="bili-account-card__stat__item">
           <span class="value">{{ account.following }}</span>
@@ -47,42 +45,56 @@ const levelImg = computed(() => {
 
 <style lang="scss">
 .bili-account-card {
-  border-radius: 8px;
-  border: 1px solid var(--app-color-primary-transparent-35);
+  min-width: 230px;
+  border: 2px solid var(--el-border-color);
+  border-radius: 12px;
   padding: 10px;
-  width: 300px;
   display: flex;
   flex-direction: row;
-  align-items: start;
+  align-items: center;
   gap: 10px;
   position: relative;
   overflow: hidden;
   user-select: none;
+  box-sizing: border-box;
+  font-size: 14px;
 
   &:hover {
     box-shadow: var(--el-box-shadow);
   }
 
   &__face {
-    width: 64px;
-    height: 64px;
+    width: 58px;
+    height: 58px;
     border-radius: 50%;
   }
 
-  &__mid,
   &__name {
+    font-size: 16px;
+    user-select: text;
+  }
+
+  &__mid {
+    font-size: 12px;
     user-select: text;
   }
 
   &__info {
     flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 0px;
+    gap: 0;
     align-items: start;
     white-space: nowrap;
 
+    > :first-child {
+      line-height: 1.5em;
+      height: 1.5em;
+    }
+
     > div {
+      width: 100%;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -99,6 +111,7 @@ const levelImg = computed(() => {
     flex-direction: row;
     gap: 20px;
     align-items: center;
+    margin-top: 6px;
 
     &__item {
       color: var(--el-text-color-secondary);

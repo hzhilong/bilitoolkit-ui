@@ -8,12 +8,17 @@ import 'element-plus/theme-chalk/el-loading.css'
 import 'element-plus/theme-chalk/el-message.css'
 import 'element-plus/theme-chalk/el-message-box.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
-import '@/assets/scss/element/light-var.css'
-import '@/assets/scss/element/dark-var.css'
-import '@/assets/scss/common/base.scss'
+import { useSelectedAccountStore } from '@/stores/selected-account.ts'
+// import '@/assets/scss/element/light-var.css'
+// import '@/assets/scss/element/dark-var.css'
+// import '@/assets/scss/common/base.scss'
 
 export const initBilitoolkitUi = async (pinia: Pinia) => {
+  import('@/assets/scss/element/light-var.css')
+  import('@/assets/scss/element/dark-var.css')
+  import('@/assets/scss/common/base.scss')
   await useAppThemeStore(pinia).init()
+  await useSelectedAccountStore(pinia).init()
 
   return {
     install(app: App) {

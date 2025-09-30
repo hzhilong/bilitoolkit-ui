@@ -19,3 +19,9 @@ export { default as ExternalLink } from './components/common/ExternalLink.vue'
 
 export * from './components/bili/types.ts'
 export { default as BiliAccountCard } from './components/bili/BiliAccountCard.vue'
+
+export { default as PluginMenuItem } from './components/plugin/PluginMenuItem.vue'
+export { default as PluginMenus } from './components/plugin/PluginMenus.vue'
+export { default as PluginPageHeader } from './components/plugin/PluginPageHeader.vue'
+export * from './components/plugin/types'
+

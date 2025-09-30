@@ -229,4 +229,5 @@
   --app-shadow-menu-active-hover: unset;
 
   --app-color-logo: var(--el-color-primary);
+  --el-menu-horizontal-height: 40px;
 }

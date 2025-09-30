@@ -144,14 +144,3 @@
     animation: rotate 3s linear infinite;
   }
 }
-
-/*app logo*/
-@mixin app-logo-style($color:var(--app-color-logo)) {
-  display: inline-block;
-  mask: url('@/assets/images/logo.svg') no-repeat center / contain;
-  -webkit-mask: url('@/assets/images/logo.svg') no-repeat center / contain;
-  //color: #FFFFFF;
-  background: $color;
-  border-radius: 10px;
-  user-select: none;
-}
