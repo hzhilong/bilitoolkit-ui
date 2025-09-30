@@ -32,6 +32,8 @@ declare module 'vue' {
     PluginMenus: typeof import('./src/components/plugin/PluginMenus.vue')['default']
     PluginPageContent: typeof import('./src/components/plugin/PluginPageContent.vue')['default']
     PluginPageHeader: typeof import('./src/components/plugin/PluginPageHeader.vue')['default']
+    SettingGroup: typeof import('./src/components/settings/SettingGroup.vue')['default']
+    SettingItem: typeof import('./src/components/settings/SettingItem.vue')['default']
   }
   export interface GlobalDirectives {
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']

@@ -9,6 +9,9 @@ export * from './stores/selected-account.ts'
 
 export { useLoadingData } from './composables/useLoadingData'
 
+export { default as SettingGroup } from './components/settings/SettingGroup.vue'
+export { default as SettingItem } from './components/settings/SettingItem.vue'
+
 export * from './components/dialog/countdown/types'
 export * from './components/dialog/countdown/useCountdown'
 export { default as CountdownDialog } from './components/dialog/countdown/CountdownDialog.vue'
