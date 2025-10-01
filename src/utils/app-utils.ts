@@ -72,17 +72,17 @@ export class AppUtils {
     ElMessage(options)
   }
 
-  static showInfoMessage(msg: string): void {
-    AppUtils.message({
-      message: msg,
-      type: 'info',
-    })
-  }
-
-  static showErrorMessage(msg: string): void {
+  static error(msg: string): void {
     AppUtils.message({
       message: msg,
       type: 'error',
+    })
+  }
+
+  static warning(msg: string): void {
+    AppUtils.message({
+      message: msg,
+      type: 'warning',
     })
   }
 

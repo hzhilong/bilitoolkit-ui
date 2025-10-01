@@ -4,7 +4,7 @@
   "private": false,
   "type": "module",
   "productName": "bilitoolkit-ui",
-  "description": "bilitoolkit-ui",
+  "description": "「哔哩工具姬」的 UI 库",
   "author": "hzhilong",
   "keywords": [
     "BiliToolkit",
