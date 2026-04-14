@@ -3,16 +3,44 @@ import { toolkitApi } from '@/api/toolkit-api.ts'
 import { useTestDataStore } from '@/stores/test-data.ts'
 import { defaultAppThemeState } from '@/common/ui-constants.ts'
 
-const whiteColor = '#ffffff'
-const blackColor = '#000000'
+export const whiteColor = '#ffffff'
+export const blackColor = '#000000'
 
 export type AppThemeCssVars = Record<string, string>
 
-const setCssVar = (k: string, v: string) => {
+/**
+ * 设置 html 根元素的 css 变量
+ * @param k
+ * @param v
+ */
+export const setCssVar = (k: string, v: string) => {
   document.documentElement.style.setProperty(k, v)
 }
 
-const mixColor = (
+/**
+ * 生成 CSS `color-mix()` 函数的字符串表示，用于动态计算两种颜色的混合结果
+ *
+ * @param {string} color1 - 参与混合的第一种颜色（支持 CSS 合法颜色值，如 HEX、RGB、HSL 等）
+ * @param {string} color2 - 参与混合的第二种颜色
+ * @param {number} percentage - 主颜色（color1）在混合中的占比（百分比数值，范围 0-100）
+ * @param {'srgb' | 'hsl'} [colorSpace='srgb'] - 色彩空间选项：
+ *   - `'srgb'`: 标准 RGB 色彩空间（默认）
+ *   - `'hsl'`: 色相-饱和度-明度色彩空间
+ * @param {number} [percentage2] - 可选参数：副颜色（color2）的独立占比。
+ *   若未提供，则自动计算为 `100 - percentage`
+ * @returns {string} 可直接用于 CSS 的 `color-mix()` 函数字符串（如 `color-mix(in srgb, red 30%, blue 70%)`）
+ *
+ * @example
+ * // 基础用法（自动计算互补占比）
+ * mixColor('red', 'blue', 30)
+ * // 返回: "color-mix(in srgb, red 30%, blue 70%)"
+ *
+ * @example
+ * // 显式指定双占比 + HSL 色彩空间
+ * mixColor('#ff0000', '#0000ff', 40, 'hsl', 60)
+ * // 返回: "color-mix(in hsl, #ff0000 40%, #0000ff 60%)"
+ */
+export const mixColor = (
   color1: string,
   color2: string,
   percentage: number,
@@ -22,15 +50,22 @@ const mixColor = (
   return `color-mix(in ${colorSpace}, ${color1} ${percentage}%, ${color2} ${percentage2 ? percentage2 : 100 - percentage}%)`
 }
 
-// 将十六进制颜色转换为 RGB
-const hexToRgb = (hex: string): { r: number; g: number; b: number } => {
+/**
+ * 将十六进制颜色转换为 RGB
+ */
+export const hexToRgb = (hex: string): { r: number; g: number; b: number } => {
   const r = parseInt(hex.slice(1, 3), 16)
   const g = parseInt(hex.slice(3, 5), 16)
   const b = parseInt(hex.slice(5, 7), 16)
   return { r, g, b }
 }
 
-const switchThemeMode = (dark: boolean, vars: AppThemeCssVars) => {
+/**
+ * 切换主题模式
+ * @param dark  是否暗黑模式
+ * @param vars  应用主题的css变量
+ */
+export const switchThemeMode = (dark: boolean, vars: AppThemeCssVars): AppThemeCssVars => {
   if (dark) {
     document.documentElement.classList.add('dark')
   } else {
@@ -41,7 +76,13 @@ const switchThemeMode = (dark: boolean, vars: AppThemeCssVars) => {
   return { foreground: vars['--app-color-foreground'], background: vars['--app-color-background'] }
 }
 
-const initTransparentColors = (primaryColor: string, vars: AppThemeCssVars, preKey: string) => {
+/**
+ * 初始化透明颜色变量集合
+ * @param primaryColor  主题色
+ * @param vars          目标保存对象
+ * @param preKey        透明色前缀
+ */
+export const initTransparentColors = (primaryColor: string, vars: AppThemeCssVars, preKey: string) => {
   const { r, g, b } = hexToRgb(primaryColor)
   for (let i = 2; i < 100; ) {
     const opacity = i / 100
@@ -55,13 +96,12 @@ const initTransparentColors = (primaryColor: string, vars: AppThemeCssVars, preK
 }
 
 /**
- * 更新主题色
+ * 更新主题色的基本方法
  */
-const baseUpdateThemeColor = (primaryColor: string, themeMode: AppThemeMode, isDark: boolean) => {
+export const baseUpdateThemeColor = (primaryColor: string, themeMode: AppThemeMode, isDark: boolean) => {
   const vars: AppThemeCssVars = {}
-  const switchThemeModeResult = switchThemeMode(isDark, vars)
-  const foreground: string = switchThemeModeResult.foreground
-  const background: string = switchThemeModeResult.background
+  const { foreground, background } = switchThemeMode(isDark, vars)
+
   vars['--app-primary-color'] = primaryColor
   vars['--el-color-primary'] = primaryColor
   vars['--el-color-primary-light-1'] = mixColor(primaryColor, background, 90)
@@ -126,31 +166,37 @@ const baseUpdateThemeColor = (primaryColor: string, themeMode: AppThemeMode, isD
   }
 }
 
-export class ThemeUtils {
-  static async isDark(themeMode?: AppThemeMode) {
-    const newMode = themeMode ?? (await toolkitApi.system.getAppThemeState()).themeMode
-    if (newMode === 'system') {
-      return await toolkitApi.system.shouldUseDarkColors()
-    } else {
-      return newMode === 'dark'
-    }
+/**
+ * 是否为暗黑模式主题
+ * @param themeMode
+ */
+export const isDarkTheme = async (themeMode?: AppThemeMode) => {
+  const newMode = themeMode ?? (await toolkitApi.system.getAppThemeState()).themeMode
+  if (newMode === 'system') {
+    return await toolkitApi.system.shouldUseDarkColors()
+  } else {
+    return newMode === 'dark'
   }
+}
 
-  /**
-   * 更新css变量
-   */
-  static async updateAppTheme(initState?: AppThemeState) {
-    if (!useTestDataStore().state.isTest) {
-      const state = initState ?? (await toolkitApi.system.getAppThemeState())
-      const dark = await ThemeUtils.isDark(state.themeMode)
-      baseUpdateThemeColor(state.primaryColor, state.themeMode, dark)
-    } else {
-      const state = initState ?? defaultAppThemeState
-      baseUpdateThemeColor(state.primaryColor, state.themeMode, false)
-    }
+/**
+ * 更新应用主题
+ */
+export const updateAppTheme = async (appThemeState?: AppThemeState) => {
+  if (!useTestDataStore().state.isTest) {
+    // 非测试模式
+    const state = appThemeState ?? (await toolkitApi.system.getAppThemeState())
+    const dark = await isDarkTheme(state.themeMode)
+    baseUpdateThemeColor(state.primaryColor, state.themeMode, dark)
+  } else {
+    const state = appThemeState ?? defaultAppThemeState
+    baseUpdateThemeColor(state.primaryColor, state.themeMode, false)
   }
+}
 
-  static async initAppTheme() {
-    await this.updateAppTheme(await toolkitApi.system.getAppThemeState())
-  }
+/**
+ * 初始化应用主题
+ */
+export const initAppTheme = async () => {
+  await updateAppTheme(await toolkitApi.system.getAppThemeState())
 }

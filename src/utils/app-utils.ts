@@ -2,111 +2,118 @@ import { AbortedError, BaseUtils } from '@ybgnb/utils'
 import { ElMessage, ElMessageBox, type ElMessageBoxOptions, type MessageParams } from 'element-plus'
 import { toolkitApi } from '@/api/toolkit-api.ts'
 import { useTestDataStore } from '@/stores/test-data.ts'
+import { BiliAbortError } from '@ybgnb/bili-api'
 
 /**
- * App工具，包含一些全局的方法
+ * 统一处理错误
  */
-export class AppUtils {
-  /**
-   * 统一处理异常
-   * @param error
-   */
-  static handleError(error: unknown): void {
-    if (error && error instanceof AbortedError) {
-      AppUtils.message({
-        message: error.message,
-        type: 'warning',
-      })
-      return
-    }
-    console.error(error)
-    if(!useTestDataStore().state.isTest){
-      toolkitApi.system.saveLog({
+export const handleError = (error: unknown) => {
+  if (error && (error instanceof AbortedError || error instanceof BiliAbortError)) {
+    showToast({
+      message: error.message,
+      type: 'warning',
+    })
+    return
+  }
+  console.error(error)
+  if (!useTestDataStore().state.isTest) {
+    toolkitApi.system
+      .saveLog({
         level: 'error',
         message: error,
       })
-    }
-    if (!error) {
-      AppUtils.message({
-        message: '未知错误',
-        type: 'error',
-      })
-    } else {
-      AppUtils.message({
-        message: BaseUtils.getErrorMessage(error),
-        type: 'error',
-      })
-    }
-  }
-
-  static message(message: string): void
-  static message({
-    message,
-    type,
-    duration,
-  }: {
-    message: string
-    type?: 'success' | 'warning' | 'info' | 'error'
-    duration?: number
-  }): void
-
-  static message(
-    config:
-      | string
-      | {
-          message: string
-          type?: 'success' | 'warning' | 'info' | 'error'
-          duration?: number
-        },
-  ): void {
-    const options: MessageParams = {
-      message: '',
-      type: 'success',
-      duration: 3000,
-    }
-    if (typeof config === 'string') {
-      options.message = config
-    } else {
-      Object.assign(options, config)
-    }
-    ElMessage(options)
-  }
-
-  static error(msg: string): void {
-    AppUtils.message({
-      message: msg,
+      .then()
+  } else if (error) {
+    showToast({
+      message: BaseUtils.getErrorMessage(error),
+      type: 'error',
+    })
+  } else {
+    showToast({
+      message: '未知错误',
       type: 'error',
     })
   }
+}
 
-  static warning(msg: string): void {
-    AppUtils.message({
-      message: msg,
-      type: 'warning',
-    })
+/**
+ * 显示提示
+ * @param message
+ */
+export function showToast(message: string): void
+export function showToast({
+  message,
+  type,
+  duration,
+}: {
+  message: string
+  type?: 'success' | 'warning' | 'info' | 'error'
+  duration?: number
+}): void
+export function showToast(
+  config:
+    | string
+    | {
+        message: string
+        type?: 'success' | 'warning' | 'info' | 'error'
+        duration?: number
+      },
+): void {
+  const options: MessageParams = {
+    message: '',
+    type: 'success',
+    duration: 3000,
   }
+  if (typeof config === 'string') {
+    options.message = config
+  } else {
+    Object.assign(options, config)
+  }
+  ElMessage(options)
+}
 
-  static confirm(message: string, title: string = '提示', options: ElMessageBoxOptions = {}) {
-    return new Promise<void>((resolve, reject) => {
-      ElMessageBox.confirm(
-        message,
-        title,
-        Object.assign(
-          {
-            autofocus: false,
-            cancelButtonText: '取消',
-            confirmButtonText: '确定',
-            type: 'warning',
-          },
-          options,
-        ),
-      )
-        .then(() => {
-          resolve()
-        })
-        .catch(() => {
-          reject(new AbortedError())
-        })
-    })
-  }
+/**
+ * 显示错误提示
+ */
+export function showError(msg: string): void {
+  showToast({
+    message: msg,
+    type: 'error',
+  })
+}
+/**
+ * 显示警告提示
+ */
+export function showWarning(msg: string): void {
+  showToast({
+    message: msg,
+    type: 'warning',
+  })
+}
+
+/**
+ * 显示确认提示
+ */
+export function showConfirm(message: string, title: string = '提示', options: ElMessageBoxOptions = {}) {
+  return new Promise<void>((resolve, reject) => {
+    ElMessageBox.confirm(
+      message,
+      title,
+      Object.assign(
+        {
+          autofocus: false,
+          cancelButtonText: '取消',
+          confirmButtonText: '确定',
+          type: 'warning',
+        },
+        options,
+      ),
+    )
+      .then(() => {
+        resolve()
+      })
+      .catch(() => {
+        reject(new AbortedError())
+      })
+  })
 }

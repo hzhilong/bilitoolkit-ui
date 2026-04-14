@@ -2,8 +2,8 @@ import type { AppThemeState } from 'bilitoolkit-api-types'
 import { defineStore } from 'pinia'
 import { reactive } from 'vue'
 import { defaultAppThemeState } from '@/common/ui-constants.ts'
-import { ThemeUtils } from '@/utils/theme-utils.ts'
 import { useTestDataStore } from '@/stores/test-data.ts'
+import { updateAppTheme } from '@/utils/theme-utils.ts'
 
 /**
  * 应用主题状态 Store
@@ -18,9 +18,9 @@ export const useAppThemeStore = defineStore('BiliToolkit-ui-AppThemeStore', () =
     if (!testDataState.isTest) {
       const newState = await window.toolkitApi.system.getAppThemeState()
       Object.assign(state, newState)
-      await ThemeUtils.updateAppTheme(newState)
+      await updateAppTheme(newState)
     } else {
-      await ThemeUtils.updateAppTheme(state)
+      await updateAppTheme(state)
     }
   }
 
@@ -28,7 +28,7 @@ export const useAppThemeStore = defineStore('BiliToolkit-ui-AppThemeStore', () =
   window.toolkitApi.event.onUpdateAppTheme((newState) => {
     if (!testDataState.isTest) {
       Object.assign(state, newState)
-      ThemeUtils.updateAppTheme(newState).then()
+      updateAppTheme(newState).then()
     }
   })
 

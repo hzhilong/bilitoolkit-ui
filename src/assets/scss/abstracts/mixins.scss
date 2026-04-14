@@ -1,29 +1,46 @@
+/** 省略内容对于单行或者多行的处理 */
+@mixin txt-ellipsis-lines {
+  &.single-line {
+    white-space: nowrap;
+  }
+
+  &:not(.single-line) {
+    display: -webkit-box;
+    line-clamp: v-bind(lines);
+    -webkit-line-clamp: v-bind(lines);
+    -webkit-box-orient: vertical;
+  }
+}
+
 /**
   省略左边内容
   注意，内容前后需要加上【&lrm;】（左至右符号）
   https://stackoverflow.com/questions/27957443/strange-special-characters-issue-in-left-side-ellipsis
  */
-@mixin txt-reverse-ellipsis {
+@mixin txt-ellipsis-left {
   background: var(--app-color-foreground-transparent-10);
   width: fit-content;
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
   direction: rtl; //定义方向
   text-align: left; // 防止父元素宽度足够的时候文字靠右右边
+
+  @include txt-ellipsis-lines;
 }
 
 /* 省略右边内容 */
-@mixin txt-ellipsis {
+@mixin txt-ellipsis-right {
   width: fit-content;
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  //white-space: nowrap;
   direction: ltr; //定义方向
   text-align: left; // 防止父元素宽度足够的时候文字靠右右边
   unicode-bidi: plaintext; // 防止尾部特殊字符显示在前面
+
+  @include txt-ellipsis-lines;
 }
 
 /** 伪元素实现的svg背景 */
@@ -117,7 +134,9 @@
 }
 
 /* 图标按钮 */
-@mixin icon-btn($size:18px,$color:var(--el-color-primary)) {
+@mixin icon-btn($size:18px, $color:var(--el-color-primary),
+  $hover-bg: rgba($color, 0.15) // 基于主色自动生成
+) {
   width: $size;
   height: $size;
   font-size: $size;
@@ -127,20 +146,26 @@
   padding: 5px;
 
   &:hover {
-    background: var(--app-color-primary-transparent-15);
+    background: $hover-bg;
+    //    background: var(--app-color-primary-transparent-15);
   }
 }
 
 /* 圆形图标按钮 */
-@mixin circle-icon-btn($size:18px,$color:var(--el-color-primary)) {
-  @include icon-btn($size, $color);
+@mixin circle-icon-btn($size:18px,$color:var(--el-color-primary),
+  $hover-bg: rgba($color, 0.15) // 基于主色自动生成
+) {
+  @include icon-btn($size, $color, $hover-bg);
   border-radius: 50%;
 }
 
 /* 旋转的圆形图标按钮 */
-@mixin circle-icon-btn--rotate($size:18px,$color:var(--el-color-primary)) {
-  @include circle-icon-btn($size, $color);
+@mixin circle-icon-btn--rotate($size:18px, $speed: 3s, $color:var(--el-color-primary),
+  $hover-bg: rgba($color, 0.15) // 基于主色自动生成
+) {
+  @include circle-icon-btn($size, $color, $hover-bg);
   &:hover {
-    animation: rotate 3s linear infinite;
+    animation: rotate $speed linear infinite;
   }
 }
+

@@ -5,7 +5,7 @@ export * from './utils/theme-utils'
 
 export * from './stores/test-data.ts'
 export * from './stores/app-theme.ts'
-export * from './stores/selected-account.ts'
+export * from './stores/selected-user.ts'
 
 export { useLoadingData } from './composables/useLoadingData'
 
@@ -28,7 +28,7 @@ export { default as ExternalLink } from './components/common/ExternalLink.vue'
 export { default as LogPrint } from './components/common/LogPrint.vue'
 
 export * from './components/bili/types.ts'
-export { default as BiliAccountCard } from './components/bili/BiliAccountCard.vue'
+export { default as BiliUserCard } from './components/bili/BiliUserCard.vue'
 
 export * from './components/plugin/types'
 export { default as PluginMenuItem } from './components/plugin/PluginMenuItem.vue'

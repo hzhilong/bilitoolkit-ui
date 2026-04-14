@@ -42,20 +42,16 @@
     "!dist/bundle-stats.*"
   ],
   "scripts": {
+    "check": "vue-tsc --noEmit  && eslint .",
+    "lint": "eslint . --fix",
     "dev": "chcp 65001 && vite",
-    "类型检查": "tsc --noEmit",
-    "构建前记得补全桶": "构建前记得补全桶",
     "build": "vite build --mode library",
-    "npm 登录": " npm login",
-    "npm 发布": " npm publish --access public",
-    "本地构建并发布": "vite build --mode library && yalc publish",
-    "添加本地依赖包": "yalc add bilitoolkit-api-types @ybgnb/utils --peer",
-    "移除本地依赖包": "yalc remove --all",
-    "type-check": "vue-tsc --build",
-    "lint": "eslint . --fix"
+    "npm login": " npm login",
+    "npm publish": " npm publish --access public"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.2",
+    "@types/lodash-es": "^4.17.12",
     "@types/node": "^22.16.5",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vitejs/plugin-vue-jsx": "^5.0.1",
@@ -80,15 +76,12 @@
   },
   "peerDependencies": {
     "@vue/language-core": "^3.0.7",
-    "@ybgnb/utils": "file:.yalc/@ybgnb/utils",
-    "bilitoolkit-api-types": "file:.yalc/bilitoolkit-api-types",
+    "@ybgnb/bili-api": "workspace:*",
+    "@ybgnb/utils": "^0.0.8",
+    "bilitoolkit-api-types": "workspace:*",
     "element-plus": "^2.11.2",
     "lodash-es": "^4.17.21",
     "pinia": "^3.0.3",
     "vue": "^3.5.18"
-  },
-  "dependencies": {
-    "@ybgnb/utils": "file:.yalc/@ybgnb/utils",
-    "bilitoolkit-api-types": "file:.yalc/bilitoolkit-api-types"
   }
 }

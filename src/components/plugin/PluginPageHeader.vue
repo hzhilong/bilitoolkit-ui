@@ -1,34 +1,34 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import defaultFace from '@/assets/images/noface.jpg'
-import type { PluginMenuInfo, PluginMenusProps } from '@/components/plugin/types.ts'
-import { useSelectedAccountStore } from '@/stores/selected-account.ts'
+import type { PluginMenuData, PluginMenusProps } from '@/components/plugin/types.ts'
 import { toolkitApi } from '@/api/toolkit-api.ts'
+import { useSelectedUserStore } from '@/stores/selected-user.ts'
 
 defineProps<PluginMenusProps>()
 
-const { state, deleteAccount, setAccount } = useSelectedAccountStore()
-const account = computed(() => state.selectedAccount)
+const { state, deleteUser, setUser } = useSelectedUserStore()
+const user = computed(() => state.selectedUser)
 
 const face = computed(() => {
-  return account.value?.face || defaultFace
+  return user.value?.face || defaultFace
 })
 
 const levelImg = computed(() => {
-  return new URL(`../../assets/images/user_level/level_${account.value?.level ?? 0}.svg`, import.meta.url).href
+  return new URL(`../../assets/images/user_level/level_${user.value?.level ?? 0}.svg`, import.meta.url).href
 })
 
-const chooseAccount = async () => {
-  setAccount(await toolkitApi.account.chooseAccount())
+const switchUser = async () => {
+  setUser(await toolkitApi.bili.switchUser())
 }
 
 const cancelChoose = () => {
-  deleteAccount()
+  deleteUser()
 }
 const emit = defineEmits<{
-  handleMenuSelect: [menu: PluginMenuInfo]
+  handleMenuSelect: [menu: PluginMenuData]
 }>()
-const handleMenuSelect = (menu: PluginMenuInfo): void => {
+const handleMenuSelect = (menu: PluginMenuData): void => {
   if (menu) {
     emit('handleMenuSelect', menu)
   }
@@ -44,17 +44,17 @@ const handleMenuSelect = (menu: PluginMenuInfo): void => {
       @handle-select="handleMenuSelect"
     ></plugin-menus>
     <div class="plugin-page-header__account-container">
-      <template v-if="account">
+      <template v-if="user">
         <el-popover placement="bottom-end" :width="260" trigger="hover" :teleported="false">
           <template #reference>
             <div class="plugin-page-header__account-container__info">
               <img class="plugin-page-header__account-container__info__face" :src="face" />
-              <span class="plugin-page-header__account-container__info__name">{{ account.name }}</span>
+              <span class="plugin-page-header__account-container__info__name">{{ user.name }}</span>
               <img class="plugin-page-header__account-container__info__level" :src="levelImg" />
             </div>
           </template>
           <template #default>
-            <bili-account-card :account="account" />
+            <bili-user-card :user="user" />
           </template>
         </el-popover>
       </template>
@@ -68,8 +68,8 @@ const handleMenuSelect = (menu: PluginMenuInfo): void => {
         <span class="plugin-page-header__account-container__arrow">▼</span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item @click="chooseAccount">选择账号</el-dropdown-item>
-            <el-dropdown-item v-if="account" @click="cancelChoose">取消选择</el-dropdown-item>
+            <el-dropdown-item @click="switchUser">选择用户</el-dropdown-item>
+            <el-dropdown-item v-if="user" @click="cancelChoose">取消选择</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>

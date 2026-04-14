@@ -1,14 +1,14 @@
-export interface PluginMenuInfo {
+export interface PluginMenuData {
   title: string
   path: string
-  children?: Array<PluginMenuInfo>
+  children?: Array<PluginMenuData>
 }
 
 export interface PluginMenusProps {
-  menus: Array<PluginMenuInfo>
+  menus: Array<PluginMenuData>
   activeIndex: string
 }
 
 export interface PluginMenuItemProps {
-  menu: PluginMenuInfo
+  menu: PluginMenuData
 }

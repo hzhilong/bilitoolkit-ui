@@ -1,6 +1,6 @@
-import type { PluginMenuInfo } from '@/components/plugin/types.ts'
+import type { PluginMenuData } from '@/components/plugin/types.ts'
 
-export const testMenus: PluginMenuInfo[] = [
+export const testMenus: PluginMenuData[] = [
   {
     title: '备份数据',
     path: '/home',

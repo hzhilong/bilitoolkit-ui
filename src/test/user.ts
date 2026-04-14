@@ -1,4 +1,4 @@
-import type { BiliAccountInfo } from 'bilitoolkit-api-types'
+import type { UserInfo } from '@ybgnb/bili-api'
 
 export const testUser = {
   mid: 1234567890,
@@ -11,4 +11,5 @@ export const testUser = {
   silence: 0,
   following: 666,
   follower: 888,
-} satisfies BiliAccountInfo
+  rank: 1000,
+} satisfies UserInfo

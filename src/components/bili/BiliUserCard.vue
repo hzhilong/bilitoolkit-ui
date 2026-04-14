@@ -1,19 +1,19 @@
 <script setup lang="ts">
 import defaultFace from '@/assets/images/noface.jpg'
 import { computed } from 'vue'
-import type { BiliAccountCardProps } from '@/components/bili/types.ts'
+import type { BiliUserCardProps } from '@/components/bili/types.ts'
 
 /**
- * 哔哩哔哩账号卡片信息
+ * 哔哩哔哩用户卡片信息
  */
-const props = defineProps<BiliAccountCardProps>()
+const props = defineProps<BiliUserCardProps>()
 
 const face = computed(() => {
-  return props.account.face || defaultFace
+  return props.user.face || defaultFace
 })
 
 const levelImg = computed(() => {
-  return new URL(`../../assets/images/user_level/level_${props.account.level}.svg`, import.meta.url).href
+  return new URL(`../../assets/images/user_level/level_${props.user.level}.svg`, import.meta.url).href
 })
 </script>
 
@@ -23,19 +23,19 @@ const levelImg = computed(() => {
     <img class="bili-account-card__face" alt="face" :src="face" />
     <div class="bili-account-card__info">
       <div>
-        <el-tooltip effect="light" :content="account.name" placement="top">
-          <span class="txt-ellipsis bili-account-card__name">{{ account.name }}</span>
+        <el-tooltip effect="light" :content="user.name" placement="top">
+          <span class="txt-ellipsis-right bili-account-card__name">{{ user.name }}</span>
         </el-tooltip>
         <img class="bili-account-card__level" :src="levelImg" alt="level" />
       </div>
-      <div class="bili-account-card__mid">UID: {{ account.mid }}</div>
+      <div class="bili-account-card__mid">UID: {{ user.mid }}</div>
       <div class="bili-account-card__stat">
         <span class="bili-account-card__stat__item">
-          <span class="value">{{ account.following }}</span>
+          <span class="value">{{ user.following }}</span>
           <span>关注</span>
         </span>
         <span class="bili-account-card__stat__item">
-          <span class="value">{{ account.follower }}</span>
+          <span class="value">{{ user.follower }}</span>
           <span>粉丝</span>
         </span>
       </div>
@@ -53,6 +53,7 @@ const levelImg = computed(() => {
   flex-direction: row;
   align-items: center;
   gap: 10px;
+  margin: 8px;
   position: relative;
   overflow: hidden;
   user-select: none;
@@ -60,7 +61,7 @@ const levelImg = computed(() => {
   font-size: 14px;
 
   &:hover {
-    box-shadow: var(--el-box-shadow);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
   }
 
   &__face {

@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import type { PluginMenuInfo, PluginMenusProps } from '@/components/plugin/types.ts'
+import type { PluginMenuData, PluginMenusProps } from '@/components/plugin/types.ts'
 import PluginMenuItem from '@/components/plugin/PluginMenuItem.vue'
 import { computed, type Slots, useSlots } from 'vue'
 
 const props = defineProps<PluginMenusProps>()
 const buildIndexMap = (
-  menus: PluginMenuInfo[],
-  map = new Map<string, PluginMenuInfo>(),
-): Map<string, PluginMenuInfo> => {
+  menus: PluginMenuData[],
+  map = new Map<string, PluginMenuData>(),
+): Map<string, PluginMenuData> => {
   menus.forEach((menu) => {
     map.set(menu.path, menu)
     if (menu.children && menu.children.length > 0) {
@@ -18,7 +18,7 @@ const buildIndexMap = (
 }
 const indexMap = computed(() => buildIndexMap(props.menus))
 const emit = defineEmits<{
-  handleSelect: [menu: PluginMenuInfo]
+  handleSelect: [menu: PluginMenuData]
 }>()
 const handleSelect = (selectIndex: string): void => {
   const menu = indexMap.value.get(selectIndex)

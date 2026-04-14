@@ -12,6 +12,8 @@ declare module '*.vue' {
 // 全局类型
 declare global {
   export interface Window {
+    __toolkitApi: ToolkitApiWithCore
+    __toolkitInvoke: (apiPath: string, ...args: unknown[]) => unknown
     toolkitApi: ToolkitApi
   }
 }

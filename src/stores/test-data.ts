@@ -9,7 +9,7 @@ import { testMenus } from '@/test/menus.ts'
 export const useTestDataStore = defineStore('BiliToolkit-ui-TestDataStore', () => {
   const state = reactive({
     isTest: false,
-    account: testUser,
+    user: testUser,
     menus: testMenus,
   })
 

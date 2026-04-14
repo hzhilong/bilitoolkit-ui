@@ -1,8 +1,8 @@
-import type { BiliAccountInfo } from 'bilitoolkit-api-types'
+import type { UserInfo } from '@ybgnb/bili-api'
 
 /**
- * 账号卡片信息
+ * 用户卡片信息
  */
-export interface BiliAccountCardProps {
-  account: BiliAccountInfo
+export interface BiliUserCardProps {
+  user: UserInfo
 }

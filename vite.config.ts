@@ -54,7 +54,7 @@ export default defineConfig(({ mode }: ConfigEnv) => {
         // 库的入口文件
         entry: 'src/index.ts',
         // 库的名称，会作为全局变量名使用
-        name: 'BilitoolkitUi',
+        name: 'bilitoolkit-ui',
         // 输出文件名
         fileName: 'bilitoolkit-ui',
       },
@@ -62,16 +62,17 @@ export default defineConfig(({ mode }: ConfigEnv) => {
       sourcemap: false,
       rollupOptions: {
         // 确保外部化处理那些你不想打包进库的依赖
-        external: ['vue', '@ybgnb/utils', 'bilitoolkit-api-types', 'pinia', 'element-plus', 'lodash-es'],
+        external: ['vue', '@ybgnb/utils','@ybgnb/bili-api', 'bilitoolkit-api-types', 'pinia', 'element-plus', 'lodash-es'],
         output: {
           // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
           globals: {
             vue: 'Vue',
             '@ybgnb/utils': '@ybgnb/utils',
+            '@ybgnb/bili-api': '@ybgnb/bili-api',
             'bilitoolkit-api-types': 'bilitoolkit-api-types',
             pinia: 'pinia',
-            'lodash-es': 'lodash-es',
             'element-plus': 'ElementPlus',
+            'lodash-es': 'lodash-es',
           },
         },
       },

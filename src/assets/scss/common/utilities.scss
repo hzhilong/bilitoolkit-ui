@@ -1,0 +1,46 @@
+@use "../abstracts/mixins" as *;
+
+/* 省略右边内容*/
+.txt-ellipsis, .txt-ellipsis-right {
+  @include txt-ellipsis-right;
+}
+
+/**
+  省略左边内容
+  注意，内容前后需要加上【&lrm;】（左至右符号）
+ */
+.txt-ellipsis-left {
+  @include txt-ellipsis-left;
+}
+
+/* 图标按钮 */
+.icon-btn {
+  @include icon-btn;
+}
+
+/* 圆形图标按钮 */
+.circle-icon-btn {
+  @include circle-icon-btn;
+}
+
+/* 旋转的圆形图标按钮 */
+.circle-icon-btn--rotate {
+  @include circle-icon-btn--rotate;
+}
+
+
+// 选项关闭按钮（一般位于右上角）
+.options-close-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  @include pseudo-svg-icon(url('@/assets/images/icon-close.svg'), var(--el-text-color-secondary), 4px);
+
+  &:hover {
+    background: var(--app-color-primary-transparent-15);
+  }
+}
+
