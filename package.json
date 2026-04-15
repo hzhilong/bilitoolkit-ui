@@ -10,7 +10,6 @@
     "BiliToolkit",
     "哔哩工具姬"
   ],
-  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/hzhilong/bilitoolkit-ui"
@@ -22,15 +21,22 @@
   "engines": {
     "node": "^20.19.0 || >=22.12.0"
   },
-  "main": "dist/bilitoolkit-ui.umd.cjs",
-  "module": "dist/bilitoolkit-ui.js",
+  "license": "Apache-2.0",
+  "packageManager": "pnpm@10.30.3",
+  "main": "./dist/index.umd.cjs",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "style": "dist/bilitoolkit-ui.css",
+  "style": "dist/index.css",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/bilitoolkit-ui.js",
-      "require": "./dist/bilitoolkit-ui.umd.cjs"
+      "import": "./dist/index.js",
+      "require": "./dist/index.umd.cjs"
+    },
+    "./common": {
+      "types": "./dist/common.d.ts",
+      "import": "./dist/common.js",
+      "require": "./dist/common.umd.cjs"
     },
     "./style.css": "./dist/bilitoolkit-ui.css",
     "./variables.scss": "./dist/styles/variables.scss",
@@ -42,7 +48,7 @@
     "!dist/bundle-stats.*"
   ],
   "scripts": {
-    "check": "vue-tsc --noEmit  && eslint .",
+    "check": "vue-tsc --build --noEmit  && eslint .",
     "lint": "eslint . --fix",
     "dev": "chcp 65001 && vite",
     "build": "vite build --mode library",
@@ -79,7 +85,7 @@
     "@ybgnb/bili-api": "workspace:*",
     "@ybgnb/utils": "^0.0.8",
     "bilitoolkit-api-types": "workspace:*",
-    "element-plus": "^2.11.2",
+    "element-plus": "^2.13.7",
     "lodash-es": "^4.17.21",
     "pinia": "^3.0.3",
     "vue": "^3.5.18"

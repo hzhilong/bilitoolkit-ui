@@ -20,3 +20,13 @@ export const defaultAppThemeState: Readonly<AppThemeState> = {
   bgMode: 'default',
   dark: false,
 }
+
+/**
+ * ui 组件库使用的数据库 key
+ */
+export const UI_DB_KEYS = {
+  /**
+   * 已选择的用户
+   */
+  UI_SELECTED_USER: 'ui_selected_user',
+} as const

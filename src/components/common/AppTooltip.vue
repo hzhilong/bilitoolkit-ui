@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppIcon from '@/components/common/AppIcon.vue'
 import { onMounted, onUnmounted, ref, useTemplateRef } from 'vue'
+import { ElTooltip } from 'element-plus'
 
 /**
  * 内容溢出提示

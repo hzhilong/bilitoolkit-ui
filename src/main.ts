@@ -2,7 +2,6 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import HomeView from '@/views/HomeView.vue'
 import ElementPlus from 'element-plus'
-import { AppUtils } from '@/utils/app-utils.ts'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 // 以服务的方式进行调用的组件，需要手动引入 css 样式
 import 'element-plus/theme-chalk/el-loading.css'
@@ -12,6 +11,7 @@ import 'element-plus/theme-chalk/el-message-box.css'
 import '@/assets/scss/element/light-var.css'
 import '@/assets/scss/element/dark-var.css'
 import '@/assets/scss/common/base.scss'
+import { handleError } from '@/utils/feedback.ts'
 
 async function bootstrapApp() {
   const app = createApp(HomeView)
@@ -28,4 +28,4 @@ bootstrapApp()
   .then(() => {
     console.log('ui 测试app 启动成功')
   })
-  .catch(AppUtils.handleError)
+  .catch(handleError)

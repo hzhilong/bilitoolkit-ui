@@ -8,6 +8,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { fileURLToPath, URL } from 'node:url'
 import { bundleStats } from 'rollup-plugin-bundle-stats'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
+import path from 'node:path'
 
 export default defineConfig(({ mode }: ConfigEnv) => {
   return {
@@ -21,15 +22,18 @@ export default defineConfig(({ mode }: ConfigEnv) => {
       Components({
         resolvers: [ElementPlusResolver()],
       }),
+      // 生成 .d.ts 类型文件
       dts({
         // 指定 tsconfig.json 的路径
         tsconfigPath: 'tsconfig.web.json',
         // 输出目录
         outDir: 'dist',
+        // 入口文件的根路径
         entryRoot: 'src',
       }),
-      // bundle-stats 插件
+      // 分析打包体积
       bundleStats({
+        baseline: false,
         html: mode !== 'production',
       }),
       viteStaticCopy({
@@ -48,22 +52,42 @@ export default defineConfig(({ mode }: ConfigEnv) => {
       },
     },
     build: {
-      // 设置为 false 可以禁用代码混淆和压缩
+      // 代码混淆和压缩
       minify: true,
       lib: {
         // 库的入口文件
-        entry: 'src/index.ts',
+        entry: {
+          index: path.resolve(__dirname, 'src/index.ts'),
+          common: path.resolve(__dirname, 'src/common.ts'),
+        },
         // 库的名称，会作为全局变量名使用
         name: 'bilitoolkit-ui',
+        formats: ['es', 'cjs'],
         // 输出文件名
-        fileName: 'bilitoolkit-ui',
+        fileName: (format, entryName) => {
+          if (format === 'es') {
+            return `${entryName}.js`
+          }
+          return `${entryName}.umd.cjs`
+        },
       },
-      // 建议为库开启 sourcemap
-      sourcemap: false,
+      sourcemap: true,
       rollupOptions: {
-        // 确保外部化处理那些你不想打包进库的依赖
-        external: ['vue', '@ybgnb/utils','@ybgnb/bili-api', 'bilitoolkit-api-types', 'pinia', 'element-plus', 'lodash-es'],
+        // 不想打包进库的依赖
+        external: [
+          'vue',
+          '@ybgnb/utils',
+          '@ybgnb/bili-api',
+          'bilitoolkit-api-types',
+          'pinia',
+          'element-plus',
+          /^element-plus\/.*/,
+          'lodash-es',
+          /^lodash-es\/.*/,
+        ],
         output: {
+          // 保持目录结构
+          preserveModules: false,
           // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
           globals: {
             vue: 'Vue',

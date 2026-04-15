@@ -18,23 +18,23 @@ const levelImg = computed(() => {
 </script>
 
 <template>
-  <div class="bili-account-card">
+  <div class="bili-user-card">
     <slot></slot>
-    <img class="bili-account-card__face" alt="face" :src="face" />
-    <div class="bili-account-card__info">
+    <img class="bili-user-card__face" alt="face" :src="face" />
+    <div class="bili-user-card__info">
       <div>
         <el-tooltip effect="light" :content="user.name" placement="top">
-          <span class="txt-ellipsis-right bili-account-card__name">{{ user.name }}</span>
+          <span class="txt-ellipsis-right bili-user-card__name">{{ user.name }}</span>
         </el-tooltip>
-        <img class="bili-account-card__level" :src="levelImg" alt="level" />
+        <img class="bili-user-card__level" :src="levelImg" alt="level" />
       </div>
-      <div class="bili-account-card__mid">UID: {{ user.mid }}</div>
-      <div class="bili-account-card__stat">
-        <span class="bili-account-card__stat__item">
+      <div class="bili-user-card__mid">UID: {{ user.mid }}</div>
+      <div class="bili-user-card__stat">
+        <span class="bili-user-card__stat__item">
           <span class="value">{{ user.following }}</span>
           <span>关注</span>
         </span>
-        <span class="bili-account-card__stat__item">
+        <span class="bili-user-card__stat__item">
           <span class="value">{{ user.follower }}</span>
           <span>粉丝</span>
         </span>
@@ -44,7 +44,7 @@ const levelImg = computed(() => {
 </template>
 
 <style lang="scss">
-.bili-account-card {
+.bili-user-card {
   min-width: 230px;
   border: 2px solid var(--el-border-color);
   border-radius: 12px;

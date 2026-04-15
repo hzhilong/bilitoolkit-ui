@@ -43,14 +43,14 @@ const handleMenuSelect = (menu: PluginMenuData): void => {
       :menus="menus"
       @handle-select="handleMenuSelect"
     ></plugin-menus>
-    <div class="plugin-page-header__account-container">
+    <div class="plugin-page-header__user-container">
       <template v-if="user">
         <el-popover placement="bottom-end" :width="260" trigger="hover" :teleported="false">
           <template #reference>
-            <div class="plugin-page-header__account-container__info">
-              <img class="plugin-page-header__account-container__info__face" :src="face" />
-              <span class="plugin-page-header__account-container__info__name">{{ user.name }}</span>
-              <img class="plugin-page-header__account-container__info__level" :src="levelImg" />
+            <div class="plugin-page-header__user-container__info">
+              <img class="plugin-page-header__user-container__info__face" :src="face" />
+              <span class="plugin-page-header__user-container__info__name">{{ user.name }}</span>
+              <img class="plugin-page-header__user-container__info__level" :src="levelImg" />
             </div>
           </template>
           <template #default>
@@ -59,13 +59,13 @@ const handleMenuSelect = (menu: PluginMenuData): void => {
         </el-popover>
       </template>
       <template v-else>
-        <div class="plugin-page-header__account-container__info">
-          <img class="plugin-page-header__account-container__info__face" alt="" src="../../assets/images/noface.jpg" />
-          <span class="plugin-page-header__account-container__info__name">未登录</span>
+        <div class="plugin-page-header__user-container__info">
+          <img class="plugin-page-header__user-container__info__face" alt="" src="../../assets/images/noface.jpg" />
+          <span class="plugin-page-header__user-container__info__name">未登录</span>
         </div>
       </template>
       <el-dropdown placement="bottom-end" trigger="click" size="default">
-        <span class="plugin-page-header__account-container__arrow">▼</span>
+        <span class="plugin-page-header__user-container__arrow">▼</span>
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item @click="switchUser">选择用户</el-dropdown-item>
@@ -88,7 +88,7 @@ const handleMenuSelect = (menu: PluginMenuData): void => {
     flex: 1;
   }
 
-  &__account-container {
+  &__user-container {
     display: flex;
     align-items: center;
     font-size: 16px;
@@ -97,7 +97,7 @@ const handleMenuSelect = (menu: PluginMenuData): void => {
     border-bottom: 1px solid var(--el-menu-border-color);
     padding-right: 1em;
 
-    .bili-account-card:hover {
+    .bili-user-card:hover {
       box-shadow: unset;
     }
 

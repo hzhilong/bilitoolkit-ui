@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import { reactive } from 'vue'
 import { defaultAppThemeState } from '@/common/ui-constants.ts'
 import { useTestDataStore } from '@/stores/test-data.ts'
-import { updateAppTheme } from '@/utils/theme-utils.ts'
+import { updateAppTheme } from '@/utils/theme.ts'
 
 /**
  * 应用主题状态 Store

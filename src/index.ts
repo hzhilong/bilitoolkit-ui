@@ -1,7 +1,9 @@
 export * from './ui'
 
-export * from './utils/app-utils'
-export * from './utils/theme-utils'
+export * from './api/toolkit-api.ts'
+
+export * from './utils/feedback.ts'
+export * from './utils/theme.ts'
 
 export * from './stores/test-data.ts'
 export * from './stores/app-theme.ts'

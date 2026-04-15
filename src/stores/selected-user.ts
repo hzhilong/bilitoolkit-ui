@@ -3,15 +3,16 @@ import { reactive, watch } from 'vue'
 import cloneDeep from 'lodash-es/cloneDeep'
 import { useTestDataStore } from '@/stores/test-data.ts'
 import type { UserInfo } from '@ybgnb/bili-api'
+import { UI_DB_KEYS } from '@/common/ui-constants.ts'
 
 /**
  * 选择的用户 状态 Store
  */
 export const useSelectedUserStore = defineStore('BiliToolkit-ui-SelectedUserStore', () => {
   const state = reactive<{
-    selectedUser: UserInfo | undefined
+    selectedUser: UserInfo | null
   }>({
-    selectedUser: undefined,
+    selectedUser: null,
   })
 
   const { state: testDataState } = useTestDataStore()
@@ -23,10 +24,7 @@ export const useSelectedUserStore = defineStore('BiliToolkit-ui-SelectedUserStor
         state.selectedUser = testDataState.user
         return
       }
-      const newState = await window.toolkitApi.db.read<UserInfo>('ui-selected-user')
-      if (newState) {
-        state.selectedUser = newState
-      }
+      state.selectedUser = await window.toolkitApi.db.init<UserInfo>(UI_DB_KEYS.UI_SELECTED_USER)
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_: unknown) {}
   }
@@ -35,14 +33,14 @@ export const useSelectedUserStore = defineStore('BiliToolkit-ui-SelectedUserStor
     state,
     async (newState) => {
       if (newState.selectedUser && !testDataState.isTest) {
-        await window.toolkitApi.db.write('ui-selected-user', cloneDeep(newState.selectedUser!))
+        await window.toolkitApi.db.write(UI_DB_KEYS.UI_SELECTED_USER, cloneDeep(newState.selectedUser!))
       }
     },
     { deep: true },
   )
 
   const deleteUser = () => {
-    state.selectedUser = undefined
+    state.selectedUser = null
   }
 
   const setUser = (user: UserInfo) => {

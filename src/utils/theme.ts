@@ -2,6 +2,7 @@ import type { AppThemeMode, AppThemeState } from 'bilitoolkit-api-types'
 import { toolkitApi } from '@/api/toolkit-api.ts'
 import { useTestDataStore } from '@/stores/test-data.ts'
 import { defaultAppThemeState } from '@/common/ui-constants.ts'
+import { useAppThemeStore } from '@/stores/app-theme.ts'
 
 export const whiteColor = '#ffffff'
 export const blackColor = '#000000'
@@ -61,22 +62,6 @@ export const hexToRgb = (hex: string): { r: number; g: number; b: number } => {
 }
 
 /**
- * 切换主题模式
- * @param dark  是否暗黑模式
- * @param vars  应用主题的css变量
- */
-export const switchThemeMode = (dark: boolean, vars: AppThemeCssVars): AppThemeCssVars => {
-  if (dark) {
-    document.documentElement.classList.add('dark')
-  } else {
-    document.documentElement.classList.remove('dark')
-  }
-  vars['--app-color-foreground'] = dark ? whiteColor : blackColor
-  vars['--app-color-background'] = dark ? '#191919' : whiteColor
-  return { foreground: vars['--app-color-foreground'], background: vars['--app-color-background'] }
-}
-
-/**
  * 初始化透明颜色变量集合
  * @param primaryColor  主题色
  * @param vars          目标保存对象
@@ -100,7 +85,13 @@ export const initTransparentColors = (primaryColor: string, vars: AppThemeCssVar
  */
 export const baseUpdateThemeColor = (primaryColor: string, themeMode: AppThemeMode, isDark: boolean) => {
   const vars: AppThemeCssVars = {}
-  const { foreground, background } = switchThemeMode(isDark, vars)
+  if (isDark) {
+    document.documentElement.classList.add('dark')
+  } else {
+    document.documentElement.classList.remove('dark')
+  }
+  const foreground = (vars['--app-color-foreground'] = isDark ? whiteColor : blackColor)
+  const background = (vars['--app-color-background'] = isDark ? '#191919' : whiteColor)
 
   vars['--app-primary-color'] = primaryColor
   vars['--el-color-primary'] = primaryColor
@@ -198,5 +189,29 @@ export const updateAppTheme = async (appThemeState?: AppThemeState) => {
  * 初始化应用主题
  */
 export const initAppTheme = async () => {
-  await updateAppTheme(await toolkitApi.system.getAppThemeState())
+  await updateAppTheme(undefined)
+}
+
+/**
+ * 切换为默认主题
+ */
+export const switchDefaultTheme = async () => {
+  await updateAppTheme(defaultAppThemeState)
+}
+
+export const switchThemeMode = async (themeMode: AppThemeMode) => {
+  const themeStore = useAppThemeStore()
+  const state = themeStore.state
+  const dark = await isDarkTheme(themeMode)
+  state.dark = dark
+  state.themeMode = themeMode
+  baseUpdateThemeColor(state.primaryColor, themeMode, dark)
+}
+
+export const updatePrimaryColor = async (primaryColor: string) => {
+  const themeStore = useAppThemeStore()
+  const state = themeStore.state
+  const dark = await isDarkTheme(state.themeMode)
+  state.primaryColor = primaryColor
+  baseUpdateThemeColor(primaryColor, state.themeMode, dark)
 }
