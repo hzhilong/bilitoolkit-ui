@@ -11,6 +11,30 @@ import { viteStaticCopy } from 'vite-plugin-static-copy'
 import path from 'node:path'
 
 export default defineConfig(({ mode }: ConfigEnv) => {
+  const external = [
+    'vue',
+    '@vue/language-core',
+    '@ybgnb/utils',
+    '@ybgnb/bili-api',
+    'bilitoolkit-api-types',
+    'bilitoolkit-api-runtime',
+    'pinia',
+    'element-plus',
+    /^element-plus\/.*/,
+    'lodash-es',
+    /^lodash-es\/.*/,
+  ]
+  const global = external
+    .filter((name) => !(name instanceof RegExp))
+    .reduce(
+      (acc, name) => {
+        if (typeof name === 'string') {
+          acc[name] = name
+        }
+        return acc
+      },
+      {} as Record<string, string>,
+    )
   return {
     base: './',
     plugins: [
@@ -58,27 +82,25 @@ export default defineConfig(({ mode }: ConfigEnv) => {
           index: path.resolve(__dirname, 'src/index.ts'),
           common: path.resolve(__dirname, 'src/common.ts'),
         },
-        formats: ['es'],
+        // 库的名称，会作为全局变量名使用
+        name: 'bilitoolkit-ui',
+        formats: ['es', 'cjs'],
+        fileName: (format, entryName) => {
+          if (format === 'es') {
+            return `${entryName}.js`
+          }
+          return `${entryName}.umd.cjs`
+        },
       },
       sourcemap: true,
       rolldownOptions: {
         // 不想打包进库的依赖
-        external: [
-          'vue',
-          '@vue/language-core',
-          '@ybgnb/utils',
-          '@ybgnb/bili-api',
-          'bilitoolkit-api-types',
-          'bilitoolkit-api-runtime',
-          'pinia',
-          'element-plus',
-          /^element-plus\/.*/,
-          'lodash-es',
-          /^lodash-es\/.*/,
-        ],
+        external: external,
         output: {
           // 不保留目录结构
           preserveModules: false,
+          // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
+          globals: global,
         },
       },
     },
