@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { BaseUtils } from '@ybgnb/utils'
+import { getFormattedDateTime } from '@ybgnb/utils'
 
 const logs = ref<string[]>([])
 
 function addLog(msg: string) {
-  logs.value.push(`[${BaseUtils.getFormattedDateTime()}] ${msg}`)
+  logs.value.push(`[${getFormattedDateTime()}] ${msg}`)
 
   if (logs.value.length > 500) {
     logs.value.shift()

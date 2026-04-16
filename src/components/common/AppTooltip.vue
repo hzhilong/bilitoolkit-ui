@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import AppIcon from '@/components/common/AppIcon.vue'
 import { onMounted, onUnmounted, ref, useTemplateRef } from 'vue'
-import { ElTooltip } from 'element-plus'
 
 /**
  * 内容溢出提示
@@ -33,7 +32,6 @@ const contentClass = () => {
 }
 
 const isOverflow = ref(false)
-const refTooltip = useTemplateRef<InstanceType<typeof ElTooltip>>('refTooltip')
 const refContent = useTemplateRef<HTMLDivElement>('refContent')
 // 创建尺寸观测者，监听元素大小变化
 const observer = new ResizeObserver(() => {
@@ -65,7 +63,7 @@ onUnmounted(() => {
       <AppIcon v-if="iconClass" :icon="iconClass" />
     </div>
     <template v-if="content">
-      <el-tooltip ref="refTooltip" effect="light" :content="content" placement="top" :disabled="!isOverflow">
+      <el-tooltip effect="light" :content="content" placement="top" :disabled="!isOverflow">
         <template #content>
           <slot name="tooltipContent" />
         </template>

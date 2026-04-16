@@ -1,4 +1,4 @@
-import { ConfigEnv, defineConfig } from 'vite'
+import { ConfigEnv, defineConfig, UserConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
@@ -24,12 +24,10 @@ export default defineConfig(({ mode }: ConfigEnv) => {
       }),
       // 生成 .d.ts 类型文件
       dts({
-        // 指定 tsconfig.json 的路径
         tsconfigPath: 'tsconfig.web.json',
-        // 输出目录
         outDir: 'dist',
-        // 入口文件的根路径
         entryRoot: 'src',
+        rollupTypes: true,
       }),
       // 分析打包体积
       bundleStats({
@@ -60,25 +58,18 @@ export default defineConfig(({ mode }: ConfigEnv) => {
           index: path.resolve(__dirname, 'src/index.ts'),
           common: path.resolve(__dirname, 'src/common.ts'),
         },
-        // 库的名称，会作为全局变量名使用
-        name: 'bilitoolkit-ui',
-        formats: ['es', 'cjs'],
-        // 输出文件名
-        fileName: (format, entryName) => {
-          if (format === 'es') {
-            return `${entryName}.js`
-          }
-          return `${entryName}.umd.cjs`
-        },
+        formats: ['es'],
       },
       sourcemap: true,
-      rollupOptions: {
+      rolldownOptions: {
         // 不想打包进库的依赖
         external: [
           'vue',
+          '@vue/language-core',
           '@ybgnb/utils',
           '@ybgnb/bili-api',
           'bilitoolkit-api-types',
+          'bilitoolkit-api-runtime',
           'pinia',
           'element-plus',
           /^element-plus\/.*/,
@@ -86,20 +77,10 @@ export default defineConfig(({ mode }: ConfigEnv) => {
           /^lodash-es\/.*/,
         ],
         output: {
-          // 保持目录结构
+          // 不保留目录结构
           preserveModules: false,
-          // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
-          globals: {
-            vue: 'Vue',
-            '@ybgnb/utils': '@ybgnb/utils',
-            '@ybgnb/bili-api': '@ybgnb/bili-api',
-            'bilitoolkit-api-types': 'bilitoolkit-api-types',
-            pinia: 'pinia',
-            'element-plus': 'ElementPlus',
-            'lodash-es': 'lodash-es',
-          },
         },
       },
     },
-  }
+  } satisfies UserConfig
 })

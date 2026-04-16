@@ -19,7 +19,7 @@ const levelImg = computed(() => {
 })
 
 const switchUser = async () => {
-  setUser(await toolkitApi.bili.switchUser())
+  setUser(await toolkitApi.user.switchUser())
 }
 
 const cancelChoose = () => {

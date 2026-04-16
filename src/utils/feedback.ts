@@ -1,14 +1,14 @@
-import { AbortedError, BaseUtils } from '@ybgnb/utils'
 import { ElMessage, ElMessageBox, type ElMessageBoxOptions, type MessageParams } from 'element-plus'
 import { toolkitApi } from '@/api/toolkit-api.ts'
 import { useTestDataStore } from '@/stores/test-data.ts'
 import { BiliAbortError } from '@ybgnb/bili-api'
+import { AbortError, getErrorMessage } from '@ybgnb/utils'
 
 /**
  * 统一处理错误
  */
 export const handleError = (error: unknown) => {
-  if (error && (error instanceof AbortedError || error instanceof BiliAbortError)) {
+  if (error && (error instanceof AbortError || error instanceof BiliAbortError)) {
     showToast({
       message: error.message,
       type: 'warning',
@@ -25,7 +25,7 @@ export const handleError = (error: unknown) => {
       .then()
   } else if (error) {
     showToast({
-      message: BaseUtils.getErrorMessage(error),
+      message: getErrorMessage(error),
       type: 'error',
     })
   } else {
@@ -113,7 +113,7 @@ export function showConfirm(message: string, title: string = '提示', options: 
         resolve()
       })
       .catch(() => {
-        reject(new AbortedError())
+        reject(new AbortError())
       })
   })
 }
