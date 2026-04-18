@@ -9,10 +9,6 @@ import { AbortError, getErrorMessage } from '@ybgnb/utils'
 export const handleError = (error: unknown) => {
   if (error && (error instanceof AbortError || error instanceof BiliAbortError)) {
     // 操作中止
-    showToast({
-      message: error.message,
-      type: 'warning',
-    })
     return
   }
   if (error) {

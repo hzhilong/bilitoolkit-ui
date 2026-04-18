@@ -23,7 +23,7 @@ export default defineConfig(({ mode: _mode }: ConfigEnv) => {
     'lodash-es',
     /^lodash-es\/.*/,
   ]
-  const global = external
+  const _global = external
     .filter((name) => !(name instanceof RegExp))
     .reduce(
       (acc, name) => {
@@ -50,7 +50,7 @@ export default defineConfig(({ mode: _mode }: ConfigEnv) => {
         tsconfigPath: 'tsconfig.web.json',
         outDir: 'dist',
         entryRoot: 'src',
-        rollupTypes: true,
+        rollupTypes: false,
       }),
       // 分析打包体积
       //      bundleStats({
@@ -99,7 +99,7 @@ export default defineConfig(({ mode: _mode }: ConfigEnv) => {
           // 不保留目录结构
           preserveModules: false,
           // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
-          globals: global,
+          //          globals: global,
         },
       },
     },

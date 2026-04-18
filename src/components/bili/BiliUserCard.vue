@@ -84,6 +84,7 @@ const levelImg = computed(() => {
     width: 58px;
     height: 58px;
     border-radius: 50%;
+    border: 2px solid color-mix(in srgb, var(--app-color-foreground), transparent 90%);
   }
 
   &--blocked {
