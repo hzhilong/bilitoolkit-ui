@@ -1,7 +1,6 @@
 import { ElMessage, ElMessageBox, type ElMessageBoxOptions, type MessageParams } from 'element-plus'
 import { toolkitApi } from '@/api/toolkit-api.ts'
-import { useTestDataStore } from '@/stores/test-data.ts'
-import { BiliAbortError } from '@ybgnb/bili-api'
+import { BiliAbortError, BiliApiBusinessError } from '@ybgnb/bili-api'
 import { AbortError, getErrorMessage } from '@ybgnb/utils'
 
 /**
@@ -9,21 +8,28 @@ import { AbortError, getErrorMessage } from '@ybgnb/utils'
  */
 export const handleError = (error: unknown) => {
   if (error && (error instanceof AbortError || error instanceof BiliAbortError)) {
+    // 操作中止
     showToast({
       message: error.message,
       type: 'warning',
     })
     return
   }
-  console.error(error)
-  if (!useTestDataStore().state.isTest) {
+  if (error) {
+    // 打印错误
+    if (error instanceof BiliApiBusinessError) {
+      console.error(error.message)
+    } else {
+      console.error(error)
+    }
+    // 保存日志
     toolkitApi.system
       .saveLog({
         level: 'error',
         message: error,
       })
       .then()
-  } else if (error) {
+    // 显示错误
     showToast({
       message: getErrorMessage(error),
       type: 'error',
