@@ -11,5 +11,6 @@ export const testUser = {
   silence: 0,
   following: 666,
   follower: 888,
+  coins: 10000,
   rank: 1000,
 } satisfies UserInfo

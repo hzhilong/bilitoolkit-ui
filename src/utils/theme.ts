@@ -68,10 +68,12 @@ export const baseUpdateThemeColor = (primaryColor: string, themeMode: AppThemeMo
     vars['--el-bg-color'] = mixColor(primaryColor, background, 3)
     vars['--el-bg-color-page'] = mixColor(primaryColor, background, 4)
     vars['--el-bg-color-overlay'] = mixColor(primaryColor, background, 3)
+    vars['--app-text-shadow'] = ` 0px 1px 2px rgba(255, 255, 255, .4)`
   } else {
     vars['--el-bg-color'] = '#ffffff'
     vars['--el-bg-color-page'] = '#f2f3f5'
     vars['--el-bg-color-overlay'] = '#ffffff'
+    vars['--app-text-shadow'] = ` 0px 1px 2px rgba(0, 0, 0, .4)`
   }
   const { r, g, b } = hexToRgb(primaryColor)
 

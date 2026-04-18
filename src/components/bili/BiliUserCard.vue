@@ -20,25 +20,33 @@ const levelImg = computed(() => {
 </script>
 
 <template>
-  <div class="bili-user-card">
+  <div class="user-card">
     <slot></slot>
-    <img class="bili-user-card__face" alt="face" :src="face" />
-    <div class="bili-user-card__info">
-      <div>
-        <el-tooltip effect="light" :content="user.name" placement="top">
-          <span class="txt-ellipsis-right bili-user-card__name">{{ user.name }}</span>
-        </el-tooltip>
-        <img class="bili-user-card__level" :src="levelImg" alt="level" />
+    <div class="user-card__face-wrapper">
+      <img class="user-card__face" alt="face" :src="face" />
+      <span class="user-card--blocked" v-if="user.silence === 1">账号已封禁</span>
+    </div>
+    <div class="user-card__info">
+      <div class="user-card__row">
+        <AppTooltip class="user-card__name" :content="user.name"></AppTooltip>
+        <img class="user-card__level" :src="levelImg" alt="level" />
       </div>
-      <div class="bili-user-card__mid">UID: {{ user.mid }}</div>
-      <div class="bili-user-card__stat">
-        <span class="bili-user-card__stat__item">
-          <span class="value">{{ user.following }}</span>
-          <span>关注</span>
+      <div class="user-card__row">
+        <span class="user-card__uid-icon"></span>
+        <span class="user-card__uid">{{ user.mid }}</span>
+      </div>
+      <div class="user-card__row">
+        <span class="user-card__stat__item">
+          <span class="user-card__stat__value">{{ user.following }}</span>
+          <span class="user-card__stat__label">关注</span>
         </span>
-        <span class="bili-user-card__stat__item">
-          <span class="value">{{ user.follower }}</span>
-          <span>粉丝</span>
+        <span class="user-card__stat__item">
+          <span class="user-card__stat__value">{{ user.follower }}</span>
+          <span class="user-card__stat__label">粉丝</span>
+        </span>
+        <span class="user-card__stat__item">
+          <span class="user-card__stat__value">{{ user.coins }}</span>
+          <span class="user-card__stat__label">硬币</span>
         </span>
       </div>
     </div>
@@ -46,8 +54,8 @@ const levelImg = computed(() => {
 </template>
 
 <style lang="scss">
-.bili-user-card {
-  min-width: 230px;
+.user-card {
+  min-width: 300px;
   border: 2px solid var(--el-border-color);
   border-radius: 12px;
   padding: 10px;
@@ -61,9 +69,15 @@ const levelImg = computed(() => {
   user-select: none;
   box-sizing: border-box;
   font-size: 14px;
+  transition: box-shadow 0.3s ease;
+  color: var(--el-text-color-regular);
 
   &:hover {
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--el-box-shadow-light);
+  }
+
+  &__face-wrapper {
+    position: relative;
   }
 
   &__face {
@@ -72,14 +86,14 @@ const levelImg = computed(() => {
     border-radius: 50%;
   }
 
-  &__name {
-    font-size: 16px;
-    user-select: text;
-  }
-
-  &__mid {
-    font-size: 12px;
-    user-select: text;
+  &--blocked {
+    font-size: 10px;
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ff0000a8;
+    white-space: nowrap;
   }
 
   &__info {
@@ -90,23 +104,42 @@ const levelImg = computed(() => {
     gap: 0;
     align-items: start;
     white-space: nowrap;
+  }
 
-    > :first-child {
-      line-height: 1.5em;
-      height: 1.5em;
-    }
+  &__row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
 
-    > div {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+  &__name {
+    font-size: 14px;
+    user-select: text;
+    color: var(--el-text-color-primary);
+    text-shadow: var(--app-text-shadow);
   }
 
   &__level {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
+    margin-left: 6px;
+  }
+
+  &__uid-icon {
+    height: 12px;
+    width: auto;
+    aspect-ratio: 61.58837890625 / 36.173736572265625;
+    mask: url('../../assets/images/uid.svg') no-repeat center / contain;
+    -webkit-mask: url('../../assets/images/uid.svg') no-repeat center / contain;
+    background-color: var(--el-text-color-regular);
+    margin-right: 2px;
+    margin-bottom: 10px;
+  }
+
+  &__uid {
+    font-size: 12px;
+    user-select: text;
+    margin-bottom: 10px;
   }
 
   &__stat {
@@ -118,10 +151,12 @@ const levelImg = computed(() => {
 
     &__item {
       color: var(--el-text-color-secondary);
+      margin-right: 10px;
+    }
 
-      .value {
-        color: var(--el-text-color-regular);
-      }
+    &__value {
+      color: var(--el-text-color-regular);
+      margin-right: 2px;
     }
   }
 }

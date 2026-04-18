@@ -23,20 +23,18 @@
   },
   "license": "Apache-2.0",
   "packageManager": "pnpm@10.30.3",
-  "main": "./dist/index.umd.cjs",
+  "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "style": "./dist/index.css",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.umd.cjs"
+      "import": "./dist/index.js"
     },
     "./common": {
       "types": "./dist/common.d.ts",
-      "import": "./dist/common.js",
-      "require": "./dist/common.umd.cjs"
+      "import": "./dist/common.js"
     },
     "./style.css": "./dist/bilitoolkit-ui.css",
     "./variables.scss": "./dist/styles/variables.scss",

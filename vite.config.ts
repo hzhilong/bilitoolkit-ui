@@ -6,11 +6,10 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { fileURLToPath, URL } from 'node:url'
-import { bundleStats } from 'rollup-plugin-bundle-stats'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 import path from 'node:path'
 
-export default defineConfig(({ mode }: ConfigEnv) => {
+export default defineConfig(({ mode: _mode }: ConfigEnv) => {
   const external = [
     'vue',
     '@vue/language-core',
@@ -54,10 +53,10 @@ export default defineConfig(({ mode }: ConfigEnv) => {
         rollupTypes: true,
       }),
       // 分析打包体积
-      bundleStats({
-        baseline: false,
-        html: mode !== 'production',
-      }),
+      //      bundleStats({
+      //        baseline: false,
+      //        html: mode !== 'production',
+      //      }),
       viteStaticCopy({
         targets: [
           {
@@ -84,7 +83,7 @@ export default defineConfig(({ mode }: ConfigEnv) => {
         },
         // 库的名称，会作为全局变量名使用
         name: 'bilitoolkit-ui',
-        formats: ['es', 'cjs'],
+        formats: ['es'],
         fileName: (format, entryName) => {
           if (format === 'es') {
             return `${entryName}.js`

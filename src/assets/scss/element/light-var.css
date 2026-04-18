@@ -230,4 +230,6 @@
 
   --app-color-logo: var(--el-color-primary);
   --el-menu-horizontal-height: 40px;
+
+  --app-text-shadow: 0px 1px 2px rgba(0, 0, 0, .4);
 }
