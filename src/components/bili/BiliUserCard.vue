@@ -55,7 +55,7 @@ const levelImg = computed(() => {
 
 <style lang="scss">
 .user-card {
-  min-width: 300px;
+  width: 300px;
   border: 2px solid var(--el-border-color);
   border-radius: 12px;
   padding: 10px;
@@ -63,17 +63,17 @@ const levelImg = computed(() => {
   flex-direction: row;
   align-items: center;
   gap: 10px;
-  margin: 8px;
   position: relative;
   overflow: hidden;
   user-select: none;
   box-sizing: border-box;
   font-size: 14px;
-  transition: box-shadow 0.3s ease;
   color: var(--el-text-color-regular);
+  transition: all 0.3s ease;
 
   &:hover {
-    box-shadow: var(--el-box-shadow-light);
+    transform: translateY(-1px);
+    box-shadow: var(--el-box-shadow);
   }
 
   &__face-wrapper {

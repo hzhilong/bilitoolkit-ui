@@ -1,6 +1,5 @@
 import { type App } from 'vue'
 // 集成 ElementPlus
-import ElementPlus from 'element-plus'
 import type { Pinia } from 'pinia'
 import { useAppThemeStore } from '@/stores/app-theme.ts'
 import 'element-plus/theme-chalk/dark/css-vars.css'
@@ -32,8 +31,6 @@ export const initBilitoolkitUi = async (pinia: Pinia, isTestMode: boolean = fals
   }
 
   return {
-    install(app: App) {
-      app.use(ElementPlus, { size: 'small', zIndex: 3000 })
-    },
+    install(_app: App) {},
   }
 }

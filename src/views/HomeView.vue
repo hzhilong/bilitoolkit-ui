@@ -5,8 +5,10 @@ const user = useTestDataStore().state.user
 </script>
 
 <template>
-  <div>
-    <bili-user-card :user="user"></bili-user-card>
+  <div style="padding: 20px">
+    <el-config-provider :size="'small'" :z-index="3000">
+      <bili-user-card :user="user"></bili-user-card>
+    </el-config-provider>
   </div>
 </template>
 

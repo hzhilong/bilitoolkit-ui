@@ -25,7 +25,6 @@ export const useSelectedUserStore = defineStore('BiliToolkit-ui-SelectedUserStor
         return
       }
       state.selectedUser = await window.toolkitApi.db.init<UserInfo>(UI_DB_KEYS.UI_SELECTED_USER)
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_: unknown) {}
   }
 

@@ -51,8 +51,8 @@
     "format": "prettier --write .",
     "dev": "chcp 65001 && vite",
     "build": "vite build --mode library",
-    "npm login": " npm login",
-    "npm publish": " npm publish --access public"
+    "npm login": "npm login",
+    "npm publish": "npm publish --access public"
   },
   "sideEffects": [
     "**/*.css",
@@ -85,8 +85,8 @@
     "vue-tsc": "^3.0.4"
   },
   "peerDependencies": {
-    "@ybgnb/bili-api": "workspace:*",
     "@ybgnb/utils": "^0.1.6",
+    "@ybgnb/bili-api": "workspace:*",
     "bilitoolkit-api-types": "workspace:*",
     "bilitoolkit-api-runtime": "workspace:*",
     "element-plus": "^2.13.7",

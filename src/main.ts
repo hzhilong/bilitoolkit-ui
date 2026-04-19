@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import HomeView from '@/views/HomeView.vue'
-import ElementPlus from 'element-plus'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 // 以服务的方式进行调用的组件，需要手动引入 css 样式
 import 'element-plus/theme-chalk/el-loading.css'
@@ -19,7 +18,6 @@ async function bootstrapApp() {
   // 挂载到全局属性
   app.config.globalProperties.$toolkitApi = window.toolkitApi
 
-  app.use(ElementPlus, { size: 'small', zIndex: 3000 })
   app.use(createPinia())
   app.mount('#app')
 }
