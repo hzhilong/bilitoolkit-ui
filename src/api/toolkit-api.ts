@@ -1,3 +1,3 @@
-import { setupToolkitApi } from 'bilitoolkit-api-runtime'
+import { setupToolkitApi } from 'bilitoolkit-runtime'
 
 export const toolkitApi = setupToolkitApi()

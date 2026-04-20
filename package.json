@@ -1,6 +1,6 @@
 {
   "name": "bilitoolkit-ui",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "type": "module",
   "productName": "bilitoolkit-ui",
@@ -87,8 +87,8 @@
   "peerDependencies": {
     "@ybgnb/utils": "^0.1.6",
     "@ybgnb/bili-api": "workspace:*",
-    "bilitoolkit-api-types": "workspace:*",
-    "bilitoolkit-api-runtime": "workspace:*",
+    "bilitoolkit-types": "workspace:*",
+    "bilitoolkit-runtime": "workspace:*",
     "element-plus": "^2.13.7",
     "lodash-es": "^4.17.21",
     "pinia": "^3.0.3",

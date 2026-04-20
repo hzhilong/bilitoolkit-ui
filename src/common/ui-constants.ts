@@ -1,4 +1,4 @@
-import type { AppThemeState } from 'bilitoolkit-api-types'
+import type { AppThemeState } from 'bilitoolkit-types'
 
 /**
  * 应用主题状态配置源

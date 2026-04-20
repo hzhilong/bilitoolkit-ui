@@ -1,4 +1,4 @@
-import type { AppThemeState } from 'bilitoolkit-api-types'
+import type { AppThemeState } from 'bilitoolkit-types'
 import { defineStore } from 'pinia'
 import { reactive } from 'vue'
 import { defaultAppThemeState } from '@/common/ui-constants.ts'

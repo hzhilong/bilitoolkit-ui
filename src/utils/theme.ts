@@ -1,4 +1,4 @@
-import type { AppThemeMode, AppThemeState } from 'bilitoolkit-api-types'
+import type { AppThemeMode, AppThemeState } from 'bilitoolkit-types'
 import { toolkitApi } from '@/api/toolkit-api.ts'
 import { useTestDataStore } from '@/stores/test-data.ts'
 import { defaultAppThemeState } from '@/common/ui-constants.ts'
