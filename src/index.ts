@@ -10,6 +10,7 @@ export * from './stores/app-theme.ts'
 export * from './stores/selected-user.ts'
 
 export { useLoadingData } from './composables/useLoadingData'
+export { useAutoRefreshData } from './composables/useAutoRefreshData.ts'
 
 export { default as SettingGroup } from './components/settings/SettingGroup.vue'
 export { default as SettingItem } from './components/settings/SettingItem.vue'
