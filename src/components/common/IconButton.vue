@@ -24,7 +24,7 @@ const handleClick = () => {
     </el-popconfirm>
   </template>
   <template v-else-if="tip">
-    <el-tooltip effect="dark" :content="tip" placement="top">
+    <el-tooltip effect="light" :content="tip" placement="top" :show-after="1500">
       <slot name="default">
         <AppIcon class="icon-btn" :icon="icon" @click="handleClick" />
       </slot>

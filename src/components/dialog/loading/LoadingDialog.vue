@@ -2,10 +2,7 @@
 <script setup lang="ts">
 import cloneDeep from 'lodash-es/cloneDeep'
 import { reactive, ref, watch } from 'vue'
-import type {
-  LoadingDialogExposed,
-  LoadingDialogProps,
-} from '@/components/dialog/loading/types.ts'
+import type { LoadingDialogExposed, LoadingDialogProps } from '@/components/dialog/loading/types.ts'
 
 const visible = defineModel<boolean>({ required: true })
 const props = withDefaults(defineProps<LoadingDialogProps>(), {
@@ -19,8 +16,8 @@ const resetLoadingText = () => {
 }
 
 const handleCancel = () => {
-  visible.value = false
   options.onCancel?.()
+  visible.value = false
 }
 
 watch(visible, (newValue) => {
@@ -58,7 +55,6 @@ defineExpose<LoadingDialogExposed>({ show, hide })
 </style>
 
 <style lang="scss">
-
 .loading-mask {
   position: fixed;
   top: 0;

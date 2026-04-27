@@ -44,3 +44,13 @@
   }
 }
 
+.table-row-options {
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  > button {
+    margin-left: 0!important;
+  }
+}

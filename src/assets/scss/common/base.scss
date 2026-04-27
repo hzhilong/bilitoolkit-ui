@@ -45,6 +45,13 @@ body {
     // 解决文本没有垂直居中的问题
     line-height: normal !important;
   }
+
+}
+
+html.dark {
+  .el-dialog {
+    border: 1px solid var(--app-color-primary-transparent-10);
+  }
 }
 
 

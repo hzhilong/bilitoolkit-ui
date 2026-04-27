@@ -22,8 +22,8 @@ const closeDialog = (type: 'confirm' | 'cancel') => {
   // 标记对话框准备关闭
   isPrepareClose = true
   stopCountdown()
-  visible.value = false
   emit(type === 'confirm' ? 'onConfirm' : 'onCancel', type)
+  visible.value = false
   isPrepareClose = false
 }
 

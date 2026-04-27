@@ -40,7 +40,7 @@ export const baseUpdateThemeColor = (primaryColor: string, themeMode: AppThemeMo
     document.documentElement.classList.remove('dark')
   }
   const foreground = (vars['--app-color-foreground'] = isDark ? whiteColor : blackColor)
-  const background = (vars['--app-color-background'] = isDark ? '#191919' : whiteColor)
+  const background = (vars['--app-color-background'] = isDark ? blackColor : whiteColor)
 
   vars['--app-primary-color'] = primaryColor
   vars['--el-color-primary'] = primaryColor
@@ -64,10 +64,19 @@ export const baseUpdateThemeColor = (primaryColor: string, themeMode: AppThemeMo
   vars['--el-color-primary-dark-8'] = mixColor(primaryColor, foreground, 20)
   vars['--el-color-primary-dark-9'] = mixColor(primaryColor, foreground, 12)
 
+  const { r, g, b } = hexToRgb(primaryColor)
+
+  // 半透明遮罩，用于更高层级的背景覆盖。
+  vars['--app-bg-color-overlay'] = `rgba(${r}, ${g}, ${b}, 0.05)`
+  vars['--app-bg-color-overlay-hover'] = `rgba(${r}, ${g}, ${b}, 0.15)`
+  // 主页面背景
+  vars['--app-bg-color-page'] = isDark ? mixColor(primaryColor, mixColor(background, foreground, 96), 5) : 'transparent'
+  vars['--app-bg-color-menus'] = `var(--app-bg-color-page)`
+
   if (isDark) {
-    vars['--el-bg-color'] = mixColor(primaryColor, background, 3)
-    vars['--el-bg-color-page'] = mixColor(primaryColor, background, 4)
-    vars['--el-bg-color-overlay'] = mixColor(primaryColor, background, 3)
+    vars['--el-bg-color'] = mixColor(primaryColor, mixColor(background, foreground, 96), 5)
+    vars['--el-bg-color-page'] = mixColor(primaryColor, mixColor(background, foreground, 96), 4)
+    vars['--el-bg-color-overlay'] = mixColor(primaryColor, mixColor(background, foreground, 96), 3)
     vars['--app-text-shadow'] = ` 0px 1px 2px rgba(255, 255, 255, .4)`
   } else {
     vars['--el-bg-color'] = '#ffffff'
@@ -75,29 +84,22 @@ export const baseUpdateThemeColor = (primaryColor: string, themeMode: AppThemeMo
     vars['--el-bg-color-overlay'] = '#ffffff'
     vars['--app-text-shadow'] = ` 0px 1px 2px rgba(0, 0, 0, .4)`
   }
-  const { r, g, b } = hexToRgb(primaryColor)
 
-  // 半透明遮罩，用于更高层级的背景覆盖。
-  vars['--app-bg-color-overlay'] = `rgba(${r}, ${g}, ${b}, 0.05)`
-  vars['--app-bg-color-overlay-hover'] = `rgba(${r}, ${g}, ${b}, 0.15)`
-  // 主页面遮罩
-  vars['--app-bg-color-page'] = isDark ? `rgba(${r}, ${g}, ${b}, 0.05)` : 'transparent'
+  vars['--el-fill-color-extra-light'] = mixColor(primaryColor, mixColor(background, foreground, 95), 2)
+  vars['--el-fill-color-lighter'] = mixColor(primaryColor, mixColor(background, foreground, 95), 6)
+  vars['--el-fill-color-light'] = mixColor(primaryColor, mixColor(background, foreground, 95), 8)
+  vars['--el-fill-color'] = mixColor(primaryColor, mixColor(background, foreground, 95), 10)
+  vars['--el-fill-color-dark'] = mixColor(primaryColor, mixColor(background, foreground, 95), 14)
+  vars['--el-fill-color-darker'] = mixColor(primaryColor, mixColor(background, foreground, 95), 18)
+  vars['--el-fill-color-blank'] = `var(--app-bg-color-page)`
 
-  vars['--el-border-color'] = mixColor(primaryColor, background, 30)
-  vars['--el-border-color-light'] = mixColor(primaryColor, background, 25)
-  vars['--el-border-color-lighter'] = mixColor(primaryColor, background, 20)
-  vars['--el-border-color-extra-light'] = mixColor(primaryColor, background, 10)
-  vars['--el-border-color-dark'] = mixColor(primaryColor, foreground, 60)
-  vars['--el-border-color-darker'] = mixColor(primaryColor, foreground, 50)
-  vars['--el-border-color-hover'] = mixColor(primaryColor, foreground, 40)
-
-  // vars['--el-fill-color'] = `rgba(0,0,0, 0.05)`
-  vars['--el-fill-color-light'] = `rgba(${r}, ${g}, ${b}, 0.1)`
-  vars['--el-fill-color-lighter'] = `rgba(${r}, ${g}, ${b}, 0.15)`
-  vars['--el-fill-color-extra-light'] = `rgba(${r}, ${g}, ${b}, 0.2)`
-  // vars['--el-fill-color-dark'] = `rgba(255,255,255, 0.93)`
-  // vars['--el-fill-color-darker'] = `rgba(255, 255, 255, 0.91)`
-  // vars['--el-fill-color-blank'] = `rgba(255,255,255, 1)`
+  vars['--el-border-color'] = mixColor(primaryColor, background, isDark ? 30 : 30)
+  vars['--el-border-color-light'] = mixColor(primaryColor, background, isDark ? 25 : 25)
+  vars['--el-border-color-lighter'] = mixColor(primaryColor, background, isDark ? 20 : 20)
+  vars['--el-border-color-extra-light'] = mixColor(primaryColor, background, isDark ? 10 : 10)
+  vars['--el-border-color-dark'] = mixColor(primaryColor, foreground, isDark ? 70 : 60)
+  vars['--el-border-color-darker'] = mixColor(primaryColor, foreground, isDark ? 60 : 50)
+  vars['--el-border-color-hover'] = mixColor(primaryColor, foreground, isDark ? 50 : 40)
 
   initTransparentColors(primaryColor, vars, '--app-color-primary')
   initTransparentColors(background, vars, '--app-color-background')

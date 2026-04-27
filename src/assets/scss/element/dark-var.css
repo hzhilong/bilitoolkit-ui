@@ -37,7 +37,7 @@ html.dark {
   --app-bg-color-overlay: var(--app-color-background-transparent-2);
   --app-bg-color-page: var(--app-color-primary-transparent-5);
 
-  --app-bg-color-menus: var(--app-color-primary-transparent-5);
+  --app-bg-color-menus: var(--app-bg-color-page);
 
   --app-color-menu: var(--el-text-color-regular);
   --app-bg-menu: linear-gradient(
