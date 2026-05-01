@@ -46,6 +46,14 @@ body {
     line-height: normal !important;
   }
 
+  .el-table .cell{
+    padding: 0 7px !important;
+
+    .el-tag{
+      padding: 0 4px !important;
+    }
+  }
+
 }
 
 html.dark {

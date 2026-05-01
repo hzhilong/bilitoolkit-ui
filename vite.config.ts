@@ -98,6 +98,13 @@ export default defineConfig(({ mode: _mode }: ConfigEnv) => {
         output: {
           // 不保留目录结构
           preserveModules: false,
+          /*           entryFileNames: (chunkInfo) => {
+            // 把带有 ? 的非法路径重命名
+            // 例如：level_1.svg?url -> level_1.svg_url.js
+            // 仅 preserveModules=true并且为库模式时才开启
+            // 可用来开发模式下查看哪个文件打包产物过大
+            return chunkInfo.name.replace(/\?/, '_') + '.js'
+          }, */
           // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
           //          globals: global,
         },

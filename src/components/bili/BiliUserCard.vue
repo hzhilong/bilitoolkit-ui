@@ -14,7 +14,7 @@ const face = computed(() => {
 
 const levelImg = computed(() => {
   // 这里使用【new URL(`./dir/${name}.png`, import.meta.url).href】的形式
-  // 如果启用[库模式 + preserveModules]打包会报错->只是通过entryFileNames重命名文件。可以在打包时再使用插件拷贝这些资源
+  // 如果启用[库模式 + preserveModules]打包会报错->只能通过entryFileNames重命名文件。可以在打包时再使用插件拷贝这些资源
   return new URL(`../../assets/images/user_level/level_${props.user.level}.svg`, import.meta.url).href
 })
 </script>

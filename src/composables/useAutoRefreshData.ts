@@ -1,5 +1,5 @@
 import { onMounted, onUnmounted } from 'vue'
-import { useLoadingData } from 'bilitoolkit-ui'
+import { useLoadingData } from '@/composables/useLoadingData.ts'
 
 export const useAutoRefreshData = (
   doneFn: Promise<void> | (() => void | Promise<void>),
