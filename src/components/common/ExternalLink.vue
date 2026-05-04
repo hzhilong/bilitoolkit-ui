@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { toolkitApi } from '@/api/toolkit-api.ts'
+import { toolkitApi } from '@/api/toolkit-api'
 
 const props = defineProps<{
   url: string

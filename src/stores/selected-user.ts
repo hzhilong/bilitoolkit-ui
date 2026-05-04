@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
 import { reactive, watch } from 'vue'
 import cloneDeep from 'lodash-es/cloneDeep'
-import { useTestDataStore } from '@/stores/test-data.ts'
+import { useTestDataStore } from '@/stores/test-data'
 import type { UserInfo } from '@ybgnb/bili-api'
-import { UI_DB_KEYS } from '@/common/ui-constants.ts'
+import { UI_DB_KEYS } from '@/common/ui-constants'
 
 /**
  * 选择的用户 状态 Store

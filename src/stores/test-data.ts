@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { reactive } from 'vue'
-import { testUser } from '@/test/user.ts'
-import { testMenus } from '@/test/menus.ts'
+import { testUser } from '@/test/user'
+import { testMenus } from '@/test/menus'
 
 /**
  * 测试数据状态 Store

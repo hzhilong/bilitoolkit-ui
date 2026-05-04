@@ -1,9 +1,9 @@
 import type { AppThemeState } from 'bilitoolkit-types'
 import { defineStore } from 'pinia'
 import { reactive } from 'vue'
-import { defaultAppThemeState } from '@/common/ui-constants.ts'
-import { useTestDataStore } from '@/stores/test-data.ts'
-import { updateAppTheme } from '@/utils/theme.ts'
+import { defaultAppThemeState } from '@/common/ui-constants'
+import { useTestDataStore } from '@/stores/test-data'
+import { updateAppTheme } from '@/utils/theme'
 
 /**
  * 应用主题状态 Store

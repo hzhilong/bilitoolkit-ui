@@ -10,7 +10,7 @@ import 'element-plus/theme-chalk/el-message-box.css'
 import '@/assets/scss/element/light-var.css'
 import '@/assets/scss/element/dark-var.css'
 import '@/assets/scss/common/base.scss'
-import { handleError } from '@/utils/feedback.ts'
+import { handleError } from '@/utils/feedback'
 
 async function bootstrapApp() {
   const app = createApp(HomeView)

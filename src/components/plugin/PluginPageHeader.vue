@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import defaultFace from '@/assets/images/noface.jpg'
-import type { PluginMenuData, PluginMenusProps } from '@/components/plugin/types.ts'
-import { toolkitApi } from '@/api/toolkit-api.ts'
-import { useSelectedUserStore } from '@/stores/selected-user.ts'
+import type { PluginMenuData, PluginMenusProps } from '@/components/plugin/types'
+import { toolkitApi } from '@/api/toolkit-api'
+import { useSelectedUserStore } from '@/stores/selected-user'
 
 defineProps<PluginMenusProps>()
 

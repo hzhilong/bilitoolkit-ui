@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useTestDataStore } from '@/stores/test-data.ts'
+import { useTestDataStore } from '@/stores/test-data'
 
 const user = useTestDataStore().state.user
 </script>

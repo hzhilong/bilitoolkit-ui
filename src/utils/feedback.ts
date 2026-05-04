@@ -1,13 +1,13 @@
 import { ElMessage, ElMessageBox, type ElMessageBoxOptions, type MessageParams } from 'element-plus'
-import { toolkitApi } from '@/api/toolkit-api.ts'
-import { BiliAbortError, BiliApiBusinessError } from '@ybgnb/bili-api'
-import { AbortError, getErrorMessage } from '@ybgnb/utils'
+import { toolkitApi } from '@/api/toolkit-api'
+import { BiliApiBusinessError } from '@ybgnb/bili-api'
+import { getErrorMessage, isCanceledError, createAbortError } from '@ybgnb/utils'
 
 /**
  * 统一处理错误
  */
 export const handleError = (error: unknown) => {
-  if (error && (error instanceof AbortError || error instanceof BiliAbortError)) {
+  if (isCanceledError(error)) {
     // 操作中止
     return
   }
@@ -115,7 +115,7 @@ export function showConfirm(message: string, title: string = '提示', options: 
         resolve()
       })
       .catch(() => {
-        reject(new AbortError())
+        reject(createAbortError())
       })
   })
 }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useAppThemeStore } from '@/stores/app-theme'
 import { computed } from 'vue'
-import { useTestDataStore } from '@/stores/test-data.ts'
+import { useTestDataStore } from '@/stores/test-data'
 
 /**
  * remix 图标

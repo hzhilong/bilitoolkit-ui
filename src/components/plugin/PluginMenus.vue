@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { PluginMenuData, PluginMenusProps } from '@/components/plugin/types.ts'
+import type { PluginMenuData, PluginMenusProps } from '@/components/plugin/types'
 import PluginMenuItem from '@/components/plugin/PluginMenuItem.vue'
 import { computed, type Slots, useSlots } from 'vue'
 

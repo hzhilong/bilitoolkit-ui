@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { watch } from 'vue'
-import type { CountdownDialogProps } from '@/components/dialog/countdown/types.ts'
-import { useCountdown } from '@/components/dialog/countdown/useCountdown.ts'
+import type { CountdownDialogProps } from '@/components/dialog/countdown/types'
+import { useCountdown } from '@/components/dialog/countdown/useCountdown'
 
 const props = withDefaults(defineProps<CountdownDialogProps>(), {
   title: '提示',

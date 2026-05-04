@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import defaultFace from '@/assets/images/noface.jpg'
 import { computed } from 'vue'
-import type { BiliUserCardProps } from '@/components/bili/types.ts'
+import type { BiliUserCardProps } from '@/components/bili/types.js'
 
 /**
  * 哔哩哔哩用户卡片信息

@@ -46,7 +46,7 @@
     "!dist/bundle-stats.*"
   ],
   "scripts": {
-    "check": "vue-tsc --build --noEmit  && eslint .",
+    "check": "vue-tsc -p tsconfig.web.json --noEmit  && eslint .",
     "lint": "eslint . --fix",
     "format": "prettier --write .",
     "dev": "chcp 65001 && vite",
@@ -85,7 +85,7 @@
     "vue-tsc": "^3.0.4"
   },
   "peerDependencies": {
-    "@ybgnb/utils": "^0.1.7",
+    "@ybgnb/utils": "^0.1.8",
     "@ybgnb/bili-api": "workspace:*",
     "bilitoolkit-types": "workspace:*",
     "bilitoolkit-runtime": "workspace:*",

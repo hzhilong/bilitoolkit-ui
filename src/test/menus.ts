@@ -1,4 +1,4 @@
-import type { PluginMenuData } from '@/components/plugin/types.ts'
+import type { PluginMenuData } from '@/components/plugin/types'
 
 export const testMenus: PluginMenuData[] = [
   {

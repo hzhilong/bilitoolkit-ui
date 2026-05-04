@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { PluginMenuItemProps } from '@/components/plugin/types.ts'
+import type { PluginMenuItemProps } from '@/components/plugin/types'
 import PluginMenuItem from '@/components/plugin/PluginMenuItem.vue'
 
 withDefaults(defineProps<PluginMenuItemProps>(), {})
