@@ -50,7 +50,7 @@ export default defineConfig({
       tsconfigPath: 'tsconfig.web.json',
       outDir: 'dist',
       entryRoot: 'src',
-      rollupTypes: false,
+      rollupTypes: true,
     }),
     // 分析打包体积
     //      bundleStats({
@@ -81,14 +81,12 @@ export default defineConfig({
         index: path.resolve(__dirname, 'src/index.ts'),
         common: path.resolve(__dirname, 'src/common.ts'),
       },
-      // 库的名称，会作为全局变量名使用
-      name: 'bilitoolkit-ui',
       formats: ['es'],
       fileName: (format, entryName) => {
         if (format === 'es') {
           return `${entryName}.js`
         }
-        return `${entryName}.umd.cjs`
+        return `${entryName}.cjs`
       },
     },
     sourcemap: true,
@@ -105,8 +103,6 @@ export default defineConfig({
             // 可用来开发模式下查看哪个文件打包产物过大
             return chunkInfo.name.replace(/\?/, '_') + '.js'
           }, */
-        // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
-        //          globals: global,
       },
     },
   },
