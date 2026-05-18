@@ -56,6 +56,7 @@ const levelImg = computed(() => {
 <style lang="scss">
 .user-card {
   width: 300px;
+  max-width: 400px;
   border: 2px solid var(--el-border-color);
   border-radius: 12px;
   padding: 10px;
@@ -118,6 +119,7 @@ const levelImg = computed(() => {
     user-select: text;
     color: var(--el-text-color-primary);
     text-shadow: var(--app-text-shadow);
+    text-wrap: nowrap;
   }
 
   &__level {
@@ -133,7 +135,7 @@ const levelImg = computed(() => {
     mask: url('../../assets/images/uid.svg') no-repeat center / contain;
     -webkit-mask: url('../../assets/images/uid.svg') no-repeat center / contain;
     background-color: var(--el-text-color-regular);
-    margin-right: 2px;
+    margin-right: 4px;
     margin-bottom: 10px;
   }
 

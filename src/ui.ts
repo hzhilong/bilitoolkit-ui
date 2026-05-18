@@ -23,12 +23,12 @@ export const initBilitoolkitUi = async (pinia: Pinia, isTestMode: boolean = fals
   import('@/assets/scss/element/dark-var.css')
   import('@/assets/scss/common/base.scss')
 
-  if (!isTestMode) {
-    await useAppThemeStore(pinia).init()
-    await useSelectedUserStore(pinia).init()
-  } else {
+  if (isTestMode) {
     await useTestDataStore(pinia).init(true)
+  } else {
+    await useAppThemeStore(pinia).init()
   }
+  await useSelectedUserStore(pinia).init()
 
   return {
     install(_app: App) {},

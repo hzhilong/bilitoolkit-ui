@@ -13,7 +13,6 @@ export const useTestDataStore = defineStore('BiliToolkit-ui-TestDataStore', () =
     menus: testMenus,
   })
 
-  // 初始化
   const init = async (isTest: boolean) => {
     state.isTest = isTest
   }

@@ -1,4 +1,4 @@
-import type { UserInfo } from '@ybgnb/bili-api'
+import type { UserInfo, UserInfoWithCookie } from '@ybgnb/bili-api'
 
 export const testUser = {
   mid: 1234567890,
@@ -13,4 +13,4 @@ export const testUser = {
   follower: 888,
   coins: 10000,
   rank: 1000,
-} satisfies UserInfo
+} satisfies UserInfo as UserInfoWithCookie

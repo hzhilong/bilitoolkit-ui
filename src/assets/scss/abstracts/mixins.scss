@@ -133,7 +133,7 @@
 
 /* 图标按钮 */
 @mixin icon-btn($size:18px, $color:var(--el-color-primary),
-  $hover-bg: rgba($color, 0.15) // 基于主色自动生成
+  $hover-bg: color-mix(in srgb, $color, transparent 85%) // 基于主色自动生成
 ) {
   width: $size;
   height: $size;
@@ -151,7 +151,7 @@
 
 /* 圆形图标按钮 */
 @mixin circle-icon-btn($size:18px,$color:var(--el-color-primary),
-  $hover-bg: rgba($color, 0.15) // 基于主色自动生成
+  $hover-bg: color-mix(in srgb, $color, transparent 85%) // 基于主色自动生成
 ) {
   @include icon-btn($size, $color, $hover-bg);
   border-radius: 50%;
@@ -159,7 +159,7 @@
 
 /* 旋转的圆形图标按钮 */
 @mixin circle-icon-btn--rotate($size:18px, $speed: 3s, $color:var(--el-color-primary),
-  $hover-bg: rgba($color, 0.15) // 基于主色自动生成
+  $hover-bg: color-mix(in srgb, $color, transparent 85%) // 基于主色自动生成
 ) {
   @include circle-icon-btn($size, $color, $hover-bg);
   &:hover {

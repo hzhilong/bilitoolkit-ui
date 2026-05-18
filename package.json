@@ -68,7 +68,6 @@
     "@vue/eslint-config-prettier": "^10.2.0",
     "@vue/eslint-config-typescript": "^14.6.0",
     "@vue/language-core": "^3.0.7",
-    "@vue/tsconfig": "^0.7.0",
     "eslint": "^9.31.0",
     "eslint-plugin-vue": "~10.3.0",
     "jiti": "^2.4.2",
@@ -85,14 +84,14 @@
     "vue-tsc": "^3.0.4"
   },
   "peerDependencies": {
-    "@ybgnb/utils": "^0.1.9",
+    "@ybgnb/utils": "^0.2.0",
     "@ybgnb/bili-api": "workspace:*",
     "bilitoolkit-types": "workspace:*",
     "bilitoolkit-runtime": "workspace:*",
     "element-plus": "^2.13.7",
     "lodash-es": "^4.17.21",
     "pinia": "^3.0.3",
-    "vue": "^3.5.32",
+    "vue": "^3.5.34",
     "@vue/language-core": "^3.2.6"
   }
 }

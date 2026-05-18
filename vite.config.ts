@@ -22,17 +22,6 @@ const external = [
   'lodash-es',
   /^lodash-es\/.*/,
 ]
-const _global = external
-  .filter((name) => !(name instanceof RegExp))
-  .reduce(
-    (acc, name) => {
-      if (typeof name === 'string') {
-        acc[name] = name
-      }
-      return acc
-    },
-    {} as Record<string, string>,
-  )
 
 export default defineConfig({
   base: './',

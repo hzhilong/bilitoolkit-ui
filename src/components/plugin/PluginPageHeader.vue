@@ -1,14 +1,17 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import defaultFace from '@/assets/images/noface.jpg'
 import type { PluginMenuData, PluginMenusProps } from '@/components/plugin/types'
 import { toolkitApi } from '@/api/toolkit-api'
 import { useSelectedUserStore } from '@/stores/selected-user'
+import { storeToRefs } from 'pinia'
+import { showError } from '@/utils/feedback'
+import { useTestDataStore } from '@/stores/test-data'
 
 defineProps<PluginMenusProps>()
 
-const { state, deleteUser, setUser } = useSelectedUserStore()
-const user = computed(() => state.selectedUser)
+const selectedUserStore = useSelectedUserStore()
+const { user } = storeToRefs(selectedUserStore)
 
 const face = computed(() => {
   return user.value?.face || defaultFace
@@ -19,11 +22,11 @@ const levelImg = computed(() => {
 })
 
 const switchUser = async () => {
-  setUser(await toolkitApi.user.switchUser())
+  selectedUserStore.setUser(await toolkitApi.user.switchUser())
 }
 
 const cancelChoose = () => {
-  deleteUser()
+  selectedUserStore.deleteUser()
 }
 const emit = defineEmits<{
   handleMenuSelect: [menu: PluginMenuData]
@@ -33,6 +36,18 @@ const handleMenuSelect = (menu: PluginMenuData): void => {
     emit('handleMenuSelect', menu)
   }
 }
+onMounted(async () => {
+  if (user.value && !useTestDataStore().state.isTest) {
+    // 更新当前用户信息并验证当前cookie有效性
+    try {
+      const newInfo = await toolkitApi.user.getMyInfoByCookie(user.value.userCookie)
+      selectedUserStore.setUser(newInfo)
+    } catch {
+      showError(`当前用户 cookie 已失效`)
+      selectedUserStore.deleteUser()
+    }
+  }
+})
 </script>
 
 <template>
@@ -45,12 +60,12 @@ const handleMenuSelect = (menu: PluginMenuData): void => {
     ></plugin-menus>
     <div class="plugin-page-header__user-container">
       <template v-if="user">
-        <el-popover placement="bottom-end" :width="260" trigger="hover" :teleported="false">
+        <el-popover placement="bottom-end" width="auto" trigger="hover" :teleported="false">
           <template #reference>
             <div class="plugin-page-header__user-container__info">
-              <img class="plugin-page-header__user-container__info__face" :src="face" />
-              <span class="plugin-page-header__user-container__info__name">{{ user.name }}</span>
-              <img class="plugin-page-header__user-container__info__level" :src="levelImg" />
+              <img class="plugin-page-header__user-container__info__face" :src="face" alt="face" />
+              <AppTooltip class="plugin-page-header__user-container__info__name" :content="user.name" />
+              <img class="plugin-page-header__user-container__info__level" :src="levelImg" alt="level img" />
             </div>
           </template>
           <template #default>
@@ -96,6 +111,8 @@ const handleMenuSelect = (menu: PluginMenuData): void => {
     height: var(--el-menu-horizontal-height);
     border-bottom: 1px solid var(--el-menu-border-color);
     padding-right: 1em;
+    min-width: 0;
+    padding-left: 60px;
 
     .bili-user-card:hover {
       box-shadow: unset;
@@ -109,11 +126,11 @@ const handleMenuSelect = (menu: PluginMenuData): void => {
       padding: 0 0.3em;
       border-radius: 0.3em;
       box-sizing: border-box;
-      border: 2px dashed var(--app-color-primary-transparent-25);
+      //      border: 2px dashed var(--app-color-primary-transparent-5);
       overflow: hidden;
 
       &:hover {
-        background-color: var(--app-color-primary-transparent-10);
+        background-color: var(--app-color-primary-transparent-5);
       }
 
       &__face {
