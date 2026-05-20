@@ -1,9 +1,9 @@
-import type { AppThemeMode, AppThemeState } from 'bilitoolkit-types'
 import { toolkitApi } from '@/api/toolkit-api'
-import { useTestDataStore } from '@/stores/test-data'
 import { defaultAppThemeState } from '@/common/ui-constants'
 import { useAppThemeStore } from '@/stores/app-theme'
+import { useTestDataStore } from '@/stores/test-data'
 import { hexToRgb, mixColor, setCssVar } from '@ybgnb/utils/dom'
+import type { AppThemeMode, AppThemeState } from 'bilitoolkit-types'
 
 export const whiteColor = '#ffffff'
 export const blackColor = '#000000'
@@ -43,26 +43,26 @@ export const baseUpdateThemeColor = (primaryColor: string, themeMode: AppThemeMo
   const background = (vars['--app-color-background'] = isDark ? blackColor : whiteColor)
 
   vars['--app-primary-color'] = primaryColor
-  vars['--el-color-primary'] = primaryColor
-  vars['--el-color-primary-light-1'] = mixColor(primaryColor, background, 90)
-  vars['--el-color-primary-light-2'] = mixColor(primaryColor, background, 80)
-  vars['--el-color-primary-light-3'] = mixColor(primaryColor, background, 70)
-  vars['--el-color-primary-light-4'] = mixColor(primaryColor, background, 60)
-  vars['--el-color-primary-light-5'] = mixColor(primaryColor, background, 50)
-  vars['--el-color-primary-light-6'] = mixColor(primaryColor, background, 40)
-  vars['--el-color-primary-light-7'] = mixColor(primaryColor, background, 30)
-  vars['--el-color-primary-light-8'] = mixColor(primaryColor, background, 20)
-  vars['--el-color-primary-light-9'] = mixColor(primaryColor, background, 12)
+  // vars['--el-color-primary'] = primaryColor
+  // vars['--el-color-primary-light-1'] = mixColor(primaryColor, background, 90)
+  // vars['--el-color-primary-light-2'] = mixColor(primaryColor, background, 80)
+  // vars['--el-color-primary-light-3'] = mixColor(primaryColor, background, 70)
+  // vars['--el-color-primary-light-4'] = mixColor(primaryColor, background, 60)
+  // vars['--el-color-primary-light-5'] = mixColor(primaryColor, background, 50)
+  // vars['--el-color-primary-light-6'] = mixColor(primaryColor, background, 40)
+  // vars['--el-color-primary-light-7'] = mixColor(primaryColor, background, 30)
+  // vars['--el-color-primary-light-8'] = mixColor(primaryColor, background, 20)
+  // vars['--el-color-primary-light-9'] = mixColor(primaryColor, background, 12)
 
-  vars['--el-color-primary-dark-1'] = mixColor(primaryColor, foreground, 90)
-  vars['--el-color-primary-dark-2'] = mixColor(primaryColor, foreground, 80)
-  vars['--el-color-primary-dark-3'] = mixColor(primaryColor, foreground, 70)
-  vars['--el-color-primary-dark-4'] = mixColor(primaryColor, foreground, 60)
-  vars['--el-color-primary-dark-5'] = mixColor(primaryColor, foreground, 50)
-  vars['--el-color-primary-dark-6'] = mixColor(primaryColor, foreground, 40)
-  vars['--el-color-primary-dark-7'] = mixColor(primaryColor, foreground, 30)
-  vars['--el-color-primary-dark-8'] = mixColor(primaryColor, foreground, 20)
-  vars['--el-color-primary-dark-9'] = mixColor(primaryColor, foreground, 12)
+  // vars['--el-color-primary-dark-1'] = mixColor(primaryColor, foreground, 90)
+  // vars['--el-color-primary-dark-2'] = mixColor(primaryColor, foreground, 80)
+  // vars['--el-color-primary-dark-3'] = mixColor(primaryColor, foreground, 70)
+  // vars['--el-color-primary-dark-4'] = mixColor(primaryColor, foreground, 60)
+  // vars['--el-color-primary-dark-5'] = mixColor(primaryColor, foreground, 50)
+  // vars['--el-color-primary-dark-6'] = mixColor(primaryColor, foreground, 40)
+  // vars['--el-color-primary-dark-7'] = mixColor(primaryColor, foreground, 30)
+  // vars['--el-color-primary-dark-8'] = mixColor(primaryColor, foreground, 20)
+  // vars['--el-color-primary-dark-9'] = mixColor(primaryColor, foreground, 12)
 
   const { r, g, b } = hexToRgb(primaryColor)
 
@@ -74,32 +74,32 @@ export const baseUpdateThemeColor = (primaryColor: string, themeMode: AppThemeMo
   vars['--app-bg-color-menus'] = `var(--app-bg-color-page)`
 
   if (isDark) {
-    vars['--el-bg-color'] = mixColor(primaryColor, mixColor(background, foreground, 96), 5)
-    vars['--el-bg-color-page'] = mixColor(primaryColor, mixColor(background, foreground, 96), 4)
-    vars['--el-bg-color-overlay'] = mixColor(primaryColor, mixColor(background, foreground, 96), 3)
+    // vars['--el-bg-color'] = mixColor(primaryColor, mixColor(background, foreground, 96), 5)
+    // vars['--el-bg-color-page'] = mixColor(primaryColor, mixColor(background, foreground, 96), 4)
+    // vars['--el-bg-color-overlay'] = mixColor(primaryColor, mixColor(background, foreground, 96), 3)
     vars['--app-text-shadow'] = ` 0px 1px 2px rgba(255, 255, 255, .4)`
   } else {
-    vars['--el-bg-color'] = '#ffffff'
-    vars['--el-bg-color-page'] = '#fafafa'
-    vars['--el-bg-color-overlay'] = '#ffffff'
+    // vars['--el-bg-color'] = '#ffffff'
+    // vars['--el-bg-color-page'] = '#fafafa'
+    // vars['--el-bg-color-overlay'] = '#ffffff'
     vars['--app-text-shadow'] = ` 0px 1px 2px rgba(0, 0, 0, .4)`
   }
 
-  vars['--el-fill-color-extra-light'] = mixColor(primaryColor, mixColor(background, foreground, 95), 2)
-  vars['--el-fill-color-lighter'] = mixColor(primaryColor, mixColor(background, foreground, 95), 6)
-  vars['--el-fill-color-light'] = mixColor(primaryColor, mixColor(background, foreground, 95), 8)
-  vars['--el-fill-color'] = mixColor(primaryColor, mixColor(background, foreground, 95), 10)
-  vars['--el-fill-color-dark'] = mixColor(primaryColor, mixColor(background, foreground, 95), 14)
-  vars['--el-fill-color-darker'] = mixColor(primaryColor, mixColor(background, foreground, 95), 18)
-  vars['--el-fill-color-blank'] = `var(--app-bg-color-page)`
+  // vars['--el-fill-color-extra-light'] = mixColor(background, foreground, 95)
+  // vars['--el-fill-color-lighter'] = mixColor(background, foreground, 95)
+  // vars['--el-fill-color-light'] = mixColor(background, foreground, 95)
+  // vars['--el-fill-color'] = mixColor(background, foreground, 95)
+  // vars['--el-fill-color-dark'] = mixColor(background, foreground, 95)
+  // vars['--el-fill-color-darker'] = mixColor(background, foreground, 95)
+  // vars['--el-fill-color-blank'] = `var(--app-bg-color-page)`
 
-  vars['--el-border-color'] = mixColor(primaryColor, background, isDark ? 30 : 30)
-  vars['--el-border-color-light'] = mixColor(primaryColor, background, isDark ? 25 : 25)
-  vars['--el-border-color-lighter'] = mixColor(primaryColor, background, isDark ? 20 : 20)
-  vars['--el-border-color-extra-light'] = mixColor(primaryColor, background, isDark ? 10 : 10)
-  vars['--el-border-color-dark'] = mixColor(primaryColor, foreground, isDark ? 70 : 60)
-  vars['--el-border-color-darker'] = mixColor(primaryColor, foreground, isDark ? 60 : 50)
-  vars['--el-border-color-hover'] = mixColor(primaryColor, foreground, isDark ? 50 : 40)
+  // vars['--el-border-color'] = mixColor(primaryColor, background, isDark ? 30 : 30)
+  // vars['--el-border-color-light'] = mixColor(primaryColor, background, isDark ? 25 : 25)
+  // vars['--el-border-color-lighter'] = mixColor(primaryColor, background, isDark ? 20 : 20)
+  // vars['--el-border-color-extra-light'] = mixColor(primaryColor, background, isDark ? 10 : 10)
+  // vars['--el-border-color-dark'] = mixColor(primaryColor, foreground, isDark ? 70 : 60)
+  // vars['--el-border-color-darker'] = mixColor(primaryColor, foreground, isDark ? 60 : 50)
+  // vars['--el-border-color-hover'] = mixColor(primaryColor, foreground, isDark ? 50 : 40)
 
   initTransparentColors(primaryColor, vars, '--app-color-primary')
   initTransparentColors(background, vars, '--app-color-background')

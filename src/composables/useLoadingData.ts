@@ -9,6 +9,8 @@ export const useLoadingData = (singleFlight: boolean = false) => {
   // 缓存正在进行的 Promise
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let pendingPromise: Promise<any> | null = null
+  // 已经执行过至少一次加载
+  const hasLoaded = ref(false)
 
   /**
    * 包装函数或 Promise，使其执行时自动管理 loading 状态
@@ -35,6 +37,7 @@ export const useLoadingData = (singleFlight: boolean = false) => {
           }
         } finally {
           loading.value = false
+          hasLoaded.value = true
           pendingPromise = null // 清空缓存
         }
       }
@@ -46,6 +49,7 @@ export const useLoadingData = (singleFlight: boolean = false) => {
 
   return {
     loading,
+    hasLoaded,
     loadingData,
   }
 }

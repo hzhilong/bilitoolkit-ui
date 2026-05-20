@@ -11,14 +11,19 @@ import '@/assets/scss/element/light-var.css'
 import '@/assets/scss/element/dark-var.css'
 import '@/assets/scss/common/base.scss'
 import { handleError } from '@/utils/feedback'
+import { useTestDataStore } from './stores/test-data'
+import { useAppThemeStore } from './stores/app-theme'
 
 async function bootstrapApp() {
   const app = createApp(HomeView)
+  console.log(`bootstrapApp`)
 
   // 挂载到全局属性
   app.config.globalProperties.$toolkitApi = window.toolkitApi
-
-  app.use(createPinia())
+  const pinia = createPinia()
+  app.use(pinia)
+  await useTestDataStore(pinia).init(true)
+  await useAppThemeStore(pinia).init()
   app.mount('#app')
 }
 

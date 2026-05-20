@@ -5,7 +5,6 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-import { fileURLToPath, URL } from 'node:url'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 import path from 'node:path'
 
@@ -29,9 +28,11 @@ export default defineConfig({
     vue(),
     vueJsx(),
     AutoImport({
+      dts: 'src/auto-imports.d.ts',
       resolvers: [ElementPlusResolver()],
     }),
     Components({
+      dts: 'src/components.d.ts',
       resolvers: [ElementPlusResolver()],
     }),
     // 生成 .d.ts 类型文件
@@ -58,12 +59,12 @@ export default defineConfig({
   resolve: {
     // 路径别名
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@': path.join(import.meta.dirname, 'src'),
     },
   },
   build: {
     // 代码混淆和压缩
-    minify: true,
+    minify: false,
     lib: {
       // 库的入口文件
       entry: {
@@ -79,7 +80,7 @@ export default defineConfig({
       },
     },
     sourcemap: true,
-    rolldownOptions: {
+    rollupOptions: {
       // 不想打包进库的依赖
       external: external,
       output: {

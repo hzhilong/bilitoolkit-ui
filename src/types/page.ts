@@ -1,13 +1,7 @@
-export type Data = Record<string, unknown>
-
-export type PageBaseParams = {
+export type PageParams = {
   pageSize: number
   pageNum: number
 }
-
-export type PageParams<C = Data> = Omit<Partial<C>, keyof PageBaseParams> & PageBaseParams
-
-export type ResetPageParams<C = Data> = Omit<PageParams<C>, keyof PageBaseParams>
 
 export interface PageData {
   pageNum: number
@@ -16,8 +10,10 @@ export interface PageData {
   total: number
 }
 
-export interface PageResult<C> extends PageData {
-  data: C[]
+export interface PageResult<D> extends PageData {
+  data: D[]
 }
 
-export type GetPage<D> = (pageParams: PageParams<D>) => Promise<PageResult<D>>
+export type FetchPage<D, Q = undefined> = Q extends undefined
+  ? (pageParams: PageParams) => Promise<PageResult<D>>
+  : (pageParams: PageParams, queryParams: Q) => Promise<PageResult<D>>

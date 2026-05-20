@@ -1,19 +1,28 @@
-export interface PageTableProps<D, Q extends QueryParams = QueryParams> {
-  /** 获取分页数据的方法 */
-  getPage: GetPage<D, Q>
-  /** 查询参数 */
-  params: RestPageParams<Q>
+import type { FetchPage, PageParams } from '@/types/page'
+
+export type PageTableAction = 'search' | 'resetQuery'
+export type SelectionMode = 'none' | 'single' | 'multiple'
+
+export interface PageTableProps<D, Q = undefined> {
+  /** 标题 */
+  title: string
   /**
    * 自动加载数据
    * @default true
    */
   autoLoad?: boolean
-}
-
-export interface PageTableExpose<D> {
-  loading: Ref<boolean>
-  tableData: Ref<D[]>
-  pageData: Ref<PageData>
-  refresh: () => Promise<void>
-  resetAndRefresh: () => Promise<void>
+  /** 顶部栏按钮 */
+  actions?: PageTableAction[]
+  /** 获取分页数据的方法 */
+  fetchPage: FetchPage<D, Q>
+  /** 分页参数 */
+  pageParams?: PageParams
+  /** 查询参数 */
+  queryParams?: Q
+  /** 分页大小切换选项 */
+  pageSizes: number[]
+  /** 表格选择行为模式 */
+  selectionMode?: SelectionMode
+  /** 表格高度，为空则占据页面最大可用高度 */
+  tableHeight?: number | string
 }

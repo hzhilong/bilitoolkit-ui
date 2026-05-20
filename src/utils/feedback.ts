@@ -3,6 +3,15 @@ import { toolkitApi } from '@/api/toolkit-api'
 import { BiliApiBusinessError } from '@ybgnb/bili-api'
 import { getErrorMessage, isCanceledError, createAbortError } from '@ybgnb/utils'
 
+async function saveLog(error: unknown) {
+  try {
+    await toolkitApi.system.saveLog({
+      level: 'error',
+      message: error,
+    })
+  } catch {}
+}
+
 /**
  * 统一处理错误
  */
@@ -19,12 +28,9 @@ export const handleError = (error: unknown) => {
       console.error(error)
     }
     // 保存日志
-    toolkitApi.system
-      .saveLog({
-        level: 'error',
-        message: error,
-      })
-      .then()
+    if (toolkitApi && toolkitApi.system) {
+      saveLog(error).then()
+    }
     // 显示错误
     showToast({
       message: getErrorMessage(error),
