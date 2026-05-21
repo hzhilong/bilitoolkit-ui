@@ -6,7 +6,6 @@ export * from './types/page.js'
 
 export * from './utils/feedback.js'
 export * from './utils/theme.js'
-export * from './utils/format.js'
 
 export * from './stores/test-data.js'
 export * from './stores/app-theme.js'
@@ -36,6 +35,7 @@ export { default as LogPrint } from './components/common/LogPrint.vue'
 
 export * from './components/bili/types.js'
 export { default as BiliUserCard } from './components/bili/BiliUserCard.vue'
+export { default as BiliUserInfo } from './components/bili/BiliUserInfo.vue'
 
 export * from './components/plugin/types.js'
 export { default as PluginMenuItem } from './components/plugin/PluginMenuItem.vue'

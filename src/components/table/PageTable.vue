@@ -1,11 +1,41 @@
 <script setup lang="ts" generic="D, Q">
 import { usePageTable } from '@/composables/usePageTable'
-import { computed, nextTick, onMounted, ref, useSlots, useTemplateRef, type Ref, type Slots } from 'vue'
+import {
+  computed,
+  nextTick,
+  onMounted,
+  ref,
+  useSlots,
+  useTemplateRef,
+  type Ref,
+  type Slots,
+  useAttrs,
+  onUnmounted,
+} from 'vue'
 import type { PageTableAction, PageTableProps } from './types'
-import type { ElEmpty, ElTable } from 'element-plus'
+import { type ElEmpty, type ElTable } from 'element-plus'
+
+defineOptions({
+  inheritAttrs: false,
+})
+
+const attrs = useAttrs()
+
+const containerAttrs = computed(() => {
+  return {
+    class: attrs.class,
+    style: attrs.style,
+  }
+})
+
+const tableAttrs = computed(() => {
+  const { class: _class, style: _style, ...rest } = attrs
+  return rest
+})
 
 const props = withDefaults(defineProps<PageTableProps<D, Q>>(), {
   autoLoad: true,
+  tableLayout: 'auto',
   actions: () => ['search', 'resetQuery'] as PageTableAction[],
 })
 
@@ -46,13 +76,28 @@ const adjustTableHeight = async () => {
   _tableHeight.value = props.tableHeight ?? tableWrapperRef.value?.clientHeight ?? 0
 }
 
+let observer: ResizeObserver | undefined
+let frameId = 0
+
 onMounted(async () => {
   if (!props.tableHeight) {
-    // 父组件没有传表格高度时，这里自动调整高度为最大可用高度
-    await nextTick()
-    requestAnimationFrame(adjustTableHeight)
+    if (!tableWrapperRef.value) return
+
+    observer = new ResizeObserver((_entries) => {
+      cancelAnimationFrame(frameId)
+      frameId = requestAnimationFrame(() => {
+        adjustTableHeight()
+      })
+    })
+
+    observer.observe(tableWrapperRef.value)
   }
 })
+
+onUnmounted(() => {
+  observer?.disconnect()
+})
+
 // 按钮可见性
 const actionVisible = computed(() => ({
   search: props.actions.includes('search'),
@@ -71,6 +116,7 @@ const hasQuerySlot = !!slots.query
 
 defineExpose({
   loading,
+  tableRef,
   tableData: tableData as Ref<D[]>,
   pageData,
   refresh,
@@ -84,7 +130,7 @@ defineExpose({
 </script>
 
 <template>
-  <div class="page-table" v-loading="loading">
+  <div class="page-table" v-loading="loading" v-bind="containerAttrs">
     <div class="page-table__toolbar">
       <!-- 查询表单 -->
       <div class="page-table__query" :class="hasQuerySlot ? 'has-query' : ''">
@@ -101,11 +147,12 @@ defineExpose({
     <div ref="tableWrapperRef" class="page-table__table-wrapper">
       <el-table
         ref="tableRef"
+        v-bind="tableAttrs"
         class="page-table__table"
         :data="tableData"
-        style="width: 100%"
         border
         :height="_tableHeight"
+        :table-layout="tableLayout"
         :highlight-current-row="selectionMode === 'single'"
       >
         <el-table-column v-if="selectionMode === 'multiple'" type="selection" width="55" />
@@ -137,7 +184,6 @@ defineExpose({
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding: 20px;
   box-sizing: border-box;
 
   &__toolbar {

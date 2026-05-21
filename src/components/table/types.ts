@@ -3,7 +3,7 @@ import type { FetchPage, PageParams } from '@/types/page'
 export type PageTableAction = 'search' | 'resetQuery'
 export type SelectionMode = 'none' | 'single' | 'multiple'
 
-export interface PageTableProps<D, Q = undefined> {
+export type PageTableProps<D, Q = undefined> = {
   /** 标题 */
   title: string
   /**
@@ -25,4 +25,6 @@ export interface PageTableProps<D, Q = undefined> {
   selectionMode?: SelectionMode
   /** 表格高度，为空则占据页面最大可用高度 */
   tableHeight?: number | string
+  /** 设置表格单元、行和列的布局方式 */
+  tableLayout?: 'auto' | 'fixed'
 }

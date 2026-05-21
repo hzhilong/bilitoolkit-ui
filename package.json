@@ -84,7 +84,7 @@
     "vue-tsc": "^3.0.4"
   },
   "peerDependencies": {
-    "@ybgnb/utils": "^0.2.0",
+    "@ybgnb/utils": "^0.2.1",
     "@ybgnb/bili-api": "workspace:*",
     "bilitoolkit-types": "workspace:*",
     "bilitoolkit-runtime": "workspace:*",

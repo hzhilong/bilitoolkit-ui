@@ -2,6 +2,7 @@
 import type { PageParams } from '@/types/page'
 import { type ElForm, type ElInput } from 'element-plus'
 import { computed, ref } from 'vue'
+import { useTestDataStore } from '@/stores/test-data'
 
 interface T {
   title: string
@@ -17,7 +18,7 @@ for (let index = 0; index < 100; index++) {
   tableData.push({
     title: `title-${index}`,
     id: index,
-    name: `name-${index}`,
+    name: `name-name-name-name-name-name-name-name-name-name-name-name-name-name-${index}`,
   })
 }
 const id = ref<number | undefined>()
@@ -46,10 +47,17 @@ const reset = () => {
 
 <template>
   <div class="home">
-    <PageTable :fetch-page="getFn" title="测试数据" :page-sizes="[20, 30, 50]" :query-params="params" @reset="reset">
+    <PageTable
+      tableLayout="fixed"
+      :fetch-page="getFn"
+      title="测试数据"
+      :page-sizes="[20, 30, 50]"
+      :query-params="params"
+      @reset="reset"
+    >
       <ElTableColumn prop="title" label="标题"></ElTableColumn>
       <ElTableColumn prop="id" label="id"></ElTableColumn>
-      <ElTableColumn prop="name" label="名称"></ElTableColumn>
+      <ElTableColumn prop="name" width="1000px" label="名称"></ElTableColumn>
       <template #query>
         <ElForm :inline="true" label-position="left" label-width="auto">
           <ElFormItem label="id">
