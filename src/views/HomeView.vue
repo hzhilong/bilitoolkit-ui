@@ -3,6 +3,7 @@ import type { PageParams } from '@/types/page'
 import { type ElForm, type ElInput } from 'element-plus'
 import { computed, ref } from 'vue'
 import { useTestDataStore } from '@/stores/test-data'
+import { showToast } from '@/utils/feedback'
 
 interface T {
   title: string
@@ -43,10 +44,20 @@ const getFn = async ({ pageNum, pageSize }: PageParams, { id }: P) => {
 const reset = () => {
   id.value = undefined
 }
+const handleClick = (msg: string): void => {
+  showToast(msg)
+}
 </script>
 
 <template>
   <div class="home">
+    <IconButton icon="friendica" tip="无确认" @click="handleClick('1')" />
+    <div>--------</div>
+    <IconButton icon="friendica" tip="有确认" confirm="确认提示" @click="handleClick('2')" />
+    <div>--------</div>
+    <IconButton icon="friendica" confirm="确认提示" @click="handleClick('3')" />
+    <div>--------</div>
+    <IconButton icon="friendica" @click="handleClick('4')" />
     <PageTable
       tableLayout="fixed"
       :fetch-page="getFn"

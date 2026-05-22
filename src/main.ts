@@ -13,6 +13,7 @@ import '@/assets/scss/common/base.scss'
 import { handleError } from '@/utils/feedback'
 import { useTestDataStore } from './stores/test-data'
 import { useAppThemeStore } from './stores/app-theme'
+import 'remixicon/fonts/remixicon.css'
 
 async function bootstrapApp() {
   const app = createApp(HomeView)

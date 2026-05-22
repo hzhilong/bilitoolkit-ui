@@ -4,8 +4,6 @@ export type PageTableAction = 'search' | 'resetQuery'
 export type SelectionMode = 'none' | 'single' | 'multiple'
 
 export type PageTableProps<D, Q = undefined> = {
-  /** 标题 */
-  title: string
   /**
    * 自动加载数据
    * @default true

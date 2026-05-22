@@ -81,7 +81,8 @@
     "vite": "^7.3.3",
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-static-copy": "^3.1.2",
-    "vue-tsc": "^3.0.4"
+    "vue-tsc": "^3.0.4",
+    "remixicon": "^4.6.0"
   },
   "peerDependencies": {
     "@ybgnb/utils": "^0.2.1",

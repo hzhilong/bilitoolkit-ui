@@ -16,24 +16,35 @@ const handleClick = () => {
 </script>
 
 <template>
-  <template v-if="confirm">
-    <el-popconfirm :title="confirm" placement="left" @confirm="handleClick">
-      <template #reference>
-        <AppIcon class="icon-btn" :icon="icon" />
-      </template>
-    </el-popconfirm>
-  </template>
-  <template v-else-if="tip">
-    <el-tooltip effect="light" :content="tip" placement="top" :show-after="1500">
-      <slot name="default">
+  <template v-if="tip">
+    <template v-if="confirm">
+      <el-popconfirm :title="confirm" placement="left" @confirm="handleClick" :teleported="false">
+        <template #reference>
+          <span>
+            <el-tooltip effect="light" :content="tip" placement="top" :show-after="800" :teleported="false">
+              <AppIcon class="icon-btn" :icon="icon" />
+            </el-tooltip>
+          </span>
+        </template>
+      </el-popconfirm>
+    </template>
+    <template v-else>
+      <el-tooltip effect="light" :content="tip" placement="top" :show-after="800" :teleported="false">
         <AppIcon class="icon-btn" :icon="icon" @click="handleClick" />
-      </slot>
-    </el-tooltip>
+      </el-tooltip>
+    </template>
   </template>
   <template v-else>
-    <slot name="default">
+    <template v-if="confirm">
+      <el-popconfirm :title="confirm" placement="left" @confirm="handleClick" :teleported="false">
+        <template #reference>
+          <AppIcon class="icon-btn" :icon="icon" />
+        </template>
+      </el-popconfirm>
+    </template>
+    <template v-else>
       <AppIcon class="icon-btn" :icon="icon" @click="handleClick" />
-    </slot>
+    </template>
   </template>
 </template>
 

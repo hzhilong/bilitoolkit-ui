@@ -22,7 +22,7 @@ const external = [
   /^lodash-es\/.*/,
 ]
 
-export default defineConfig({
+export default defineConfig((configEnv) => ({
   base: './',
   plugins: [
     vue(),
@@ -40,7 +40,7 @@ export default defineConfig({
       tsconfigPath: 'tsconfig.web.json',
       outDir: 'dist',
       entryRoot: 'src',
-      rollupTypes: true,
+      rollupTypes: configEnv.mode === 'development',
     }),
     // 分析打包体积
     //      bundleStats({
@@ -96,4 +96,4 @@ export default defineConfig({
       },
     },
   },
-})
+}))

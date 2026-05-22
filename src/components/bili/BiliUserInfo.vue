@@ -8,7 +8,7 @@ defineProps<{
 
 <template>
   <div class="user-info info-row">
-    <img class="user-info__face" :src="user.face" alt="face" />
+    <img v-if="user.face" class="user-info__face" :src="user.face" alt="face" />
     <div class="user-info__right">
       <AppTooltip class="user-info__name" :content="user.name"></AppTooltip>
       <div class="info-row">
@@ -28,6 +28,7 @@ defineProps<{
 .user-info {
   min-height: 1em;
   font-size: 12px;
+  line-height: 18px;
 
   &__face {
     width: 2em;
@@ -62,7 +63,8 @@ defineProps<{
   }
 
   &__uid {
-    font-size: 0.9em;
+    font-size: 11px;
+    line-height: 16px;
     color: var(--el-text-color-placeholder);
     flex-shrink: 0;
   }
