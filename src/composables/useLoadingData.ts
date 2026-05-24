@@ -1,11 +1,16 @@
-import { ref } from 'vue'
+import { ref, type Ref } from 'vue'
+
+interface UseLoadingDataOptions {
+  loading?: Ref<boolean>
+  /** 是否限制同一时刻只能有一次加载 */
+  singleFlight?: boolean
+}
 
 /**
  * 封装的数据加载函数，方便关联返回的 loading
- * @param singleFlight  是否限制同一时刻只能有一次加载
  */
-export const useLoadingData = (singleFlight: boolean = false) => {
-  const loading = ref(false)
+export const useLoadingData = (options?: UseLoadingDataOptions) => {
+  const loading = options?.loading ?? ref(false)
   // 缓存正在进行的 Promise
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let pendingPromise: Promise<any> | null = null
@@ -22,7 +27,7 @@ export const useLoadingData = (singleFlight: boolean = false) => {
   ): ((...args: TArgs) => Promise<TReturn>) => {
     return async (...args: TArgs): Promise<TReturn> => {
       // 开启 singleFlight 且已有正在进行的请求
-      if (singleFlight && loading.value && pendingPromise) {
+      if (options?.singleFlight && loading.value && pendingPromise) {
         // 直接返回之前的 Promise
         return pendingPromise
       }

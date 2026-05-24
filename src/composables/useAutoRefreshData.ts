@@ -5,7 +5,7 @@ export const useAutoRefreshData = (
   doneFn: Promise<void> | (() => void | Promise<void>),
   intervalTimeMs: number = 3000,
 ) => {
-  const { loading, loadingData } = useLoadingData(true)
+  const { loading, loadingData } = useLoadingData({ singleFlight: true })
   const refreshTableData = loadingData(doneFn)
   let timer: null | ReturnType<typeof setInterval> = null
 

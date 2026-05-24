@@ -63,7 +63,14 @@ onUnmounted(() => {
       <AppIcon v-if="iconClass" :icon="iconClass" />
     </div>
     <template v-if="content">
-      <el-tooltip effect="light" :content="content" placement="top" :disabled="!isOverflow" :show-after="800">
+      <el-tooltip
+        effect="light"
+        :content="content"
+        placement="top"
+        :disabled="!isOverflow"
+        :show-after="800"
+        :teleported="false"
+      >
         <template #content>
           <slot name="tooltipContent" />
         </template>
