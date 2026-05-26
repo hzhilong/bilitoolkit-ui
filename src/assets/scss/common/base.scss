@@ -4,6 +4,17 @@
 @use '../common/scrollbar' as *;
 @use '../common/utilities' as *;
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   width: 100vw;
   height: 100vh;
@@ -54,6 +65,11 @@ body {
     }
   }
 
+  .el-table{
+    .el-button.is-link+.el-button.is-link {
+      margin-left: 3px;
+    }
+  }
 }
 
 html.dark {

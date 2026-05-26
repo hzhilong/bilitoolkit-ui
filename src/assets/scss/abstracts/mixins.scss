@@ -135,8 +135,8 @@
 @mixin icon-btn($size:18px, $color:var(--el-color-primary),
   $hover-bg: color-mix(in srgb, $color, transparent 85%) // 基于主色自动生成
 ) {
-  width: $size;
-  height: $size;
+  width: calc($size + 10px);
+  height: calc($size + 10px);
   font-size: $size;
   line-height: $size;
   color: $color;

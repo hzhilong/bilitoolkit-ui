@@ -11,6 +11,7 @@ import {
   type Slots,
   useAttrs,
   onUnmounted,
+  watch,
 } from 'vue'
 import type { PageTableAction, PageTableProps } from './types'
 import { type ElEmpty, type ElTable } from 'element-plus'
@@ -36,6 +37,7 @@ const tableAttrs = computed(() => {
 const props = withDefaults(defineProps<PageTableProps<D, Q>>(), {
   autoLoad: true,
   tableLayout: 'auto',
+  searchActionLabel: '搜索',
   actions: () => ['search', 'resetQuery'] as PageTableAction[],
 })
 
@@ -50,6 +52,21 @@ const { pageData, tableData, loading, refresh, resetAndRefresh, handleSizeChange
   autoLoad: props.autoLoad,
   onLoaded: () => tableRef.value?.setScrollTop(0),
 })
+
+watch(
+  () => pageData.value.pageNum,
+  () => {
+    console.log(`watch pageNum`, pageData.value.pageNum)
+    //    handleCurrPageChange()
+  },
+)
+watch(
+  () => pageData.value.pageSize,
+  () => {
+    console.log(`watch pageSize`, pageData.value.pageSize)
+    //    handleSizeChange()
+  },
+)
 
 const emits = defineEmits<{
   reset: []
@@ -138,7 +155,7 @@ defineExpose({
         <!-- 操作按钮 -->
         <div class="page-table__actions">
           <slot name="actions"></slot>
-          <el-button v-if="actionVisible.search" type="primary" @click="search">搜索</el-button>
+          <el-button v-if="actionVisible.search" type="primary" @click="search">{{ searchActionLabel }}</el-button>
           <el-button v-if="actionVisible.resetQuery" @click="reset">重置</el-button>
         </div>
       </div>
@@ -170,10 +187,10 @@ defineExpose({
       v-model:current-page="pageData.pageNum"
       v-model:page-size="pageData.pageSize"
       :page-sizes="pageSizes"
-      :layout="paginationLayout"
       :total="pageData.total"
-      @size-change="handleSizeChange"
-      @current-change="handleCurrPageChange"
+      :layout="paginationLayout"
+      @currentChange="handleCurrPageChange"
+      @sizeChange="handleSizeChange"
     />
   </div>
 </template>
@@ -208,11 +225,11 @@ defineExpose({
     }
   }
   &__actions {
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     align-items: flex-end;
-    margin-left: auto;
   }
   &__table-wrapper {
     flex: 1;

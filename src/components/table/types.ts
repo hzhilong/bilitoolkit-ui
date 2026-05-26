@@ -9,6 +9,8 @@ export type PageTableProps<D, Q = undefined> = {
    * @default true
    */
   autoLoad?: boolean
+  /** 搜索按钮的文本 */
+  searchActionLabel?: string
   /** 顶部栏按钮 */
   actions?: PageTableAction[]
   /** 获取分页数据的方法 */

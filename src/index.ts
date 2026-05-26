@@ -14,6 +14,7 @@ export * from './stores/selected-user.js'
 export { useLoadingData } from './composables/useLoadingData.js'
 export { useAutoRefreshData } from './composables/useAutoRefreshData.js'
 export { usePageTable } from './composables/usePageTable.js'
+export { useSelectData } from './composables/useSelectData.js'
 
 export { default as SettingGroup } from './components/settings/SettingGroup.vue'
 export { default as SettingItem } from './components/settings/SettingItem.vue'

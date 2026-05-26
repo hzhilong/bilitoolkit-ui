@@ -39,6 +39,7 @@ export const usePageTable = <D, Q = undefined>(options: UsePageTableOptions<D, Q
       pageNum: pageData.value.pageNum,
       pageSize: pageData.value.pageSize,
     }
+    console.log(`refresh`, currPageParams, queryParamsData)
     const { data, ...page } = queryParamsData
       ? await fetchPage(currPageParams, queryParamsData)
       : await (fetchPage as FetchPage<D>)(currPageParams)
