@@ -1,7 +1,6 @@
-import { computed, type Ref, shallowRef, toValue } from 'vue'
+import { computed, type Ref, shallowRef, toValue, toRaw } from 'vue'
 
 export const useSelectData = <Data, ID>(dataList: Ref<Data[]>, getId: (data: Data) => ID) => {
-
   const selectedIds = shallowRef<Set<ID>>(new Set<ID>([]))
 
   const checkboxValue = computed({
@@ -57,7 +56,7 @@ export const useSelectData = <Data, ID>(dataList: Ref<Data[]>, getId: (data: Dat
   }
 
   function getSelectedData() {
-    return toValue(dataList).filter((data) => selectedIds.value.has(getId(data)))
+    return toRaw(dataList.value).filter((data) => selectedIds.value.has(getId(data)))
   }
 
   return {

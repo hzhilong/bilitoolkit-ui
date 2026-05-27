@@ -9,7 +9,6 @@ import 'element-plus/theme-chalk/el-message.css'
 import 'element-plus/theme-chalk/el-message-box.css'
 import { useTestDataStore } from '@/stores/test-data'
 import { useSelectedUserStore } from '@/stores/selected-user'
-import { setDevMode } from 'bilitoolkit-runtime'
 // import '@/assets/scss/element/light-var.css'
 // import '@/assets/scss/element/dark-var.css'
 // import '@/assets/scss/common/base.scss'
@@ -17,13 +16,12 @@ import { setDevMode } from 'bilitoolkit-runtime'
 /**
  * 初始化UI
  */
-export const initBilitoolkitUi = async (pinia: Pinia, options?: { isDev?: boolean; useTestData?: boolean }) => {
-  const { isDev = false, useTestData = false } = options ?? {}
+export const initBilitoolkitUi = async (pinia: Pinia, options?: { useTestData?: boolean }) => {
+  const { useTestData = false } = options ?? {}
   import('@/assets/scss/element/light-var.css')
   import('@/assets/scss/element/dark-var.css')
   import('@/assets/scss/common/base.scss')
 
-  setDevMode(isDev)
   if (useTestData) {
     await useTestDataStore(pinia).init(true)
   } else {

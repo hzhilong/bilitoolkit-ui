@@ -85,7 +85,7 @@
     "remixicon": "^4.6.0"
   },
   "peerDependencies": {
-    "@ybgnb/utils": "^0.2.1",
+    "@ybgnb/utils": "^0.2.3",
     "@ybgnb/bili-api": "workspace:*",
     "bilitoolkit-types": "workspace:*",
     "bilitoolkit-runtime": "workspace:*",
