@@ -57,18 +57,22 @@ body {
     line-height: normal !important;
   }
 
-  .el-table .cell{
+  .el-table .cell {
     padding: 0 7px !important;
 
-    .el-tag{
+    .el-tag {
       padding: 0 4px !important;
     }
   }
 
-  .el-table{
-    .el-button.is-link+.el-button.is-link {
+  .el-table {
+    .el-button.is-link + .el-button.is-link {
       margin-left: 3px;
     }
+  }
+
+  .el-message {
+//    z-index: 3003 !important;
   }
 }
 

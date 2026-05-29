@@ -110,6 +110,7 @@ export function showConfirm(message: string, title: string = '提示', options: 
       Object.assign(
         {
           autofocus: false,
+          dangerouslyUseHTMLString: true,
           cancelButtonText: '取消',
           confirmButtonText: '确定',
           type: 'warning',
@@ -124,4 +125,13 @@ export function showConfirm(message: string, title: string = '提示', options: 
         reject(createAbortError())
       })
   })
+}
+
+/**
+ * 按顺序依次显示多个确认弹窗，任意一步取消都会中断后续确认。
+ */
+export async function showConfirmSequence(confirms: Array<Parameters<typeof showConfirm>>) {
+  for (const [message, title, options] of confirms) {
+    await showConfirm(message, title, options)
+  }
 }

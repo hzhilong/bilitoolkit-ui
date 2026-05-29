@@ -11,7 +11,6 @@ import {
   type Slots,
   useAttrs,
   onUnmounted,
-  watch,
 } from 'vue'
 import type { PageTableAction, PageTableProps } from './types'
 import { type ElEmpty, type ElTable } from 'element-plus'
@@ -53,21 +52,6 @@ const { pageData, tableData, loading, refresh, resetAndRefresh, handleSizeChange
   onLoaded: () => tableRef.value?.setScrollTop(0),
 })
 
-watch(
-  () => pageData.value.pageNum,
-  () => {
-    console.log(`watch pageNum`, pageData.value.pageNum)
-    //    handleCurrPageChange()
-  },
-)
-watch(
-  () => pageData.value.pageSize,
-  () => {
-    console.log(`watch pageSize`, pageData.value.pageSize)
-    //    handleSizeChange()
-  },
-)
-
 const emits = defineEmits<{
   reset: []
   search: []
@@ -90,25 +74,26 @@ const tableRef = useTemplateRef<InstanceType<typeof ElTable>>('tableRef')
 const _tableHeight = ref<number | string | undefined>(undefined)
 // 自动调整表格高度
 const adjustTableHeight = async () => {
-  _tableHeight.value = props.tableHeight ?? tableWrapperRef.value?.clientHeight ?? 0
+  if (props.tableHeight) {
+    _tableHeight.value = props.tableHeight
+  } else if (tableWrapperRef.value?.clientHeight) {
+    _tableHeight.value = tableWrapperRef.value?.clientHeight
+  }
 }
 
 let observer: ResizeObserver | undefined
 let frameId = 0
 
 onMounted(async () => {
-  if (!props.tableHeight) {
-    if (!tableWrapperRef.value) return
+  if (!tableWrapperRef.value) return
 
-    observer = new ResizeObserver((_entries) => {
-      cancelAnimationFrame(frameId)
-      frameId = requestAnimationFrame(() => {
-        adjustTableHeight()
-      })
+  observer = new ResizeObserver((_entries) => {
+    cancelAnimationFrame(frameId)
+    frameId = requestAnimationFrame(() => {
+      adjustTableHeight()
     })
-
-    observer.observe(tableWrapperRef.value)
-  }
+  })
+  observer.observe(tableWrapperRef.value!)
 })
 
 onUnmounted(() => {
@@ -225,7 +210,7 @@ defineExpose({
     }
   }
   &__actions {
-    width: 100%;
+    margin-left: auto;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
