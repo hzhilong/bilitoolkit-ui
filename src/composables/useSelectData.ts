@@ -1,62 +1,47 @@
-import { computed, type Ref, shallowRef, toValue, toRaw } from 'vue'
+import { shallowRef, toValue, ref, watch, type MaybeRefOrGetter } from 'vue'
 
-export const useSelectData = <Data, ID>(dataList: Ref<Data[]>, getId: (data: Data) => ID) => {
-  const selectedIds = shallowRef<Set<ID>>(new Set<ID>([]))
+export const useSelectData = <Data, ID>(dataList: MaybeRefOrGetter<Data[]>, getId: (data: Data) => ID) => {
+  const selectedIds = shallowRef<ID[]>([])
 
-  const checkboxValue = computed({
-    get() {
-      return [...selectedIds.value]
-    },
-
-    set(value: ID[]) {
-      selectedIds.value = new Set(value)
-    },
-  })
-
-  /**
-   * 是否选中
-   */
   function isSelected(id: ID) {
-    return selectedIds.value.has(id)
+    return selectedIds.value.includes(id)
   }
 
-  /**
-   * 切换选择
-   */
   function toggleSelect(id: ID) {
-    const set = new Set<ID>(selectedIds.value)
-
-    if (set.has(id)) {
-      set.delete(id)
+    const index = selectedIds.value.indexOf(id)
+    if (index > -1) {
+      selectedIds.value = selectedIds.value.splice(index, 1)
     } else {
-      set.add(id)
+      selectedIds.value = [...selectedIds.value, id]
     }
-
-    selectedIds.value = set
   }
 
-  /**
-   * 全选
-   */
-  const isAllSelected = computed(() => {
-    const list = toValue(dataList)
-    return list.length > 0 && list.every((item) => selectedIds.value.has(getId(item)))
-  })
+  const isAllSelected = ref(false)
 
-  /**
-   * 切换全选
-   */
+  watch(
+    selectedIds,
+    () => {
+      const list = toValue(dataList)
+      isAllSelected.value =
+        list.length > 0 &&
+        list.every((item) => {
+          return selectedIds.value.includes(getId(item))
+        })
+    },
+    { immediate: true },
+  )
+
   function toggleAll() {
     if (isAllSelected.value) {
-      selectedIds.value = new Set<ID>()
-      return
+      const ids = toValue(dataList).map((item) => getId(item))
+      selectedIds.value = ids
+    } else {
+      selectedIds.value = []
     }
-    const list = toValue(dataList)
-    selectedIds.value = new Set<ID>(list.map((item) => getId(item)))
   }
 
   function getSelectedData() {
-    return toRaw(dataList.value).filter((data) => selectedIds.value.has(getId(data)))
+    return toValue(dataList).filter((data) => selectedIds.value.includes(getId(data)))
   }
 
   return {
@@ -66,6 +51,5 @@ export const useSelectData = <Data, ID>(dataList: Ref<Data[]>, getId: (data: Dat
     isAllSelected,
     toggleAll,
     getSelectedData,
-    checkboxValue,
   }
 }
