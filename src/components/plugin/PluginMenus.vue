@@ -71,4 +71,13 @@ const hasRightItemSlot = computed(() => {
   </el-menu>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.plugin-menus {
+  height: 40px !important;
+
+  ::v-deep(.el-menu-item) {
+    line-height: 40px;
+    padding: 0 10px;
+  }
+}
+</style>

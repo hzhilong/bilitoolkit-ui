@@ -18,6 +18,8 @@ declare module 'vue' {
     BiliUserInfo: typeof import('./components/bili/BiliUserInfo.vue')['default']
     CountdownDialog: typeof import('./components/dialog/countdown/CountdownDialog.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
+    ElCheckboxGroup: typeof import('element-plus/es')['ElCheckboxGroup']
     ElDialog: typeof import('element-plus/es')['ElDialog']
     ElDropdown: typeof import('element-plus/es')['ElDropdown']
     ElDropdownItem: typeof import('element-plus/es')['ElDropdownItem']
@@ -44,6 +46,7 @@ declare module 'vue' {
     PluginPageHeader: typeof import('./components/plugin/PluginPageHeader.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SelectDialog: typeof import('./components/dialog/select/SelectDialog.vue')['default']
     SettingGroup: typeof import('./components/settings/SettingGroup.vue')['default']
     SettingItem: typeof import('./components/settings/SettingItem.vue')['default']
   }
@@ -60,6 +63,8 @@ declare global {
   const BiliUserInfo: typeof import('./components/bili/BiliUserInfo.vue')['default']
   const CountdownDialog: typeof import('./components/dialog/countdown/CountdownDialog.vue')['default']
   const ElButton: typeof import('element-plus/es')['ElButton']
+  const ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
+  const ElCheckboxGroup: typeof import('element-plus/es')['ElCheckboxGroup']
   const ElDialog: typeof import('element-plus/es')['ElDialog']
   const ElDropdown: typeof import('element-plus/es')['ElDropdown']
   const ElDropdownItem: typeof import('element-plus/es')['ElDropdownItem']
@@ -86,6 +91,7 @@ declare global {
   const PluginPageHeader: typeof import('./components/plugin/PluginPageHeader.vue')['default']
   const RouterLink: typeof import('vue-router')['RouterLink']
   const RouterView: typeof import('vue-router')['RouterView']
+  const SelectDialog: typeof import('./components/dialog/select/SelectDialog.vue')['default']
   const SettingGroup: typeof import('./components/settings/SettingGroup.vue')['default']
   const SettingItem: typeof import('./components/settings/SettingItem.vue')['default']
 }

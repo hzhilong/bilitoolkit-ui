@@ -108,7 +108,8 @@ onMounted(async () => {
     align-items: center;
     font-size: 16px;
     gap: 0.5em;
-    height: var(--el-menu-horizontal-height);
+    //    height: var(--el-menu-horizontal-height);
+    height: 40px;
     border-bottom: 1px solid var(--el-menu-border-color);
     padding-right: 1em;
     min-width: 0;
