@@ -1,6 +1,7 @@
 export interface SelectDialogProps<T = unknown> {
   title?: string
   options: T[] | (() => Promise<T[]>)
+  defaultSelectedList?: T[]
   getDataLabel: (data: T) => string
   getDataId: (data: T) => string
   isDisabled?: (data: T) => boolean
