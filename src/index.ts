@@ -23,6 +23,14 @@ export * from './components/dialog/countdown/types.js'
 export * from './components/dialog/countdown/useCountdown.js'
 export { default as CountdownDialog } from './components/dialog/countdown/CountdownDialog.vue'
 
+export * from './components/dialog/select/types.js'
+export * from './components/dialog/select/selectService.js'
+export { default as SelectDialog } from './components/dialog/select/SelectDialog.vue'
+
+export * from './components/dialog/page-range/types.js'
+export * from './components/dialog/page-range/pageRangeService'
+export { default as PageRangeDialog } from './components/dialog/page-range/PageRangeDialog.vue'
+
 export * from './components/dialog/loading/types.js'
 export * from './components/dialog/loading/loadingService.js'
 export { default as LoadingDialog } from './components/dialog/loading/LoadingDialog.vue'

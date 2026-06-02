@@ -11,8 +11,12 @@ function addLog(msg: string) {
     logs.value.shift()
   }
 }
+const reset = () => {
+  logs.value = []
+}
 defineExpose({
   addLog,
+  reset,
 })
 </script>
 

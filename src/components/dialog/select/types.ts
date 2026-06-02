@@ -3,8 +3,8 @@ export interface SelectDialogProps<T = unknown> {
   options: T[] | (() => Promise<T[]>)
   defaultSelectedList?: T[]
   getDataLabel: (data: T) => string
-  getDataId: (data: T) => string
-  isDisabled?: (data: T) => boolean
+  getDataId: (data: T) => string | number
+  //  isDisabled?: (data: T) => boolean
   multiple?: boolean
   canSelectAll?: boolean
   showCurrentSelection?: boolean
