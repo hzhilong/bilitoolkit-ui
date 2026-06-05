@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, useTemplateRef, nextTick } from 'vue'
 import { getFormattedDateTime } from '@ybgnb/utils'
 
 const logs = ref<string[]>([])
+const logBoxRef = useTemplateRef<HTMLDivElement>('logBoxRef')
 
 function addLog(msg: string) {
   logs.value.push(`[${getFormattedDateTime()}] ${msg}`)
@@ -10,6 +11,11 @@ function addLog(msg: string) {
   if (logs.value.length > 500) {
     logs.value.shift()
   }
+  nextTick(() => {
+    if (logBoxRef.value) {
+      logBoxRef.value.scrollTop = logBoxRef.value.scrollHeight
+    }
+  })
 }
 const reset = () => {
   logs.value = []
@@ -21,7 +27,7 @@ defineExpose({
 </script>
 
 <template>
-  <div class="log-print-box">
+  <div ref="logBoxRef" class="log-print-box">
     <div v-for="(log, i) in logs" :key="i" v-html="log" class="log-print-box__line"></div>
   </div>
 </template>

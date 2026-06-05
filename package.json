@@ -48,7 +48,7 @@
   "scripts": {
     "check": "vue-tsc -p tsconfig.web.json --noEmit",
     "lint": "eslint . --fix",
-    "format": "prettier --write .",
+    "format": "prettier --write src/",
     "dev": "chcp 65001 && vite",
     "build": "vite build --mode library",
     "npm login": "npm login",
@@ -85,7 +85,7 @@
     "remixicon": "^4.6.0"
   },
   "peerDependencies": {
-    "@ybgnb/utils": "^0.2.3",
+    "@ybgnb/utils": "^0.2.8",
     "@ybgnb/bili-api": "workspace:*",
     "bilitoolkit-types": "workspace:*",
     "bilitoolkit-runtime": "workspace:*",

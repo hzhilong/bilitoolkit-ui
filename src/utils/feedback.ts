@@ -1,15 +1,15 @@
 import { ElMessage, ElMessageBox, type ElMessageBoxOptions, type MessageParams } from 'element-plus'
 import { toolkitApi } from '@/api/toolkit-api'
 import { BiliApiBusinessError } from '@ybgnb/bili-api'
-import { getErrorMessage, isCanceledError, createAbortError } from '@ybgnb/utils'
+import { getErrorMessage, isCanceledError, createAbortError, serializeError } from '@ybgnb/utils'
 
-async function saveLog(error: unknown) {
-  try {
-    await toolkitApi.system.saveLog({
+function saveErrorLog(error: unknown) {
+  toolkitApi.system
+    .saveLog({
       level: 'error',
-      message: error,
+      data: [JSON.stringify(serializeError(error))],
     })
-  } catch {}
+    .catch()
 }
 
 /**
@@ -21,21 +21,15 @@ export const handleError = (error: unknown) => {
     return
   }
   if (error) {
-    // 打印错误
-    if (error instanceof BiliApiBusinessError) {
-      console.error(error.message)
-    } else {
-      console.error(error)
-    }
-    // 保存日志
+    console.error(error)
     if (toolkitApi && toolkitApi.system) {
-      saveLog(error).then()
+      saveErrorLog(error)
     }
-    // 显示错误
-    showToast({
-      message: getErrorMessage(error),
-      type: 'error',
-    })
+    if (error instanceof BiliApiBusinessError) {
+      showError(`${error.message} (${error.responseCode})`)
+    } else {
+      showError(getErrorMessage(error))
+    }
   } else {
     showToast({
       message: '未知错误',
