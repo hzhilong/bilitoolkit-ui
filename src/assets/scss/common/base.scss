@@ -71,14 +71,11 @@ body {
     }
   }
 
-  .el-message {
-//    z-index: 3003 !important;
-  }
 }
 
 html.dark {
   .el-dialog {
-    border: 1px solid var(--app-color-primary-transparent-10);
+//    border: 1px solid var(--app-color-primary-transparent-10);
   }
 }
 

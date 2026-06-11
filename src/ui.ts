@@ -13,10 +13,19 @@ import { useSelectedUserStore } from '@/stores/selected-user'
 // import '@/assets/scss/element/dark-var.css'
 // import '@/assets/scss/common/base.scss'
 
+interface InitOptions {
+  /** 是否使用测试数据 */
+  useTestData?: boolean
+  /** core 环境特有 */
+  appThemeDBName?: string
+  /** core 环境特有 */
+  appThemeUpdateEvent?: string
+}
+
 /**
  * 初始化UI
  */
-export const initBilitoolkitUi = async (pinia: Pinia, options?: { useTestData?: boolean }) => {
+export const initBilitoolkitUi = async (pinia: Pinia, options?: InitOptions) => {
   const { useTestData = false } = options ?? {}
   import('@/assets/scss/element/light-var.css')
   import('@/assets/scss/element/dark-var.css')
@@ -25,7 +34,7 @@ export const initBilitoolkitUi = async (pinia: Pinia, options?: { useTestData?: 
   if (useTestData) {
     await useTestDataStore(pinia).init(true)
   } else {
-    await useAppThemeStore(pinia).init()
+    await useAppThemeStore(pinia).init(options?.appThemeDBName, options?.appThemeUpdateEvent)
   }
   await useSelectedUserStore(pinia).init()
 

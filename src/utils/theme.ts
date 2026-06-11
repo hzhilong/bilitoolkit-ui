@@ -70,7 +70,8 @@ export const baseUpdateThemeColor = (primaryColor: string, themeMode: AppThemeMo
   vars['--app-bg-color-overlay'] = `rgba(${r}, ${g}, ${b}, 0.05)`
   vars['--app-bg-color-overlay-hover'] = `rgba(${r}, ${g}, ${b}, 0.15)`
   // 主页面背景
-  vars['--app-bg-color-page'] = isDark ? mixColor(primaryColor, mixColor(background, foreground, 96), 5) : 'transparent'
+  //  vars['--app-bg-color-page'] = isDark ? mixColor(primaryColor, mixColor(background, foreground, 96), 5) : 'transparent'
+  vars['--app-bg-color-page'] = isDark ? 'var(--el-fill-color-blank)' : 'transparent'
   vars['--app-bg-color-menus'] = `var(--app-bg-color-page)`
 
   if (isDark) {
@@ -134,7 +135,7 @@ export const updateAppTheme = async (appThemeState?: AppThemeState) => {
     baseUpdateThemeColor(state.primaryColor, state.themeMode, dark)
   } else {
     const state = appThemeState ?? defaultAppThemeState
-    baseUpdateThemeColor(state.primaryColor, state.themeMode, false)
+    baseUpdateThemeColor(state.primaryColor, state.themeMode, state?.dark)
   }
 }
 

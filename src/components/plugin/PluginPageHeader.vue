@@ -60,7 +60,7 @@ onMounted(async () => {
     ></plugin-menus>
     <div class="plugin-page-header__user-container">
       <template v-if="user">
-        <el-popover placement="bottom-end" width="auto" trigger="hover" :teleported="false">
+        <el-popover placement="bottom-end" width="auto" trigger="hover">
           <template #reference>
             <div class="plugin-page-header__user-container__info">
               <img class="plugin-page-header__user-container__info__face" :src="face" alt="face" />
@@ -108,12 +108,12 @@ onMounted(async () => {
     align-items: center;
     font-size: 16px;
     gap: 0.5em;
-    //    height: var(--el-menu-horizontal-height);
     height: 40px;
     border-bottom: 1px solid var(--el-menu-border-color);
     padding-right: 1em;
     min-width: 0;
     padding-left: 60px;
+    background-color: var(--el-menu-bg-color);
 
     .bili-user-card:hover {
       box-shadow: unset;
@@ -123,7 +123,7 @@ onMounted(async () => {
       display: flex;
       align-items: center;
       gap: 0.3em;
-      height: calc(var(--el-menu-horizontal-height) - 0.4em);
+      height: calc(40px - 0.4em);
       padding: 0 0.3em;
       border-radius: 0.3em;
       box-sizing: border-box;
@@ -150,7 +150,7 @@ onMounted(async () => {
     }
 
     &__arrow {
-      padding: 0.3em;
+      padding: 0.6em;
       cursor: pointer;
       border-radius: 0.2em;
 

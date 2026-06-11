@@ -13,4 +13,8 @@ export const testUser = {
   follower: 888,
   coins: 10000,
   rank: 1000,
+  vip: {
+    type: 0,
+    status: 0,
+  },
 } satisfies UserInfo as UserInfoWithCookie

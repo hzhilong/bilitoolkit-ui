@@ -54,11 +54,11 @@ const levelImg = computed(() => {
 </template>
 
 <style lang="scss">
+@use '@/assets/scss/abstracts/mixins' as mixins;
 .user-card {
+  @include mixins.card-tech-style;
   width: 300px;
   max-width: 400px;
-  border: 2px solid var(--el-border-color);
-  border-radius: 12px;
   padding: 10px;
   display: flex;
   flex-direction: row;
@@ -70,12 +70,6 @@ const levelImg = computed(() => {
   box-sizing: border-box;
   font-size: 14px;
   color: var(--el-text-color-regular);
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: translateY(-1px);
-    box-shadow: var(--el-box-shadow);
-  }
 
   &__face-wrapper {
     position: relative;
