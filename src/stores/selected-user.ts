@@ -8,7 +8,7 @@ import { UI_DB_KEYS } from '@/common/ui-constants'
 /**
  * 选择的用户 状态 Store
  */
-export const useSelectedUserStore = defineStore('BiliToolkit-ui-SelectedUserStore', () => {
+export const useSelectedUserStore = defineStore('biliToolkit-ui-selected-user', () => {
   const selectedUser = ref<UserInfoWithCookie | null>(null)
 
   const { state: testDataState } = useTestDataStore()

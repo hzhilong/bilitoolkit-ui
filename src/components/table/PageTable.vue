@@ -40,7 +40,7 @@ const props = withDefaults(defineProps<PageTableProps<D, Q>>(), {
   actions: () => ['search', 'resetQuery'] as PageTableAction[],
 })
 
-// 使用组合式函数
+const isInitialized = ref(false)
 const { pageData, tableData, loading, refresh, resetAndRefresh, handleSizeChange, handleCurrPageChange } = usePageTable<
   D,
   Q
@@ -49,7 +49,10 @@ const { pageData, tableData, loading, refresh, resetAndRefresh, handleSizeChange
   pageParams: props.pageParams,
   queryParams: props.queryParams ? () => props.queryParams! : undefined,
   autoLoad: props.autoLoad,
-  onLoaded: () => tableRef.value?.setScrollTop(0),
+  onLoaded: () => {
+    isInitialized.value = true
+    tableRef.value?.setScrollTop(0)
+  },
 })
 
 const emits = defineEmits<{
@@ -149,6 +152,7 @@ defineExpose({
     <div ref="tableWrapperRef" class="page-table__table-wrapper">
       <el-table
         ref="tableRef"
+        v-if="isInitialized"
         v-bind="tableAttrs"
         class="page-table__table"
         :data="tableData"

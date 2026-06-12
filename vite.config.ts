@@ -29,18 +29,26 @@ export default defineConfig((configEnv) => ({
     vueJsx(),
     AutoImport({
       dts: 'src/auto-imports.d.ts',
-      resolvers: [ElementPlusResolver()],
+      resolvers: [
+        ElementPlusResolver({
+          importStyle: configEnv.mode === 'development' ? false : 'css',
+        }),
+      ],
     }),
     Components({
       dts: 'src/components.d.ts',
-      resolvers: [ElementPlusResolver()],
+      resolvers: [
+        ElementPlusResolver({
+          importStyle: configEnv.mode === 'development' ? false : 'css',
+        }),
+      ],
     }),
     // 生成 .d.ts 类型文件
     dts({
       tsconfigPath: 'tsconfig.web.json',
       outDir: 'dist',
       entryRoot: 'src',
-      rollupTypes: configEnv.mode === 'development',
+      rollupTypes: true,
     }),
     // 分析打包体积
     //      bundleStats({
@@ -63,8 +71,7 @@ export default defineConfig((configEnv) => ({
     },
   },
   build: {
-    // 代码混淆和压缩
-    minify: false,
+    minify: true,
     lib: {
       // 库的入口文件
       entry: {

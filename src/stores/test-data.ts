@@ -6,7 +6,7 @@ import { testMenus } from '@/test/menus'
 /**
  * 测试数据状态 Store
  */
-export const useTestDataStore = defineStore('BiliToolkit-ui-TestDataStore', () => {
+export const useTestDataStore = defineStore('biliToolkit-ui-test-data', () => {
   const state = reactive({
     isTest: false,
     user: testUser,

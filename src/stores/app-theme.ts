@@ -9,7 +9,7 @@ import cloneDeep from 'lodash-es/cloneDeep'
  * 应用主题状态 Store
  */
 export const useAppThemeStore = defineStore(
-  'BiliToolkit-ui-AppThemeStore',
+  'biliToolkit-ui-theme',
   () => {
     const state = reactive<AppThemeState>(defaultAppThemeState)
 

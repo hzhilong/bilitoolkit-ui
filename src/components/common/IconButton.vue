@@ -7,6 +7,10 @@ interface IconButtonProps {
   tip?: string
 }
 
+defineOptions({
+  inheritAttrs: false,
+})
+
 withDefaults(defineProps<IconButtonProps>(), {})
 const emit = defineEmits(['click'])
 
@@ -20,7 +24,7 @@ const handleClick = () => {
     <template v-if="confirm">
       <el-popconfirm :title="confirm" placement="left" @confirm="handleClick">
         <template #reference>
-          <span>
+          <span v-bind="$attrs">
             <el-tooltip effect="light" :content="tip" placement="top" :show-after="800">
               <AppIcon class="icon-btn" :icon="icon" />
             </el-tooltip>
@@ -30,7 +34,7 @@ const handleClick = () => {
     </template>
     <template v-else>
       <el-tooltip effect="light" :content="tip" placement="top" :show-after="800">
-        <AppIcon class="icon-btn" :icon="icon" @click="handleClick" />
+        <AppIcon class="icon-btn" :icon="icon" @click.stop="handleClick" v-bind="$attrs" />
       </el-tooltip>
     </template>
   </template>
@@ -38,12 +42,12 @@ const handleClick = () => {
     <template v-if="confirm">
       <el-popconfirm :title="confirm" placement="left" @confirm="handleClick">
         <template #reference>
-          <AppIcon class="icon-btn" :icon="icon" />
+          <AppIcon class="icon-btn" :icon="icon" v-bind="$attrs" />
         </template>
       </el-popconfirm>
     </template>
     <template v-else>
-      <AppIcon class="icon-btn" :icon="icon" @click="handleClick" />
+      <AppIcon class="icon-btn" :icon="icon" @click.stop="handleClick" v-bind="$attrs" />
     </template>
   </template>
 </template>

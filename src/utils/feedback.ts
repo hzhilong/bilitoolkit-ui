@@ -2,6 +2,7 @@ import { ElMessage, ElMessageBox, type ElMessageBoxOptions, type MessageParams }
 import { toolkitApi } from '@/api/toolkit-api'
 import { BiliApiBusinessError } from '@ybgnb/bili-api'
 import { getErrorMessage, isCanceledError, createAbortError, serializeError } from '@ybgnb/utils'
+import { AppError } from 'bilitoolkit-types'
 
 function saveErrorLog(error: unknown) {
   toolkitApi.system
@@ -10,6 +11,12 @@ function saveErrorLog(error: unknown) {
       data: [JSON.stringify(serializeError(error))],
     })
     .catch()
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function isError<T>(error: unknown, errorClass: new (...args: any[]) => T): error is T {
+  if (error == null) return false
+  return error instanceof errorClass || (typeof error === 'object' && 'name' in error && error.name === errorClass.name)
 }
 
 /**
@@ -22,13 +29,19 @@ export const handleError = (error: unknown) => {
   }
   if (error) {
     console.error(error)
-    if (toolkitApi && toolkitApi.system) {
-      saveErrorLog(error)
+    const saveLog = () => {
+      if (toolkitApi && toolkitApi.system) {
+        saveErrorLog(error)
+      }
     }
-    if (error instanceof BiliApiBusinessError) {
+    if (isError(error, AppError)) {
+      showError(`${error.message}`)
+    } else if (isError(error, BiliApiBusinessError)) {
       showError(`${error.message} (${error.responseCode})`)
+      saveLog()
     } else {
       showError(getErrorMessage(error))
+      saveLog()
     }
   } else {
     showToast({
