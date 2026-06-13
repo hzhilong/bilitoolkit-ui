@@ -1,10 +1,10 @@
 {
   "name": "bilitoolkit-ui",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "private": false,
   "type": "module",
   "productName": "bilitoolkit-ui",
-  "description": "「哔哩工具姬」的 UI 库",
+  "description": "『哔哩工具姬』的 UI 库",
   "author": "hzhilong",
   "keywords": [
     "BiliToolkit",
@@ -18,9 +18,6 @@
     "url": "https://github.com/hzhilong/bilitoolkit-ui/issues"
   },
   "homepage": "https://github.com/hzhilong/bilitoolkit-ui#readme",
-  "engines": {
-    "node": "^20.19.0 || >=22.12.0"
-  },
   "license": "MIT",
   "packageManager": "pnpm@10.30.3",
   "main": "./dist/index.js",

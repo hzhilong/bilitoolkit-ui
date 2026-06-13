@@ -86,7 +86,7 @@ export default defineConfig((configEnv) => ({
         return `${entryName}.cjs`
       },
     },
-    sourcemap: true,
+    sourcemap: false,
     rollupOptions: {
       // 不想打包进库的依赖
       external: external,
