@@ -1,7 +1,6 @@
 import { toolkitApi } from '@/api/toolkit-api'
 import { defaultAppThemeState } from '@/common/ui-constants'
 import { useAppThemeStore } from '@/stores/app-theme'
-import { useTestDataStore } from '@/stores/test-data'
 import { hexToRgb, mixColor, setCssVar } from '@ybgnb/utils/dom'
 import type { AppThemeMode, AppThemeState } from 'bilitoolkit-types'
 
@@ -128,15 +127,9 @@ export const isDarkTheme = async (themeMode?: AppThemeMode) => {
  * 更新应用主题
  */
 export const updateAppTheme = async (appThemeState?: AppThemeState) => {
-  if (!useTestDataStore().state.isTest) {
-    // 非测试模式
-    const state = appThemeState ?? (await toolkitApi.system.getAppThemeState())
-    const dark = await isDarkTheme(state.themeMode)
-    baseUpdateThemeColor(state.primaryColor, state.themeMode, dark)
-  } else {
-    const state = appThemeState ?? defaultAppThemeState
-    baseUpdateThemeColor(state.primaryColor, state.themeMode, state?.dark)
-  }
+  const state = appThemeState ?? (await toolkitApi.system.getAppThemeState())
+  const dark = await isDarkTheme(state.themeMode)
+  baseUpdateThemeColor(state.primaryColor, state.themeMode, dark)
 }
 
 /**

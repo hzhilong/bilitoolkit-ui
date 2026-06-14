@@ -6,7 +6,6 @@ import { toolkitApi } from '@/api/toolkit-api'
 import { useSelectedUserStore } from '@/stores/selected-user'
 import { storeToRefs } from 'pinia'
 import { showError } from '@/utils/feedback'
-import { useTestDataStore } from '@/stores/test-data'
 
 defineProps<PluginMenusProps>()
 
@@ -37,7 +36,7 @@ const handleMenuSelect = (menu: PluginMenuData): void => {
   }
 }
 onMounted(async () => {
-  if (user.value && !useTestDataStore().state.isTest) {
+  if (user.value) {
     // 更新当前用户信息并验证当前cookie有效性
     try {
       const newInfo = await toolkitApi.user.getMyInfoByCookie(user.value.userCookie)

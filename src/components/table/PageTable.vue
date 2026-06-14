@@ -1,4 +1,4 @@
-<script setup lang="ts" generic="D, Q">
+<script setup lang="ts" generic="D extends Record<PropertyKey, any>, Q">
 import { usePageTable } from '@/composables/usePageTable'
 import {
   computed,
@@ -13,7 +13,8 @@ import {
   onUnmounted,
 } from 'vue'
 import type { PageTableAction, PageTableProps } from './types'
-import { type ElEmpty, type ElTable } from 'element-plus'
+import { type ElEmpty, ElTable } from 'element-plus'
+import type { ComponentExposed } from 'vue-component-type-helpers'
 
 defineOptions({
   inheritAttrs: false,
@@ -73,7 +74,7 @@ const reset = async () => {
 }
 
 const tableWrapperRef = useTemplateRef<HTMLDivElement>('tableWrapperRef')
-const tableRef = useTemplateRef<InstanceType<typeof ElTable>>('tableRef')
+const tableRef = useTemplateRef<ComponentExposed<typeof ElTable<D>>>('tableRef')
 const _tableHeight = ref<number | string | undefined>(undefined)
 // 自动调整表格高度
 const adjustTableHeight = async () => {

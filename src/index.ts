@@ -7,7 +7,6 @@ export * from './types/page.js'
 export * from './utils/feedback.js'
 export * from './utils/theme.js'
 
-export * from './stores/test-data.js'
 export * from './stores/app-theme.js'
 export * from './stores/selected-user.js'
 

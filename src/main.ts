@@ -11,7 +11,6 @@ import '@/assets/scss/element/light-var.css'
 import '@/assets/scss/element/dark-var.css'
 import '@/assets/scss/common/base.scss'
 import { handleError } from '@/utils/feedback'
-import { useTestDataStore } from './stores/test-data'
 import { useAppThemeStore } from './stores/app-theme'
 import 'remixicon/fonts/remixicon.css'
 
@@ -23,7 +22,6 @@ async function bootstrapApp() {
   app.config.globalProperties.$toolkitApi = window.toolkitApi
   const pinia = createPinia()
   app.use(pinia)
-  await useTestDataStore(pinia).init(true)
   await useAppThemeStore(pinia).init()
   app.mount('#app')
 }
