@@ -13,8 +13,7 @@ import {
   onUnmounted,
 } from 'vue'
 import type { PageTableAction, PageTableProps } from './types'
-import { type ElEmpty, ElTable } from 'element-plus'
-import type { ComponentExposed } from 'vue-component-type-helpers'
+import type { TableInstance } from 'element-plus'
 
 defineOptions({
   inheritAttrs: false,
@@ -74,7 +73,7 @@ const reset = async () => {
 }
 
 const tableWrapperRef = useTemplateRef<HTMLDivElement>('tableWrapperRef')
-const tableRef = useTemplateRef<ComponentExposed<typeof ElTable<D>>>('tableRef')
+const tableRef = useTemplateRef<TableInstance>('tableRef')
 const _tableHeight = ref<number | string | undefined>(undefined)
 // 自动调整表格高度
 const adjustTableHeight = async () => {
