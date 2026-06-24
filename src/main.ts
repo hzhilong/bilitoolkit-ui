@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import HomeView from '@/views/HomeView.vue'
 import 'element-plus/theme-chalk/dark/css-vars.css'
+import 'element-plus/dist/index.css'
 // 以服务的方式进行调用的组件，需要手动引入 css 样式
 import 'element-plus/theme-chalk/el-loading.css'
 import 'element-plus/theme-chalk/el-message.css'
@@ -11,18 +12,16 @@ import '@/assets/scss/element/light-var.css'
 import '@/assets/scss/element/dark-var.css'
 import '@/assets/scss/common/base.scss'
 import { handleError } from '@/utils/feedback'
-import { useAppThemeStore } from './stores/app-theme'
 import 'remixicon/fonts/remixicon.css'
 
 async function bootstrapApp() {
   const app = createApp(HomeView)
-  console.log(`bootstrapApp`)
 
   // 挂载到全局属性
   app.config.globalProperties.$toolkitApi = window.toolkitApi
   const pinia = createPinia()
   app.use(pinia)
-  await useAppThemeStore(pinia).init()
+  //  await useAppThemeStore(pinia).init()
   app.mount('#app')
 }
 

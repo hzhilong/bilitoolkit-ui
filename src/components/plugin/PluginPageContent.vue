@@ -16,6 +16,7 @@
   justify-items: start;
   gap: 10px;
   margin-top: 20px;
+  margin-bottom: 10px;
   box-sizing: border-box;
   color: var(--el-text-color-regular);
   overflow: auto;

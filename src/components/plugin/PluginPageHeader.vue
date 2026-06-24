@@ -21,7 +21,7 @@ const levelImg = computed(() => {
 })
 
 const switchUser = async () => {
-  selectedUserStore.setUser(await toolkitApi.user.switchUser())
+  selectedUserStore.setUser(await toolkitApi.user.switchUser(true))
 }
 
 const cancelChoose = () => {

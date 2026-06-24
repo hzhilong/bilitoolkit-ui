@@ -1,60 +1,60 @@
 <!--加载框-->
 <script setup lang="ts">
-import cloneDeep from 'lodash-es/cloneDeep'
-import { reactive, ref, watch } from 'vue'
-import type { LoadingDialogExposed, LoadingDialogProps } from '@/components/dialog/loading/types'
+import { ref } from 'vue'
+import type { LoadingDialogOptions } from '@/components/dialog/loading/types'
 
-const visible = defineModel<boolean>({ required: true })
-const props = withDefaults(defineProps<LoadingDialogProps>(), {
-  canCancel: false,
-})
+const visible = ref(false)
+const message = ref('')
+const showCancel = ref(false)
 
-const options: LoadingDialogProps = reactive(cloneDeep(props))
-const loading = ref(visible)
-const resetLoadingText = () => {
-  options.loadingText = options.loadingText ?? '加载中...'
-}
+let cancelHandler: (() => void | Promise<void>) | undefined
 
-const handleCancel = () => {
-  options.onCancel?.()
-  visible.value = false
-}
+const show = (options: LoadingDialogOptions = {}) => {
+  message.value = options.message ?? '加载中'
+  showCancel.value = options.showCancel ?? false
+  cancelHandler = options.onCancel
 
-watch(visible, (newValue) => {
-  loading.value = newValue
-})
-// 显示
-const show = (newOptions?: LoadingDialogProps) => {
-  Object.assign(options, newOptions)
-  resetLoadingText()
-  loading.value = true
+  if (options?.autoCloseDelay) {
+    setTimeout(() => {
+      close()
+    }, options?.autoCloseDelay)
+  }
+
   visible.value = true
 }
-// 隐藏
-const hide = () => {
-  loading.value = false
+
+const update = (text: string) => {
+  message.value = text
+}
+
+const close = () => {
   visible.value = false
 }
-defineExpose<LoadingDialogExposed>({ show, hide })
+
+const handleCancel = async () => {
+  await cancelHandler?.()
+  close()
+}
+
+defineExpose({
+  show,
+  update,
+  close,
+})
 </script>
 
 <template>
   <div class="loading-mask el-overlay" v-show="visible">
     <div class="loading-content">
-      <div class="options-close-btn" v-show="options.canCancel" @click="handleCancel"></div>
-      <div class="loading-spinner" v-loading="loading"></div>
-      <div class="loading-text">{{ options.loadingText }}</div>
+      <div class="options-close-btn" v-show="showCancel" @click="handleCancel"></div>
+      <div class="loading-spinner" v-loading="true"></div>
+
+      <div class="loading-text">{{ message }}</div>
     </div>
   </div>
 </template>
 
-<style lang="scss">
-.loading-mask .el-loading-mask {
-  background-color: unset !important;
-}
-</style>
-
-<style lang="scss">
+<style scoped lang="scss">
 .loading-mask {
   position: fixed;
   top: 0;
@@ -67,6 +67,10 @@ defineExpose<LoadingDialogExposed>({ show, hide })
   background: var(--el-overlay-color-lighter);
   z-index: 9999;
   user-select: none;
+
+  ::v-deep(.el-loading-mask) {
+    background-color: unset !important;
+  }
 
   .loading-content {
     min-width: 220px;
@@ -86,7 +90,7 @@ defineExpose<LoadingDialogExposed>({ show, hide })
     }
 
     .loading-text {
-      font-size: 14px;
+      font-size: 16px;
       color: var(--el-text-color-regular);
     }
   }

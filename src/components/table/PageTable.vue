@@ -1,19 +1,10 @@
 <script setup lang="ts" generic="D extends Record<PropertyKey, any>, Q">
 import { usePageTable } from '@/composables/usePageTable'
-import {
-  computed,
-  nextTick,
-  onMounted,
-  ref,
-  useSlots,
-  useTemplateRef,
-  type Ref,
-  type Slots,
-  useAttrs,
-  onUnmounted,
-} from 'vue'
+import { computed, nextTick, ref, useSlots, useTemplateRef, type Ref, type Slots, useAttrs } from 'vue'
 import type { PageTableAction, PageTableProps } from './types'
 import type { TableInstance } from 'element-plus'
+import { useElementHeight } from '@/composables/useElementHeight'
+import type { PageParams } from '@/types/page'
 
 defineOptions({
   inheritAttrs: false,
@@ -41,12 +32,20 @@ const props = withDefaults(defineProps<PageTableProps<D, Q>>(), {
 })
 
 const isInitialized = ref(false)
+const currPageParams = computed<PageParams>(() => {
+  if (props.pageParams) return props.pageParams
+
+  return {
+    pageNum: 1,
+    pageSize: props.pageSizes[0],
+  }
+})
 const { pageData, tableData, loading, refresh, resetAndRefresh, handleSizeChange, handleCurrPageChange } = usePageTable<
   D,
   Q
 >({
   fetchPage: props.fetchPage,
-  pageParams: props.pageParams,
+  pageParams: () => currPageParams.value,
   queryParams: props.queryParams ? () => props.queryParams! : undefined,
   autoLoad: props.autoLoad,
   onLoaded: () => {
@@ -72,35 +71,10 @@ const reset = async () => {
   await resetAndRefresh()
 }
 
-const tableWrapperRef = useTemplateRef<HTMLDivElement>('tableWrapperRef')
+const { elementRef: tableWrapperRef, height: tableHeight } = useElementHeight('tableWrapperRef')
 const tableRef = useTemplateRef<TableInstance>('tableRef')
-const _tableHeight = ref<number | string | undefined>(undefined)
-// 自动调整表格高度
-const adjustTableHeight = async () => {
-  if (props.tableHeight) {
-    _tableHeight.value = props.tableHeight
-  } else if (tableWrapperRef.value?.clientHeight) {
-    _tableHeight.value = tableWrapperRef.value?.clientHeight
-  }
-}
-
-let observer: ResizeObserver | undefined
-let frameId = 0
-
-onMounted(async () => {
-  if (!tableWrapperRef.value) return
-
-  observer = new ResizeObserver((_entries) => {
-    cancelAnimationFrame(frameId)
-    frameId = requestAnimationFrame(() => {
-      adjustTableHeight()
-    })
-  })
-  observer.observe(tableWrapperRef.value!)
-})
-
-onUnmounted(() => {
-  observer?.disconnect()
+const _tableHeight = computed(() => {
+  return props.tableHeight ? props.tableHeight : tableHeight.value
 })
 
 // 按钮可见性

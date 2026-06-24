@@ -14,6 +14,7 @@ export { useLoadingData } from './composables/useLoadingData.js'
 export { useAutoRefreshData } from './composables/useAutoRefreshData.js'
 export { usePageTable } from './composables/usePageTable.js'
 export { useSelectData } from './composables/useSelectData.js'
+export { useElementHeight } from './composables/useElementHeight.js'
 
 export { default as SettingGroup } from './components/settings/SettingGroup.vue'
 export { default as SettingItem } from './components/settings/SettingItem.vue'
@@ -31,8 +32,12 @@ export * from './components/dialog/page-range/pageRangeService'
 export { default as PageRangeDialog } from './components/dialog/page-range/PageRangeDialog.vue'
 
 export * from './components/dialog/loading/types.js'
-export * from './components/dialog/loading/loadingService.js'
+export * from './components/dialog/loading/service'
 export { default as LoadingDialog } from './components/dialog/loading/LoadingDialog.vue'
+
+export * from './components/dialog/process/types.js'
+export * from './components/dialog/process/service'
+export { default as ProcessDialog } from './components/dialog/process/ProcessDialog.vue'
 
 export { default as AppIcon } from './components/common/AppIcon.vue'
 export { default as AppTooltip } from './components/common/AppTooltip.vue'
