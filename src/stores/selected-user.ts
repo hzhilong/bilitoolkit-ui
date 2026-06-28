@@ -40,5 +40,11 @@ export const useSelectedUserStore = defineStore('biliToolkit-ui-selected-user', 
     selectedUser.value = user
   }
 
-  return { init, user: selectedUser, deleteUser, setUser }
+  const assertLoggedIn = () => {
+    if (selectedUser.value == null) {
+      throw new Error('请先登录')
+    }
+  }
+
+  return { init, user: selectedUser, deleteUser, setUser, assertLoggedIn }
 })
