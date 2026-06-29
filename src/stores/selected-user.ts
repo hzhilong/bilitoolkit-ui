@@ -25,9 +25,13 @@ export const useSelectedUserStore = defineStore('biliToolkit-ui-selected-user', 
   watch(
     () => selectedUser.value,
     async (user) => {
+      let clonedUser = user != null ? cloneDeep(user) : null
       await window.toolkitApi.db.write(UI_DB_KEYS.UI_SELECTED_USER, {
-        user: user != null ? cloneDeep(user) : null,
+        user: clonedUser,
       })
+      if (clonedUser) {
+        await window.toolkitApi.user.switchCurrUser(clonedUser)
+      }
     },
     { deep: true },
   )
