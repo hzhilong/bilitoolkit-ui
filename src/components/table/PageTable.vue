@@ -40,10 +40,16 @@ const currPageParams = computed<PageParams>(() => {
     pageSize: props.pageSizes[0],
   }
 })
-const { pageData, tableData, loading, refresh, resetAndRefresh, handleSizeChange, handleCurrPageChange } = usePageTable<
-  D,
-  Q
->({
+const {
+  pageData,
+  tableData,
+  loading,
+  refresh,
+  resetAndRefresh,
+  resetPageAndRefresh,
+  handleSizeChange,
+  handleCurrPageChange,
+} = usePageTable<D, Q>({
   fetchPage: props.fetchPage,
   pageParams: () => currPageParams.value,
   queryParams: props.queryParams ? () => props.queryParams! : undefined,
@@ -100,6 +106,7 @@ defineExpose({
   pageData,
   refresh,
   resetAndRefresh,
+  resetPageAndRefresh,
   getSelectionRows: tableRef.value?.getSelectionRows,
   toggleRowSelection: tableRef.value?.toggleRowSelection,
   setCurrentRow: tableRef.value?.setCurrentRow,
@@ -144,7 +151,6 @@ defineExpose({
         </template>
       </el-table>
     </div>
-    <!-- 分页 -->
     <el-pagination
       class="page-table__pagination"
       v-model:current-page="pageData.pageNum"

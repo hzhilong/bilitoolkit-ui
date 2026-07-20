@@ -58,3 +58,20 @@ export { default as PluginPageContent } from './components/plugin/PluginPageCont
 
 export * from './components/table/types.js'
 export { default as PageTable } from './components/table/PageTable.vue'
+
+export { default as DeleteConfirmDialog } from './components/download/DeleteConfirmDialog.vue'
+export { default as DownloadDetailsDialog } from './components/download/DownloadDetailsDialog.vue'
+export { default as DownloadItem } from './components/download/DownloadItem.vue'
+export { default as DownloadManagePage } from './components/download/DownloadManagePage.vue'
+export { default as DownloadProgress } from './components/download/DownloadProgress.vue'
+export { default as DownloadProgressDetails } from './components/download/DownloadProgressDetails.vue'
+export { default as DownloadResourceTag } from './components/download/DownloadResourceTag.vue'
+export { default as DownloadResult } from './components/download/DownloadResult.vue'
+export { default as DownloadStatus } from './components/download/DownloadStatus.vue'
+export { default as DownloadVideoCard } from './components/download/DownloadVideoCard.vue'
+export { default as DownloadVideoPartCard } from './components/download/DownloadVideoPartCard.vue'
+export { default as VideoStatsInfo } from './components/download/VideoStatsInfo.vue'
+export * from '@/components/download/deleteConfirmService'
+
+export * from './utils/download.js'
+export * from './utils/format.js'

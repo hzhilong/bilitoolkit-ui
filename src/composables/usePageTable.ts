@@ -61,9 +61,13 @@ export const usePageTable = <D, Q = undefined>(options: UsePageTableOptions<D, Q
     await refresh()
   }
 
-  const handleSizeChange = async () => {
+  const resetPageAndRefresh = async () => {
     pageData.value.pageNum = 1
     await refresh()
+  }
+
+  const handleSizeChange = async () => {
+    await resetPageAndRefresh()
   }
 
   const handleCurrPageChange = async () => {
@@ -82,6 +86,7 @@ export const usePageTable = <D, Q = undefined>(options: UsePageTableOptions<D, Q
     loading,
     refresh,
     resetAndRefresh,
+    resetPageAndRefresh,
     handleSizeChange,
     handleCurrPageChange,
   }

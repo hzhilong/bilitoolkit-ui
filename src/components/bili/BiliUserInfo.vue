@@ -7,28 +7,30 @@ defineProps<{
 </script>
 
 <template>
-  <div class="user-info info-row">
-    <img v-if="user.face" class="user-info__face" :src="user.face" alt="face" />
-    <div class="user-info__right">
-      <AppTooltip class="user-info__name" :content="user.name"></AppTooltip>
-      <div class="info-row">
-        <span class="user-info__uid-icon"></span>
-        <span class="user-info__uid"> {{ user.mid }}</span>
+  <div class="bili-user-info">
+    <img v-if="user.face" class="bili-user-info__face" :src="user.face" alt="face" />
+    <div class="bili-user-info__right">
+      <AppTooltip class="bili-user-info__name" :content="user.name"></AppTooltip>
+      <div class="bili-user-info__info-row">
+        <span class="bili-user-info__uid-icon"></span>
+        <span class="bili-user-info__uid"> {{ user.mid }}</span>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.info-row {
-  display: flex;
-  align-items: center;
-}
-
-.user-info {
+.bili-user-info {
   min-height: 1em;
   font-size: 12px;
   line-height: 18px;
+  display: flex;
+  align-items: center;
+
+  &__info-row {
+    display: flex;
+    align-items: center;
+  }
 
   &__face {
     width: 2em;

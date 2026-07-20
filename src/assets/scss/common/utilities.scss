@@ -54,3 +54,13 @@
     margin-left: 0!important;
   }
 }
+
+.uid-icon {
+  height: 10px;
+  width: auto;
+  aspect-ratio: 61.58837890625 / 36.173736572265625;
+  mask: url('../../images/uid.svg') no-repeat center / contain;
+  -webkit-mask: url('../../images/uid.svg') no-repeat center / contain;
+  background-color: var(--el-text-color-regular);
+  margin-right: 2px;
+}
