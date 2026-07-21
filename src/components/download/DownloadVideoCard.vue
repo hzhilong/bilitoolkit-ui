@@ -9,6 +9,7 @@ import { formatStatCount } from '@/utils/format'
 import VideoStatsInfo from '@/components/download/VideoStatsInfo.vue'
 import DownloadResourceTag from '@/components/download/DownloadResourceTag.vue'
 import DownloadVideoPartCard from '@/components/download/DownloadVideoPartCard.vue'
+import { parseVideoZoneLabel } from '@/utils/parse-zone'
 
 const props = defineProps<{
   video: DownloadVideo
@@ -66,10 +67,11 @@ const openFolder = async (part: DownloadVideoPart) => {
             <img class="user-face" :src="info.owner.face" alt="face" />
             <div class="user-name">{{ info.owner.name }}</div>
           </div>
-          <div class="zone">{{ videoZoneV2MapFlat[info.tid_v2] }}</div>
+          <div class="zone">{{ parseVideoZoneLabel(info) }}</div>
           <div class="pubdate">{{ formatTime(info.pubdate) }}</div>
         </div>
         <div class="info-row stats">
+          <div class="bvid">{{ info.bvid }}</div>
           <VideoStatsInfo :stat="info.stat"></VideoStatsInfo>
         </div>
         <div class="info-row">
