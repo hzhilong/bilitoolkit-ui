@@ -4,12 +4,7 @@ import { showDeleteConfirmDialog } from '@/components/download/deleteConfirmServ
 import { showToast } from '@/utils/feedback'
 
 export const handleOpenFolder = async (task: DownloadTask): Promise<void> => {
-  await toolkitApi.system.showItemInFolder(
-    [await toolkitApi.file.getRootDir(), task.videos[0].parts[0].subdirectory]
-      .filter(Boolean)
-      .join('/')
-      .replace(/\/+/g, '/'),
-  )
+  await toolkitApi.download.openFolder(task.id, 0, 0)
 }
 
 export const handlePause = async (task: DownloadTask): Promise<void> => {

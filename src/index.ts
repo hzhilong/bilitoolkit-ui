@@ -75,3 +75,4 @@ export * from '@/components/download/deleteConfirmService'
 
 export * from './utils/download.js'
 export * from './utils/format.js'
+export * from './utils/parse-zone.js'

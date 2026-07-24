@@ -7,6 +7,7 @@ import DownloadProgress from '@/components/download/DownloadProgress.vue'
 import DownloadProgressDetails from '@/components/download/DownloadProgressDetails.vue'
 import DownloadResult from '@/components/download/DownloadResult.vue'
 import DownloadVideoCard from '@/components/download/DownloadVideoCard.vue'
+import { toolkitApi } from '@/api/toolkit-api'
 
 const props = defineProps<{
   task?: DownloadTask
@@ -34,6 +35,12 @@ watch(
     }
   },
 )
+
+const handleOpenFolder = async (vi: number, pi: number) => {
+  if (props.task) {
+    await toolkitApi.download.openFolder(props.task.id, vi, pi)
+  }
+}
 </script>
 
 <template>
@@ -85,7 +92,7 @@ watch(
               <div class="header">
                 <span>#{{ i + 1 }}</span>
               </div>
-              <DownloadVideoCard :video="v"></DownloadVideoCard>
+              <DownloadVideoCard :video="v" @openFolder="(pi: number) => handleOpenFolder(i, pi)"></DownloadVideoCard>
             </div>
           </div>
         </div>

@@ -6,12 +6,13 @@ import {
   downloadTaskStatusMap,
 } from 'bilitoolkit-types'
 import { ref, useTemplateRef, nextTick, onMounted, onUnmounted, computed } from 'vue'
-import { usePageTable, type PageParams } from 'bilitoolkit-ui'
 import DownloadItem, { type DownloadTaskAction } from '@/components/download/DownloadItem.vue'
 import { toolkitApi } from '@/api/toolkit-api'
 import { handleOpenFolder, handlePause, handleResume, handleCancel, handleDelete } from '@/utils/download'
 import DownloadDetailsDialog from '@/components/download/DownloadDetailsDialog.vue'
 import { showToast } from '@/utils/feedback'
+import type { PageParams } from '@/types/page'
+import { usePageTable } from '@/composables/usePageTable'
 
 const props = withDefaults(
   defineProps<{

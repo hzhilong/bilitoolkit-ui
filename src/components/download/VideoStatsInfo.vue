@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { type VideoStat } from '@ybgnb/bili-api'
-import { AppIcon } from 'bilitoolkit-ui'
 import { computed } from 'vue'
 
 type AvailableStat = keyof Pick<VideoStat, 'like' | 'coin' | 'favorite' | 'share' | 'reply'>

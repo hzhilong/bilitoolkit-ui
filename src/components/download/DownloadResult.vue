@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { AppIcon } from 'bilitoolkit-ui'
 import type { DownloadTask } from 'bilitoolkit-types'
 import { formatBytes } from '@/utils/format'
 

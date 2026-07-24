@@ -3,13 +3,12 @@ import { formatTime, formatDuration } from '@ybgnb/utils'
 import { Picture } from '@element-plus/icons-vue'
 import type { DownloadVideo, DownloadVideoPart } from 'bilitoolkit-types'
 import { computed } from 'vue'
-import { videoZoneV2MapFlat } from '@ybgnb/bili-api'
-import { AppTooltip, IconLabel, toolkitApi } from 'bilitoolkit-ui'
 import { formatStatCount } from '@/utils/format'
 import VideoStatsInfo from '@/components/download/VideoStatsInfo.vue'
 import DownloadResourceTag from '@/components/download/DownloadResourceTag.vue'
 import DownloadVideoPartCard from '@/components/download/DownloadVideoPartCard.vue'
 import { parseVideoZoneLabel } from '@/utils/parse-zone'
+import { toolkitApi } from '@/api/toolkit-api'
 
 const props = defineProps<{
   video: DownloadVideo
@@ -28,11 +27,10 @@ const openVideoPage = async () => {
 const _openPartPage = async (page: number) => {
   window.open(`https://www.bilibili.com/video/${info.value.bvid}/?p=${page}`)
 }
-const openFolder = async (part: DownloadVideoPart) => {
-  await toolkitApi.system.showItemInFolder(
-    [await toolkitApi.file.getRootDir(), part.subdirectory].filter(Boolean).join('/').replace(/\/+/g, '/'),
-  )
-}
+
+const emits = defineEmits<{
+  (e: 'open-folder', partIndex: number): void
+}>()
 </script>
 
 <template>
@@ -83,10 +81,10 @@ const openFolder = async (part: DownloadVideoPart) => {
     <div class="part-list">
       <div class="header">视频分P：</div>
       <DownloadVideoPartCard
-        v-for="p in video.parts"
+        v-for="(p, pi) in video.parts"
         :key="p.snapshot.cid"
         :part="p"
-        @click="openFolder(p)"
+        @click="emits('open-folder', pi)"
       ></DownloadVideoPartCard>
     </div>
   </div>
@@ -109,6 +107,11 @@ const openFolder = async (part: DownloadVideoPart) => {
     gap: 4px;
   }
 
+  .info-right {
+    flex: 1;
+    min-width: 0;
+  }
+
   .cover {
     width: 180px;
     flex-shrink: 0;
@@ -119,6 +122,8 @@ const openFolder = async (part: DownloadVideoPart) => {
     gap: 4px;
     cursor: pointer;
     position: relative;
+    border-radius: 6px;
+    border: 1px solid var(--el-border-color-lighter);
 
     .cover-image {
       width: 100%;
@@ -165,6 +170,7 @@ const openFolder = async (part: DownloadVideoPart) => {
   }
 
   .title {
+    font-size: 16px;
     color: var(--el-text-color-primary);
   }
 
@@ -184,11 +190,14 @@ const openFolder = async (part: DownloadVideoPart) => {
   }
 
   .part-list {
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0 10px 10px;
+    user-select: none;
+    gap: 6px;
 
     .header {
       color: var(--el-text-color-regular);
-      margin-left: -10px;
     }
   }
 }

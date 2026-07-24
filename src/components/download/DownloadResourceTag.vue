@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { type DownloadResourceType, downloadResourceNameMap } from 'bilitoolkit-types'
 import { computed } from 'vue'
-import { IconLabel } from 'bilitoolkit-ui'
+import IconLabel from '@/components/common/IconLabel.vue'
 
 const props = defineProps<{
   type: DownloadResourceType
