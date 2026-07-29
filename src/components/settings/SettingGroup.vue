@@ -16,7 +16,6 @@ const props = defineProps<{
 <style lang="scss">
 .setting-group {
   border-radius: 8px;
-  max-width: 800px;
 
   &__name {
     font-size: 18px;

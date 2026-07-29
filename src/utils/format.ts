@@ -13,5 +13,9 @@ export const formatSpeed = (speedKBps: number) => {
 export const formatStatCount = (viewCount: number) => {
   if (viewCount <= 10000) return String(viewCount)
 
-  return (viewCount / 10000).toFixed(1) + '万'
+  if (viewCount < 100000000) {
+    return (viewCount / 10000).toFixed(1) + '万'
+  }
+
+  return (viewCount / 100000000).toFixed(1) + '亿'
 }

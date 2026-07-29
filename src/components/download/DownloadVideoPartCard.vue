@@ -1,14 +1,7 @@
 <script setup lang="ts">
 import type { DownloadVideoPart } from 'bilitoolkit-types'
 import { formatDuration } from '@ybgnb/utils'
-import {
-  audioQualityEntries,
-  videoQualityEntries,
-  videoCodecEntries,
-  audioQualityMap,
-  videoCodecIdMap,
-  videoQualityMap,
-} from '@ybgnb/bili-api'
+import { audioQualityMap, videoCodecIdMap, videoQualityMap } from '@ybgnb/bili-api'
 import { computed } from 'vue'
 
 const props = defineProps<{
@@ -19,7 +12,6 @@ const audioQuality = computed(() => props.part.resources.find((t) => t.type === 
 const videoQuality = computed(() => props.part.resources.find((t) => t.type === 'video')?.source.videoQuality)
 const videoCodec = computed(() => props.part.resources.find((t) => t.type === 'video')?.source.videoCodec)
 </script>
-
 <template>
   <div class="download-video-part-card">
     <div class="left-info">

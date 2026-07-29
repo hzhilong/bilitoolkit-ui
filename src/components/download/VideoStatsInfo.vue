@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { type VideoStat } from '@ybgnb/bili-api'
 import { computed } from 'vue'
+import { formatStatCount } from '@/utils/format'
 
 type AvailableStat = keyof Pick<VideoStat, 'like' | 'coin' | 'favorite' | 'share' | 'reply'>
 const props = withDefaults(
@@ -22,14 +23,14 @@ const iconMap: Record<AvailableStat, string> = {
 const stats = computed<
   {
     icon: string
-    value: number
+    value: string
   }[]
 >(() => {
   const list = []
   for (const field of props.fields) {
     list.push({
       icon: iconMap[field],
-      value: props.stat[field],
+      value: formatStatCount(props.stat[field]),
     })
   }
   return list
@@ -49,6 +50,7 @@ const stats = computed<
 .video-stats-info {
   display: flex;
   align-items: center;
+  font-size: 12px;
   gap: 20px;
 
   .stat-item {
