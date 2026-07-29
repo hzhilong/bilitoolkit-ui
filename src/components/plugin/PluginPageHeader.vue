@@ -6,6 +6,7 @@ import { toolkitApi } from '@/api/toolkit-api'
 import { useSelectedUserStore } from '@/stores/selected-user'
 import { storeToRefs } from 'pinia'
 import { showError } from '@/utils/feedback'
+import { resetBiliClient } from 'bilitoolkit-runtime/biliapi'
 
 defineProps<PluginMenusProps>()
 
@@ -21,7 +22,9 @@ const levelImg = computed(() => {
 })
 
 const switchUser = async () => {
-  selectedUserStore.setUser(await toolkitApi.user.switchUser(true))
+  const newUser = await toolkitApi.user.switchUser(true)
+  selectedUserStore.setUser(newUser)
+  await resetBiliClient(newUser)
 }
 
 const cancelChoose = () => {
