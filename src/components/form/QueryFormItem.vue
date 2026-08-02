@@ -24,7 +24,8 @@ defineProps<{
     border-bottom-left-radius: 0;
     box-shadow: 0 0 0 1px var(--el-border-color) inset;
 
-    .el-select__wrapper {
+    .el-select__wrapper,
+    .el-input__wrapper {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
