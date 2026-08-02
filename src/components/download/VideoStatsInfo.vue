@@ -14,7 +14,7 @@ const props = withDefaults(
   },
 )
 const iconMap: Record<AvailableStat, string> = {
-  like: 'heart',
+  like: 'thumb-up',
   coin: 'money-cny-circle',
   favorite: 'star',
   share: 'share-forward',
