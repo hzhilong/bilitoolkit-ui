@@ -9,15 +9,18 @@ const showCancel = ref(false)
 
 let cancelHandler: (() => void | Promise<void>) | undefined
 
-const show = (options: LoadingDialogOptions = {}) => {
-  message.value = options.message ?? '加载中'
-  showCancel.value = options.showCancel ?? false
-  cancelHandler = options.onCancel
-
-  if (options?.autoCloseDelay) {
-    setTimeout(() => {
-      close()
-    }, options?.autoCloseDelay)
+const show = (options: LoadingDialogOptions | string = {}) => {
+  if (typeof options === 'string') {
+    message.value = options || '加载中'
+  } else {
+    message.value = options.message ?? '加载中'
+    showCancel.value = options.showCancel ?? false
+    cancelHandler = options.onCancel
+    if (options?.autoCloseDelay) {
+      setTimeout(() => {
+        close()
+      }, options?.autoCloseDelay)
+    }
   }
 
   visible.value = true

@@ -21,7 +21,7 @@ function ensureInstance() {
  * 全局加载框
  */
 export const loadingDialog = {
-  show(options?: LoadingDialogOptions) {
+  show(options?: LoadingDialogOptions | string) {
     ensureInstance().show(options)
   },
 
