@@ -83,3 +83,5 @@ export * from './utils/open.js'
 
 export { default as KeyValueTag } from './components/form/KeyValueTag.vue'
 export { default as QueryFormItem } from './components/form/QueryFormItem.vue'
+
+export { default as OverflowText } from './components/text/OverflowText.vue'
