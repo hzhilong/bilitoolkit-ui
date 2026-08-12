@@ -28,6 +28,8 @@ export { default as CountdownDialog } from './components/dialog/countdown/Countd
 export * from './components/dialog/select/types.js'
 export * from './components/dialog/select/selectService.js'
 export { default as SelectDialog } from './components/dialog/select/SelectDialog.vue'
+export * from './components/dialog/select/virtualSelectService.js'
+export { default as VirtualSelectDialog } from './components/dialog/select/VirtualSelectDialog.vue'
 
 export * from './components/dialog/page-range/types.js'
 export * from './components/dialog/page-range/pageRangeService'

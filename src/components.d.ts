@@ -77,6 +77,7 @@ declare module 'vue' {
     SettingGroup: typeof import('./components/settings/SettingGroup.vue')['default']
     SettingItem: typeof import('./components/settings/SettingItem.vue')['default']
     VideoStatsInfo: typeof import('./components/download/VideoStatsInfo.vue')['default']
+    VirtualSelectDialog: typeof import('./components/dialog/select/VirtualSelectDialog.vue')['default']
   }
   export interface GlobalDirectives {
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']
@@ -150,4 +151,5 @@ declare global {
   const SettingGroup: typeof import('./components/settings/SettingGroup.vue')['default']
   const SettingItem: typeof import('./components/settings/SettingItem.vue')['default']
   const VideoStatsInfo: typeof import('./components/download/VideoStatsInfo.vue')['default']
+  const VirtualSelectDialog: typeof import('./components/dialog/select/VirtualSelectDialog.vue')['default']
 }
