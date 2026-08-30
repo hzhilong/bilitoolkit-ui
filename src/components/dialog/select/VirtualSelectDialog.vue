@@ -109,13 +109,32 @@ const isAllSelected = computed(() => {
   })
 })
 
-const toggleAll = loadingData(() => {
+const toggleAllSelection = loadingData(() => {
   if (isAllSelected.value) {
     selectedIds.value = new Set<DATA[ID_KEY]>()
   } else {
     selectedIds.value = new Set<DATA[ID_KEY]>(allOptions.value.map((item) => item[props.idKey]))
   }
   triggerRef(selectedIds)
+})
+
+const clearSelection = loadingData(() => {
+  selectedIds.value = new Set<DATA[ID_KEY]>()
+  triggerRef(selectedIds)
+})
+
+const setSelectionIds = loadingData((ids: DATA[ID_KEY][]) => {
+  selectedIds.value = new Set<DATA[ID_KEY]>(ids)
+  triggerRef(selectedIds)
+})
+
+const getSelectionIds = () => selectedIds.value
+
+defineExpose({
+  clearSelection,
+  getSelectionIds,
+  setSelectionIds,
+  toggleAllSelection,
 })
 </script>
 
@@ -179,12 +198,14 @@ const toggleAll = loadingData(() => {
         <span
           v-if="multiple && canSelectAll"
           class="select-all"
-          @click="toggleAll"
+          @click="toggleAllSelection"
           :class="isAllSelected ? 'selected' : ''"
           ><span class="select-icon"></span>全选</span
         >
+        <slot name="footer-prepend" :allOptions="allOptions" :selectOptionIds="selectedIds"></slot>
         <el-button @click="handleCancel">{{ cancelText }}</el-button>
         <el-button type="primary" @click="handleSubmit" :disabled="loading">{{ confirmText }}</el-button>
+        <slot name="footer-append" :allOptions="allOptions" :selectOptionIds="selectedIds" />
       </template>
     </el-dialog>
   </div>
