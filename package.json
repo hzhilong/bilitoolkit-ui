@@ -1,6 +1,6 @@
 {
   "name": "bilitoolkit-ui",
-  "version": "0.1.5",
+  "version": "1.0.0",
   "private": false,
   "type": "module",
   "productName": "bilitoolkit-ui",
@@ -84,7 +84,7 @@
   "peerDependencies": {
     "@vue/language-core": "^3.2.6",
     "@ybgnb/bili-api": "workspace:^",
-    "@ybgnb/utils": "^0.3.4",
+    "@ybgnb/utils": "^1.0.0",
     "bilitoolkit-runtime": "workspace:^",
     "bilitoolkit-types": "workspace:^",
     "element-plus": "^2.13.7",
