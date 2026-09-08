@@ -12,7 +12,7 @@ defineProps<{
 <template>
   <div class="download-progress-details" :style="{ gap: isCompact ? '10px' : '20px' }">
     <template v-if="task.progress">
-      <div class="detail-item">
+      <div class="detail-item" v-if="task.progress.speedKBps">
         <span class="label">速度：</span>
         <span class="value">{{ formatSpeed(task.progress.speedKBps) }}</span>
       </div>
@@ -24,7 +24,7 @@ defineProps<{
           <span>{{ resourceCount }}</span>
         </div>
       </div>
-      <div class="detail-item">
+      <div class="detail-item" v-if="task.progress.completedBytes && task.progress.totalBytes">
         <span class="label">已完成：</span>
         <div class="value">
           <span>{{ formatBytes(task.progress.completedBytes) }}</span>

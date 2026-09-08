@@ -58,7 +58,7 @@ const handleOpenFolder = async (vi: number, pi: number) => {
       <div class="dialog-content" v-if="task">
         <el-descriptions border :column="2">
           <el-descriptions-item label="任务 ID">{{ task.id }}</el-descriptions-item>
-          <el-descriptions-item label="任务类型">{{ task.title }}</el-descriptions-item>
+          <el-descriptions-item label="任务标题">{{ task.title }}</el-descriptions-item>
           <el-descriptions-item label="创建时间">{{ formatTime(task.createdAt) }}</el-descriptions-item>
           <el-descriptions-item label="更新时间">{{
             task.updatedAt ? formatTime(task.updatedAt) : '-'

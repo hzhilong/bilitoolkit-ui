@@ -17,7 +17,7 @@ const info = computed(() => props.video.snapshot)
 const resourceTypeList = computed(() => {
   const parts = props.video.parts
   if (parts.length >= 1) {
-    return parts[0].resources.map((r) => r.type)
+    return Array.from(new Set(parts[0].resources.map((r) => r.type)))
   }
   return []
 })
